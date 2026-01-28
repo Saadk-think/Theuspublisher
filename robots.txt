@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theuspublisher.com/sitemap.xml
