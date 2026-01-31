@@ -2413,6 +2413,517 @@ html, body{
 .review-card p{opacity:.9}
 @media(max-width:900px){.review-grid{grid-template-columns:1fr}}
 
+
+/* === About section visual upgrade (library background + glass cards) === */
+#about{
+  position: relative;
+  background:
+    linear-gradient(rgba(6,20,46,.86), rgba(6,20,46,.90)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat !important;
+}
+#about::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+}
+#about .card, 
+#about .t, 
+#about .tile, 
+#about .box{
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+
+/* === SERVICES section upgrade: richer background + color-coded cards + logo accents === */
+#services{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4,12,28,.78), rgba(4,12,28,.88)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#services::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(167,139,250,.20), transparent 60%),
+    radial-gradient(820px 520px at 70% 92%, rgba(250,204,21,.12), transparent 65%);
+  pointer-events:none;
+}
+/* subtle icon pattern (books) */
+#services::after{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.7' stroke-width='2'%3E%3Cpath d='M64 78c18-10 38-10 56 0v92c-18-10-38-10-56 0V78z'/%3E%3Cpath d='M156 78c-18-10-38-10-56 0v92c18-10 38-10 56 0V78z'/%3E%3Cpath d='M64 78v-10c18-10 38-10 56 0v10'/%3E%3Cpath d='M156 78v-10c-18-10-38-10-56 0v10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+#services .container, #services .reveal, #services #svcGrid{position:relative; z-index:2;}
+
+/* Make the category tabs feel premium */
+#services .seg{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(12px);
+}
+#services .seg button{
+  color: rgba(255,255,255,.88) !important;
+}
+#services .seg button.active{
+  background: linear-gradient(135deg, rgba(110,231,255,.26), rgba(250,204,21,.16), rgba(167,139,250,.22)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Card base: more depth + tidy spacing */
+#services .svc{
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 18px 56px rgba(0,0,0,.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateZ(0);
+}
+#services .svc:hover{
+  box-shadow: 0 26px 86px rgba(0,0,0,.40), 0 0 44px rgba(110,231,255,.18);
+}
+
+/* “Logo chip” on each card (no HTML changes) */
+#services .svc::after{
+  content:"";
+  position:absolute;
+  right:16px; top:16px;
+  width:42px; height:42px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18));
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+  opacity:.95;
+}
+#services .svc::before{opacity:1 !important;} /* keep existing glow visible */
+
+/* Color-code by category using data-cat */
+#services .svc[data-cat="write"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.26), rgba(52,211,153,.18));
+}
+#services .svc[data-cat="edit"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(167,139,250,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="publish"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(250,204,21,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="market"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(251,113,133,.26), rgba(167,139,250,.16));
+}
+
+/* Make icons brighter and more “logo-like” */
+#services .icon{
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+#services .icon svg{fill: rgba(255,255,255,.92) !important;}
+
+/* Improve CTA buttons inside cards */
+#services .btn2{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+#services .btn2:hover{background: rgba(255,255,255,.14) !important;}
+#services .btn.btn-secondary{
+  background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+
+/* === COVERS / BOOK PORTFOLIO upgrade: scenic background + side-to-side moving covers === */
+#covers{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(6,20,46,.82), rgba(6,20,46,.90)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#covers::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 12%, rgba(110,231,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 18%, rgba(167,139,250,.18), transparent 60%),
+    radial-gradient(820px 520px at 60% 92%, rgba(250,204,21,.10), transparent 70%);
+  pointer-events:none;
+}
+#covers .container{position:relative; z-index:2;}
+
+/* Slider frame (glass) */
+#covers .coverSlider{
+  margin-top: 22px;
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  overflow: hidden;
+  padding: 18px 12px;
+}
+
+/* The moving track: books enter from one side and exit the other */
+#covers .slides{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  will-change: transform;
+  animation: coversMarquee 34s linear infinite;
+  padding: 6px 14px; /* lets covers sit near edges, not centered */
+}
+
+/* Pause on hover so users can look */
+#covers .coverSlider:hover .slides{animation-play-state: paused;}
+
+/* Cover cards */
+#covers .slide{
+  flex: 0 0 auto;
+  width: min(240px, 62vw);
+  height: 320px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  position: relative;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+#covers .slide::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* Arrows: keep, but make premium and not dominant */
+#covers .arrow{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:5;
+  box-shadow: 0 16px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+#covers .arrow.left{left: 12px;}
+#covers .arrow.right{right: 12px;}
+#covers .arrow:hover{background: rgba(0,0,0,.34);}
+
+/* Marquee animation (right->left) */
+@keyframes coversMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+/* Responsive tuning */
+@media (max-width: 980px){
+  #covers .slide{height: 280px;}
+  #covers .slides{gap: 14px; animation-duration: 28s;}
+}
+@media (max-width: 560px){
+  #covers .slide{height: 240px; width: 70vw;}
+  #covers .arrow{display:none;} /* cleaner on mobile */
+  #covers .slides{animation-duration: 24s;}
+}
+
+
+/* === FIX: Covers must reach BOTH corners (full-bleed marquee) === */
+#covers .coverSlider{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+  padding: 24px 0 !important;
+}
+
+#covers .slides{
+  gap: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  animation-duration: 38s !important;
+}
+
+#covers .slide{
+  width: 260px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 900px){
+  #covers .slide{
+    width: 200px !important;
+    height: 300px !important;
+  }
+}
+
+
+/* === TRUE corner-to-corner flow (right -> left), no center bias === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 10px 0 !important;
+  overflow:hidden;
+}
+
+#covers .slides{
+  width: max-content;
+  display:flex;
+  gap:18px;
+  animation: coversEdgeFlow 40s linear infinite !important;
+}
+
+@keyframes coversEdgeFlow{
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* keep original cover size */
+#covers .slide{
+  width:240px !important;
+  height:320px !important;
+}
+
+
+/* === Seamless edge-to-edge marquee (fills corners while moving) === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 8px 0 !important;
+  overflow:hidden;
+}
+#covers .slides{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding: 0 !important; /* no inner gutters */
+  will-change: transform;
+  animation: coversSeamless var(--coversDur, 46s) linear infinite !important;
+}
+@keyframes coversSeamless{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(var(--coversDist, -1600px),0,0); }
+}
+/* keep original size */
+#covers .slide{ width:240px !important; height:320px !important; }
+@media (max-width: 900px){ #covers .slide{ width:200px !important; height:300px !important; } }
+
+
+/* === Oscar-style: drag-to-scroll covers, edge-to-edge, NO arrows === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;      /* Firefox */
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important; /* no centering */
+  align-items:center;
+  gap:18px;
+  padding: 14px 0 !important; /* no side gutters, just vertical breathing */
+  width: max-content;
+  animation: none !important;  /* disable marquee */
+}
+
+/* Keep original card size (do NOT enlarge) */
+#covers .slide{ width:240px !important; height:320px !important; }
+
+/* Optional: soft edge fade so it feels premium */
+#covers .coverSlider{
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+/* Slower “auto drift” feel (the JS sets speed) */
+
+
+/* === Covers v2: no empty edges, no fade mask, true infinite loop fill === */
+#covers .coverSlider{
+  mask-image: none !important;
+  padding: 0 !important;
+}
+#covers .slides{
+  padding: 14px 0 !important;
+  justify-content:flex-start !important;
+}
+
+
+/* === Covers v3: tighter spacing so corners are filled === */
+#covers .slides{ gap: 12px !important; }
+
+
+/* (removed Covers v9) */
+#covers .arrow{display:none !important;}
+
+/* full-bleed frame */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;  /* IMPORTANT: hide edges like Oscar */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* allow vertical scroll */
+}
+
+/* track */
+#covers .slides{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap: 16px !important;
+  padding: 18px 0 !important; /* only vertical breathing */
+  width: max-content;
+  will-change: transform;
+  animation: none !important; /* disable any prior marquee */
+  transform: translate3d(0,0,0);
+}
+#covers .slide{ flex:0 0 auto; }  /* keep original sizing from your file */
+
+
+/* === Covers v10: Oscar-like grab-to-drag with smooth slow drift, NO jitter === */
+#covers .arrow{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  border-radius:0 !important;
+  padding: 0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  cursor: grab;
+  user-select:none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;}
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:center;
+  gap: 14px !important;
+  padding: 18px 0 !important;   /* no side padding -> covers can touch corners */
+  width:max-content;
+  animation:none !important;
+}
+
+
+/* === Covers edge fill fix: remove internal gutters completely === */
+#covers .coverSlider{padding-left:0 !important; padding-right:0 !important;}
+#covers .coverSlider:after{left:0 !important; right:0 !important; opacity:.25;}
+
+
+/* === FINAL covers edge fix: make slider FULL-BLEED + remove ALL inner gutters === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+  border-radius:0 !important;
+}
+#covers .slides{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+
+/* === Covers FINAL edge fix (force flush to viewport edges) === */
+#covers .coverSlider{
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 18px 0 !important;   /* kills original 54px side padding */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+#covers .slides{
+  padding: 0 !important;
+  margin: 0 !important;
+  justify-content: flex-start !important;
+}
+
+
+/* ===== OUR PROCESS — GLASS BACKGROUND (SCOPED) ===== */
+section:has(.steps){
+  position: relative !important;
+  background: transparent !important;
+}
+
+section:has(.steps)::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05)),
+    radial-gradient(800px 400px at 20% 0%, rgba(110,231,255,.25), transparent 60%),
+    radial-gradient(800px 400px at 80% 0%, rgba(167,139,250,.22), transparent 60%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,.18);
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  z-index: 0;
+}
+
+section:has(.steps) > *{
+  position: relative;
+  z-index: 1;
+}
+
 </style>
 
 
@@ -2528,6 +3039,472 @@ html, body{
 .review-card p{opacity:.9}
 @media(max-width:900px){.review-grid{grid-template-columns:1fr}}
 
+
+/* === About section visual upgrade (library background + glass cards) === */
+#about{
+  position: relative;
+  background:
+    linear-gradient(rgba(6,20,46,.86), rgba(6,20,46,.90)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat !important;
+}
+#about::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+}
+#about .card, 
+#about .t, 
+#about .tile, 
+#about .box{
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+
+/* === SERVICES section upgrade: richer background + color-coded cards + logo accents === */
+#services{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4,12,28,.78), rgba(4,12,28,.88)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#services::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(167,139,250,.20), transparent 60%),
+    radial-gradient(820px 520px at 70% 92%, rgba(250,204,21,.12), transparent 65%);
+  pointer-events:none;
+}
+/* subtle icon pattern (books) */
+#services::after{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.7' stroke-width='2'%3E%3Cpath d='M64 78c18-10 38-10 56 0v92c-18-10-38-10-56 0V78z'/%3E%3Cpath d='M156 78c-18-10-38-10-56 0v92c18-10 38-10 56 0V78z'/%3E%3Cpath d='M64 78v-10c18-10 38-10 56 0v10'/%3E%3Cpath d='M156 78v-10c-18-10-38-10-56 0v10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+#services .container, #services .reveal, #services #svcGrid{position:relative; z-index:2;}
+
+/* Make the category tabs feel premium */
+#services .seg{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(12px);
+}
+#services .seg button{
+  color: rgba(255,255,255,.88) !important;
+}
+#services .seg button.active{
+  background: linear-gradient(135deg, rgba(110,231,255,.26), rgba(250,204,21,.16), rgba(167,139,250,.22)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Card base: more depth + tidy spacing */
+#services .svc{
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 18px 56px rgba(0,0,0,.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateZ(0);
+}
+#services .svc:hover{
+  box-shadow: 0 26px 86px rgba(0,0,0,.40), 0 0 44px rgba(110,231,255,.18);
+}
+
+/* “Logo chip” on each card (no HTML changes) */
+#services .svc::after{
+  content:"";
+  position:absolute;
+  right:16px; top:16px;
+  width:42px; height:42px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18));
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+  opacity:.95;
+}
+#services .svc::before{opacity:1 !important;} /* keep existing glow visible */
+
+/* Color-code by category using data-cat */
+#services .svc[data-cat="write"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.26), rgba(52,211,153,.18));
+}
+#services .svc[data-cat="edit"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(167,139,250,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="publish"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(250,204,21,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="market"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(251,113,133,.26), rgba(167,139,250,.16));
+}
+
+/* Make icons brighter and more “logo-like” */
+#services .icon{
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+#services .icon svg{fill: rgba(255,255,255,.92) !important;}
+
+/* Improve CTA buttons inside cards */
+#services .btn2{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+#services .btn2:hover{background: rgba(255,255,255,.14) !important;}
+#services .btn.btn-secondary{
+  background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+
+/* === COVERS / BOOK PORTFOLIO upgrade: scenic background + side-to-side moving covers === */
+#covers{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(6,20,46,.82), rgba(6,20,46,.90)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#covers::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 12%, rgba(110,231,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 18%, rgba(167,139,250,.18), transparent 60%),
+    radial-gradient(820px 520px at 60% 92%, rgba(250,204,21,.10), transparent 70%);
+  pointer-events:none;
+}
+#covers .container{position:relative; z-index:2;}
+
+/* Slider frame (glass) */
+#covers .coverSlider{
+  margin-top: 22px;
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  overflow: hidden;
+  padding: 18px 12px;
+}
+
+/* The moving track: books enter from one side and exit the other */
+#covers .slides{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  will-change: transform;
+  animation: coversMarquee 34s linear infinite;
+  padding: 6px 14px; /* lets covers sit near edges, not centered */
+}
+
+/* Pause on hover so users can look */
+#covers .coverSlider:hover .slides{animation-play-state: paused;}
+
+/* Cover cards */
+#covers .slide{
+  flex: 0 0 auto;
+  width: min(240px, 62vw);
+  height: 320px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  position: relative;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+#covers .slide::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* Arrows: keep, but make premium and not dominant */
+#covers .arrow{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:5;
+  box-shadow: 0 16px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+#covers .arrow.left{left: 12px;}
+#covers .arrow.right{right: 12px;}
+#covers .arrow:hover{background: rgba(0,0,0,.34);}
+
+/* Marquee animation (right->left) */
+@keyframes coversMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+/* Responsive tuning */
+@media (max-width: 980px){
+  #covers .slide{height: 280px;}
+  #covers .slides{gap: 14px; animation-duration: 28s;}
+}
+@media (max-width: 560px){
+  #covers .slide{height: 240px; width: 70vw;}
+  #covers .arrow{display:none;} /* cleaner on mobile */
+  #covers .slides{animation-duration: 24s;}
+}
+
+
+/* === FIX: Covers must reach BOTH corners (full-bleed marquee) === */
+#covers .coverSlider{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+  padding: 24px 0 !important;
+}
+
+#covers .slides{
+  gap: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  animation-duration: 38s !important;
+}
+
+#covers .slide{
+  width: 260px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 900px){
+  #covers .slide{
+    width: 200px !important;
+    height: 300px !important;
+  }
+}
+
+
+/* === TRUE corner-to-corner flow (right -> left), no center bias === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 10px 0 !important;
+  overflow:hidden;
+}
+
+#covers .slides{
+  width: max-content;
+  display:flex;
+  gap:18px;
+  animation: coversEdgeFlow 40s linear infinite !important;
+}
+
+@keyframes coversEdgeFlow{
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* keep original cover size */
+#covers .slide{
+  width:240px !important;
+  height:320px !important;
+}
+
+
+/* === Seamless edge-to-edge marquee (fills corners while moving) === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 8px 0 !important;
+  overflow:hidden;
+}
+#covers .slides{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding: 0 !important; /* no inner gutters */
+  will-change: transform;
+  animation: coversSeamless var(--coversDur, 46s) linear infinite !important;
+}
+@keyframes coversSeamless{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(var(--coversDist, -1600px),0,0); }
+}
+/* keep original size */
+#covers .slide{ width:240px !important; height:320px !important; }
+@media (max-width: 900px){ #covers .slide{ width:200px !important; height:300px !important; } }
+
+
+/* === Oscar-style: drag-to-scroll covers, edge-to-edge, NO arrows === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;      /* Firefox */
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important; /* no centering */
+  align-items:center;
+  gap:18px;
+  padding: 14px 0 !important; /* no side gutters, just vertical breathing */
+  width: max-content;
+  animation: none !important;  /* disable marquee */
+}
+
+/* Keep original card size (do NOT enlarge) */
+#covers .slide{ width:240px !important; height:320px !important; }
+
+/* Optional: soft edge fade so it feels premium */
+#covers .coverSlider{
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+/* Slower “auto drift” feel (the JS sets speed) */
+
+
+/* === Covers v2: no empty edges, no fade mask, true infinite loop fill === */
+#covers .coverSlider{
+  mask-image: none !important;
+  padding: 0 !important;
+}
+#covers .slides{
+  padding: 14px 0 !important;
+  justify-content:flex-start !important;
+}
+
+
+/* === Covers v3: tighter spacing so corners are filled === */
+#covers .slides{ gap: 12px !important; }
+
+
+/* (removed Covers v9) */
+#covers .arrow{display:none !important;}
+
+/* full-bleed frame */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;  /* IMPORTANT: hide edges like Oscar */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* allow vertical scroll */
+}
+
+/* track */
+#covers .slides{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap: 16px !important;
+  padding: 18px 0 !important; /* only vertical breathing */
+  width: max-content;
+  will-change: transform;
+  animation: none !important; /* disable any prior marquee */
+  transform: translate3d(0,0,0);
+}
+#covers .slide{ flex:0 0 auto; }  /* keep original sizing from your file */
+
+
+/* === Covers v10: Oscar-like grab-to-drag with smooth slow drift, NO jitter === */
+#covers .arrow{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  border-radius:0 !important;
+  padding: 0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  cursor: grab;
+  user-select:none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;}
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:center;
+  gap: 14px !important;
+  padding: 18px 0 !important;   /* no side padding -> covers can touch corners */
+  width:max-content;
+  animation:none !important;
+}
+
+
+/* === Covers edge fill fix: remove internal gutters completely === */
+#covers .coverSlider{padding-left:0 !important; padding-right:0 !important;}
+#covers .coverSlider:after{left:0 !important; right:0 !important; opacity:.25;}
+
+
+/* === FINAL covers edge fix: make slider FULL-BLEED + remove ALL inner gutters === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+  border-radius:0 !important;
+}
+#covers .slides{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
 </style>
 
 <style>
@@ -2593,6 +3570,472 @@ html, body{
 .review-card p{opacity:.9}
 @media(max-width:900px){.review-grid{grid-template-columns:1fr}}
 
+
+/* === About section visual upgrade (library background + glass cards) === */
+#about{
+  position: relative;
+  background:
+    linear-gradient(rgba(6,20,46,.86), rgba(6,20,46,.90)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat !important;
+}
+#about::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+}
+#about .card, 
+#about .t, 
+#about .tile, 
+#about .box{
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+
+/* === SERVICES section upgrade: richer background + color-coded cards + logo accents === */
+#services{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4,12,28,.78), rgba(4,12,28,.88)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#services::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(167,139,250,.20), transparent 60%),
+    radial-gradient(820px 520px at 70% 92%, rgba(250,204,21,.12), transparent 65%);
+  pointer-events:none;
+}
+/* subtle icon pattern (books) */
+#services::after{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.7' stroke-width='2'%3E%3Cpath d='M64 78c18-10 38-10 56 0v92c-18-10-38-10-56 0V78z'/%3E%3Cpath d='M156 78c-18-10-38-10-56 0v92c18-10 38-10 56 0V78z'/%3E%3Cpath d='M64 78v-10c18-10 38-10 56 0v10'/%3E%3Cpath d='M156 78v-10c-18-10-38-10-56 0v10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+#services .container, #services .reveal, #services #svcGrid{position:relative; z-index:2;}
+
+/* Make the category tabs feel premium */
+#services .seg{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(12px);
+}
+#services .seg button{
+  color: rgba(255,255,255,.88) !important;
+}
+#services .seg button.active{
+  background: linear-gradient(135deg, rgba(110,231,255,.26), rgba(250,204,21,.16), rgba(167,139,250,.22)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Card base: more depth + tidy spacing */
+#services .svc{
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 18px 56px rgba(0,0,0,.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateZ(0);
+}
+#services .svc:hover{
+  box-shadow: 0 26px 86px rgba(0,0,0,.40), 0 0 44px rgba(110,231,255,.18);
+}
+
+/* “Logo chip” on each card (no HTML changes) */
+#services .svc::after{
+  content:"";
+  position:absolute;
+  right:16px; top:16px;
+  width:42px; height:42px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18));
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+  opacity:.95;
+}
+#services .svc::before{opacity:1 !important;} /* keep existing glow visible */
+
+/* Color-code by category using data-cat */
+#services .svc[data-cat="write"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.26), rgba(52,211,153,.18));
+}
+#services .svc[data-cat="edit"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(167,139,250,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="publish"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(250,204,21,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="market"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(251,113,133,.26), rgba(167,139,250,.16));
+}
+
+/* Make icons brighter and more “logo-like” */
+#services .icon{
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+#services .icon svg{fill: rgba(255,255,255,.92) !important;}
+
+/* Improve CTA buttons inside cards */
+#services .btn2{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+#services .btn2:hover{background: rgba(255,255,255,.14) !important;}
+#services .btn.btn-secondary{
+  background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+
+/* === COVERS / BOOK PORTFOLIO upgrade: scenic background + side-to-side moving covers === */
+#covers{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(6,20,46,.82), rgba(6,20,46,.90)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#covers::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 12%, rgba(110,231,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 18%, rgba(167,139,250,.18), transparent 60%),
+    radial-gradient(820px 520px at 60% 92%, rgba(250,204,21,.10), transparent 70%);
+  pointer-events:none;
+}
+#covers .container{position:relative; z-index:2;}
+
+/* Slider frame (glass) */
+#covers .coverSlider{
+  margin-top: 22px;
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  overflow: hidden;
+  padding: 18px 12px;
+}
+
+/* The moving track: books enter from one side and exit the other */
+#covers .slides{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  will-change: transform;
+  animation: coversMarquee 34s linear infinite;
+  padding: 6px 14px; /* lets covers sit near edges, not centered */
+}
+
+/* Pause on hover so users can look */
+#covers .coverSlider:hover .slides{animation-play-state: paused;}
+
+/* Cover cards */
+#covers .slide{
+  flex: 0 0 auto;
+  width: min(240px, 62vw);
+  height: 320px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  position: relative;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+#covers .slide::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* Arrows: keep, but make premium and not dominant */
+#covers .arrow{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:5;
+  box-shadow: 0 16px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+#covers .arrow.left{left: 12px;}
+#covers .arrow.right{right: 12px;}
+#covers .arrow:hover{background: rgba(0,0,0,.34);}
+
+/* Marquee animation (right->left) */
+@keyframes coversMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+/* Responsive tuning */
+@media (max-width: 980px){
+  #covers .slide{height: 280px;}
+  #covers .slides{gap: 14px; animation-duration: 28s;}
+}
+@media (max-width: 560px){
+  #covers .slide{height: 240px; width: 70vw;}
+  #covers .arrow{display:none;} /* cleaner on mobile */
+  #covers .slides{animation-duration: 24s;}
+}
+
+
+/* === FIX: Covers must reach BOTH corners (full-bleed marquee) === */
+#covers .coverSlider{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+  padding: 24px 0 !important;
+}
+
+#covers .slides{
+  gap: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  animation-duration: 38s !important;
+}
+
+#covers .slide{
+  width: 260px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 900px){
+  #covers .slide{
+    width: 200px !important;
+    height: 300px !important;
+  }
+}
+
+
+/* === TRUE corner-to-corner flow (right -> left), no center bias === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 10px 0 !important;
+  overflow:hidden;
+}
+
+#covers .slides{
+  width: max-content;
+  display:flex;
+  gap:18px;
+  animation: coversEdgeFlow 40s linear infinite !important;
+}
+
+@keyframes coversEdgeFlow{
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* keep original cover size */
+#covers .slide{
+  width:240px !important;
+  height:320px !important;
+}
+
+
+/* === Seamless edge-to-edge marquee (fills corners while moving) === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 8px 0 !important;
+  overflow:hidden;
+}
+#covers .slides{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding: 0 !important; /* no inner gutters */
+  will-change: transform;
+  animation: coversSeamless var(--coversDur, 46s) linear infinite !important;
+}
+@keyframes coversSeamless{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(var(--coversDist, -1600px),0,0); }
+}
+/* keep original size */
+#covers .slide{ width:240px !important; height:320px !important; }
+@media (max-width: 900px){ #covers .slide{ width:200px !important; height:300px !important; } }
+
+
+/* === Oscar-style: drag-to-scroll covers, edge-to-edge, NO arrows === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;      /* Firefox */
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important; /* no centering */
+  align-items:center;
+  gap:18px;
+  padding: 14px 0 !important; /* no side gutters, just vertical breathing */
+  width: max-content;
+  animation: none !important;  /* disable marquee */
+}
+
+/* Keep original card size (do NOT enlarge) */
+#covers .slide{ width:240px !important; height:320px !important; }
+
+/* Optional: soft edge fade so it feels premium */
+#covers .coverSlider{
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+/* Slower “auto drift” feel (the JS sets speed) */
+
+
+/* === Covers v2: no empty edges, no fade mask, true infinite loop fill === */
+#covers .coverSlider{
+  mask-image: none !important;
+  padding: 0 !important;
+}
+#covers .slides{
+  padding: 14px 0 !important;
+  justify-content:flex-start !important;
+}
+
+
+/* === Covers v3: tighter spacing so corners are filled === */
+#covers .slides{ gap: 12px !important; }
+
+
+/* (removed Covers v9) */
+#covers .arrow{display:none !important;}
+
+/* full-bleed frame */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;  /* IMPORTANT: hide edges like Oscar */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* allow vertical scroll */
+}
+
+/* track */
+#covers .slides{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap: 16px !important;
+  padding: 18px 0 !important; /* only vertical breathing */
+  width: max-content;
+  will-change: transform;
+  animation: none !important; /* disable any prior marquee */
+  transform: translate3d(0,0,0);
+}
+#covers .slide{ flex:0 0 auto; }  /* keep original sizing from your file */
+
+
+/* === Covers v10: Oscar-like grab-to-drag with smooth slow drift, NO jitter === */
+#covers .arrow{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  border-radius:0 !important;
+  padding: 0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  cursor: grab;
+  user-select:none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;}
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:center;
+  gap: 14px !important;
+  padding: 18px 0 !important;   /* no side padding -> covers can touch corners */
+  width:max-content;
+  animation:none !important;
+}
+
+
+/* === Covers edge fill fix: remove internal gutters completely === */
+#covers .coverSlider{padding-left:0 !important; padding-right:0 !important;}
+#covers .coverSlider:after{left:0 !important; right:0 !important; opacity:.25;}
+
+
+/* === FINAL covers edge fix: make slider FULL-BLEED + remove ALL inner gutters === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+  border-radius:0 !important;
+}
+#covers .slides{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
 </style>
 
 <style id="tusp-enhancements">
@@ -2647,6 +4090,472 @@ html, body{
 .r-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .review-card p{opacity:.9}
 @media(max-width:900px){.review-grid{grid-template-columns:1fr}}
+
+
+/* === About section visual upgrade (library background + glass cards) === */
+#about{
+  position: relative;
+  background:
+    linear-gradient(rgba(6,20,46,.86), rgba(6,20,46,.90)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat !important;
+}
+#about::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+}
+#about .card, 
+#about .t, 
+#about .tile, 
+#about .box{
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+
+/* === SERVICES section upgrade: richer background + color-coded cards + logo accents === */
+#services{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4,12,28,.78), rgba(4,12,28,.88)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#services::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(167,139,250,.20), transparent 60%),
+    radial-gradient(820px 520px at 70% 92%, rgba(250,204,21,.12), transparent 65%);
+  pointer-events:none;
+}
+/* subtle icon pattern (books) */
+#services::after{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.7' stroke-width='2'%3E%3Cpath d='M64 78c18-10 38-10 56 0v92c-18-10-38-10-56 0V78z'/%3E%3Cpath d='M156 78c-18-10-38-10-56 0v92c18-10 38-10 56 0V78z'/%3E%3Cpath d='M64 78v-10c18-10 38-10 56 0v10'/%3E%3Cpath d='M156 78v-10c-18-10-38-10-56 0v10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+#services .container, #services .reveal, #services #svcGrid{position:relative; z-index:2;}
+
+/* Make the category tabs feel premium */
+#services .seg{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(12px);
+}
+#services .seg button{
+  color: rgba(255,255,255,.88) !important;
+}
+#services .seg button.active{
+  background: linear-gradient(135deg, rgba(110,231,255,.26), rgba(250,204,21,.16), rgba(167,139,250,.22)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Card base: more depth + tidy spacing */
+#services .svc{
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 18px 56px rgba(0,0,0,.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateZ(0);
+}
+#services .svc:hover{
+  box-shadow: 0 26px 86px rgba(0,0,0,.40), 0 0 44px rgba(110,231,255,.18);
+}
+
+/* “Logo chip” on each card (no HTML changes) */
+#services .svc::after{
+  content:"";
+  position:absolute;
+  right:16px; top:16px;
+  width:42px; height:42px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18));
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+  opacity:.95;
+}
+#services .svc::before{opacity:1 !important;} /* keep existing glow visible */
+
+/* Color-code by category using data-cat */
+#services .svc[data-cat="write"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.26), rgba(52,211,153,.18));
+}
+#services .svc[data-cat="edit"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(167,139,250,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="publish"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(250,204,21,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="market"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(251,113,133,.26), rgba(167,139,250,.16));
+}
+
+/* Make icons brighter and more “logo-like” */
+#services .icon{
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+#services .icon svg{fill: rgba(255,255,255,.92) !important;}
+
+/* Improve CTA buttons inside cards */
+#services .btn2{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+#services .btn2:hover{background: rgba(255,255,255,.14) !important;}
+#services .btn.btn-secondary{
+  background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+
+/* === COVERS / BOOK PORTFOLIO upgrade: scenic background + side-to-side moving covers === */
+#covers{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(6,20,46,.82), rgba(6,20,46,.90)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#covers::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 12%, rgba(110,231,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 18%, rgba(167,139,250,.18), transparent 60%),
+    radial-gradient(820px 520px at 60% 92%, rgba(250,204,21,.10), transparent 70%);
+  pointer-events:none;
+}
+#covers .container{position:relative; z-index:2;}
+
+/* Slider frame (glass) */
+#covers .coverSlider{
+  margin-top: 22px;
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  overflow: hidden;
+  padding: 18px 12px;
+}
+
+/* The moving track: books enter from one side and exit the other */
+#covers .slides{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  will-change: transform;
+  animation: coversMarquee 34s linear infinite;
+  padding: 6px 14px; /* lets covers sit near edges, not centered */
+}
+
+/* Pause on hover so users can look */
+#covers .coverSlider:hover .slides{animation-play-state: paused;}
+
+/* Cover cards */
+#covers .slide{
+  flex: 0 0 auto;
+  width: min(240px, 62vw);
+  height: 320px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  position: relative;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+#covers .slide::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* Arrows: keep, but make premium and not dominant */
+#covers .arrow{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:5;
+  box-shadow: 0 16px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+#covers .arrow.left{left: 12px;}
+#covers .arrow.right{right: 12px;}
+#covers .arrow:hover{background: rgba(0,0,0,.34);}
+
+/* Marquee animation (right->left) */
+@keyframes coversMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+/* Responsive tuning */
+@media (max-width: 980px){
+  #covers .slide{height: 280px;}
+  #covers .slides{gap: 14px; animation-duration: 28s;}
+}
+@media (max-width: 560px){
+  #covers .slide{height: 240px; width: 70vw;}
+  #covers .arrow{display:none;} /* cleaner on mobile */
+  #covers .slides{animation-duration: 24s;}
+}
+
+
+/* === FIX: Covers must reach BOTH corners (full-bleed marquee) === */
+#covers .coverSlider{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+  padding: 24px 0 !important;
+}
+
+#covers .slides{
+  gap: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  animation-duration: 38s !important;
+}
+
+#covers .slide{
+  width: 260px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 900px){
+  #covers .slide{
+    width: 200px !important;
+    height: 300px !important;
+  }
+}
+
+
+/* === TRUE corner-to-corner flow (right -> left), no center bias === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 10px 0 !important;
+  overflow:hidden;
+}
+
+#covers .slides{
+  width: max-content;
+  display:flex;
+  gap:18px;
+  animation: coversEdgeFlow 40s linear infinite !important;
+}
+
+@keyframes coversEdgeFlow{
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* keep original cover size */
+#covers .slide{
+  width:240px !important;
+  height:320px !important;
+}
+
+
+/* === Seamless edge-to-edge marquee (fills corners while moving) === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 8px 0 !important;
+  overflow:hidden;
+}
+#covers .slides{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding: 0 !important; /* no inner gutters */
+  will-change: transform;
+  animation: coversSeamless var(--coversDur, 46s) linear infinite !important;
+}
+@keyframes coversSeamless{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(var(--coversDist, -1600px),0,0); }
+}
+/* keep original size */
+#covers .slide{ width:240px !important; height:320px !important; }
+@media (max-width: 900px){ #covers .slide{ width:200px !important; height:300px !important; } }
+
+
+/* === Oscar-style: drag-to-scroll covers, edge-to-edge, NO arrows === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;      /* Firefox */
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important; /* no centering */
+  align-items:center;
+  gap:18px;
+  padding: 14px 0 !important; /* no side gutters, just vertical breathing */
+  width: max-content;
+  animation: none !important;  /* disable marquee */
+}
+
+/* Keep original card size (do NOT enlarge) */
+#covers .slide{ width:240px !important; height:320px !important; }
+
+/* Optional: soft edge fade so it feels premium */
+#covers .coverSlider{
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+/* Slower “auto drift” feel (the JS sets speed) */
+
+
+/* === Covers v2: no empty edges, no fade mask, true infinite loop fill === */
+#covers .coverSlider{
+  mask-image: none !important;
+  padding: 0 !important;
+}
+#covers .slides{
+  padding: 14px 0 !important;
+  justify-content:flex-start !important;
+}
+
+
+/* === Covers v3: tighter spacing so corners are filled === */
+#covers .slides{ gap: 12px !important; }
+
+
+/* (removed Covers v9) */
+#covers .arrow{display:none !important;}
+
+/* full-bleed frame */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;  /* IMPORTANT: hide edges like Oscar */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* allow vertical scroll */
+}
+
+/* track */
+#covers .slides{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap: 16px !important;
+  padding: 18px 0 !important; /* only vertical breathing */
+  width: max-content;
+  will-change: transform;
+  animation: none !important; /* disable any prior marquee */
+  transform: translate3d(0,0,0);
+}
+#covers .slide{ flex:0 0 auto; }  /* keep original sizing from your file */
+
+
+/* === Covers v10: Oscar-like grab-to-drag with smooth slow drift, NO jitter === */
+#covers .arrow{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  border-radius:0 !important;
+  padding: 0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  cursor: grab;
+  user-select:none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;}
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:center;
+  gap: 14px !important;
+  padding: 18px 0 !important;   /* no side padding -> covers can touch corners */
+  width:max-content;
+  animation:none !important;
+}
+
+
+/* === Covers edge fill fix: remove internal gutters completely === */
+#covers .coverSlider{padding-left:0 !important; padding-right:0 !important;}
+#covers .coverSlider:after{left:0 !important; right:0 !important; opacity:.25;}
+
+
+/* === FINAL covers edge fix: make slider FULL-BLEED + remove ALL inner gutters === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+  border-radius:0 !important;
+}
+#covers .slides{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
 
 </style>
 
@@ -2705,6 +4614,735 @@ html, body{
 .r-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .review-card p{opacity:.9}
 @media(max-width:900px){.review-grid{grid-template-columns:1fr}}
+
+
+/* === About section visual upgrade (library background + glass cards) === */
+#about{
+  position: relative;
+  background:
+    linear-gradient(rgba(6,20,46,.86), rgba(6,20,46,.90)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat !important;
+}
+#about::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter: blur(2px);
+}
+#about .card, 
+#about .t, 
+#about .tile, 
+#about .box{
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+
+/* === SERVICES section upgrade: richer background + color-coded cards + logo accents === */
+#services{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4,12,28,.78), rgba(4,12,28,.88)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#services::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 18% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(167,139,250,.20), transparent 60%),
+    radial-gradient(820px 520px at 70% 92%, rgba(250,204,21,.12), transparent 65%);
+  pointer-events:none;
+}
+/* subtle icon pattern (books) */
+#services::after{
+  content:"";
+  position:absolute; inset:0;
+  opacity:.14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.7' stroke-width='2'%3E%3Cpath d='M64 78c18-10 38-10 56 0v92c-18-10-38-10-56 0V78z'/%3E%3Cpath d='M156 78c-18-10-38-10-56 0v92c18-10 38-10 56 0V78z'/%3E%3Cpath d='M64 78v-10c18-10 38-10 56 0v10'/%3E%3Cpath d='M156 78v-10c-18-10-38-10-56 0v10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+#services .container, #services .reveal, #services #svcGrid{position:relative; z-index:2;}
+
+/* Make the category tabs feel premium */
+#services .seg{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  backdrop-filter: blur(12px);
+}
+#services .seg button{
+  color: rgba(255,255,255,.88) !important;
+}
+#services .seg button.active{
+  background: linear-gradient(135deg, rgba(110,231,255,.26), rgba(250,204,21,.16), rgba(167,139,250,.22)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+/* Card base: more depth + tidy spacing */
+#services .svc{
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow: 0 18px 56px rgba(0,0,0,.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateZ(0);
+}
+#services .svc:hover{
+  box-shadow: 0 26px 86px rgba(0,0,0,.40), 0 0 44px rgba(110,231,255,.18);
+}
+
+/* “Logo chip” on each card (no HTML changes) */
+#services .svc::after{
+  content:"";
+  position:absolute;
+  right:16px; top:16px;
+  width:42px; height:42px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18));
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+  opacity:.95;
+}
+#services .svc::before{opacity:1 !important;} /* keep existing glow visible */
+
+/* Color-code by category using data-cat */
+#services .svc[data-cat="write"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(110,231,255,.26), rgba(52,211,153,.18));
+}
+#services .svc[data-cat="edit"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(167,139,250,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="publish"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(250,204,21,.26), rgba(110,231,255,.16));
+}
+#services .svc[data-cat="market"]::after{
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.42), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(251,113,133,.26), rgba(167,139,250,.16));
+}
+
+/* Make icons brighter and more “logo-like” */
+#services .icon{
+  background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+#services .icon svg{fill: rgba(255,255,255,.92) !important;}
+
+/* Improve CTA buttons inside cards */
+#services .btn2{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+#services .btn2:hover{background: rgba(255,255,255,.14) !important;}
+#services .btn.btn-secondary{
+  background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.18)) !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+
+/* === COVERS / BOOK PORTFOLIO upgrade: scenic background + side-to-side moving covers === */
+#covers{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(6,20,46,.82), rgba(6,20,46,.90)),
+    url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#covers::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 12%, rgba(110,231,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 18%, rgba(167,139,250,.18), transparent 60%),
+    radial-gradient(820px 520px at 60% 92%, rgba(250,204,21,.10), transparent 70%);
+  pointer-events:none;
+}
+#covers .container{position:relative; z-index:2;}
+
+/* Slider frame (glass) */
+#covers .coverSlider{
+  margin-top: 22px;
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+  overflow: hidden;
+  padding: 18px 12px;
+}
+
+/* The moving track: books enter from one side and exit the other */
+#covers .slides{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  will-change: transform;
+  animation: coversMarquee 34s linear infinite;
+  padding: 6px 14px; /* lets covers sit near edges, not centered */
+}
+
+/* Pause on hover so users can look */
+#covers .coverSlider:hover .slides{animation-play-state: paused;}
+
+/* Cover cards */
+#covers .slide{
+  flex: 0 0 auto;
+  width: min(240px, 62vw);
+  height: 320px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.40);
+  position: relative;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+#covers .slide::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* Arrows: keep, but make premium and not dominant */
+#covers .arrow{
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:5;
+  box-shadow: 0 16px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+#covers .arrow.left{left: 12px;}
+#covers .arrow.right{right: 12px;}
+#covers .arrow:hover{background: rgba(0,0,0,.34);}
+
+/* Marquee animation (right->left) */
+@keyframes coversMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+/* Responsive tuning */
+@media (max-width: 980px){
+  #covers .slide{height: 280px;}
+  #covers .slides{gap: 14px; animation-duration: 28s;}
+}
+@media (max-width: 560px){
+  #covers .slide{height: 240px; width: 70vw;}
+  #covers .arrow{display:none;} /* cleaner on mobile */
+  #covers .slides{animation-duration: 24s;}
+}
+
+
+/* === FIX: Covers must reach BOTH corners (full-bleed marquee) === */
+#covers .coverSlider{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+  padding: 24px 0 !important;
+}
+
+#covers .slides{
+  gap: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  animation-duration: 38s !important;
+}
+
+#covers .slide{
+  width: 260px !important;
+  height: 360px !important;
+}
+
+@media (max-width: 900px){
+  #covers .slide{
+    width: 200px !important;
+    height: 300px !important;
+  }
+}
+
+
+/* === TRUE corner-to-corner flow (right -> left), no center bias === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 10px 0 !important;
+  overflow:hidden;
+}
+
+#covers .slides{
+  width: max-content;
+  display:flex;
+  gap:18px;
+  animation: coversEdgeFlow 40s linear infinite !important;
+}
+
+@keyframes coversEdgeFlow{
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* keep original cover size */
+#covers .slide{
+  width:240px !important;
+  height:320px !important;
+}
+
+
+/* === Seamless edge-to-edge marquee (fills corners while moving) === */
+#covers .coverSlider{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding: 8px 0 !important;
+  overflow:hidden;
+}
+#covers .slides{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding: 0 !important; /* no inner gutters */
+  will-change: transform;
+  animation: coversSeamless var(--coversDur, 46s) linear infinite !important;
+}
+@keyframes coversSeamless{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(var(--coversDist, -1600px),0,0); }
+}
+/* keep original size */
+#covers .slide{ width:240px !important; height:320px !important; }
+@media (max-width: 900px){ #covers .slide{ width:200px !important; height:300px !important; } }
+
+
+/* === Oscar-style: drag-to-scroll covers, edge-to-edge, NO arrows === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;      /* Firefox */
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;} /* Chrome/Safari */
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important; /* no centering */
+  align-items:center;
+  gap:18px;
+  padding: 14px 0 !important; /* no side gutters, just vertical breathing */
+  width: max-content;
+  animation: none !important;  /* disable marquee */
+}
+
+/* Keep original card size (do NOT enlarge) */
+#covers .slide{ width:240px !important; height:320px !important; }
+
+/* Optional: soft edge fade so it feels premium */
+#covers .coverSlider{
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+/* Slower “auto drift” feel (the JS sets speed) */
+
+
+/* === Covers v2: no empty edges, no fade mask, true infinite loop fill === */
+#covers .coverSlider{
+  mask-image: none !important;
+  padding: 0 !important;
+}
+#covers .slides{
+  padding: 14px 0 !important;
+  justify-content:flex-start !important;
+}
+
+
+/* === Covers v3: tighter spacing so corners are filled === */
+#covers .slides{ gap: 12px !important; }
+
+
+/* (removed Covers v9) */
+#covers .arrow{display:none !important;}
+
+/* full-bleed frame */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;  /* IMPORTANT: hide edges like Oscar */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y; /* allow vertical scroll */
+}
+
+/* track */
+#covers .slides{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap: 16px !important;
+  padding: 18px 0 !important; /* only vertical breathing */
+  width: max-content;
+  will-change: transform;
+  animation: none !important; /* disable any prior marquee */
+  transform: translate3d(0,0,0);
+}
+#covers .slide{ flex:0 0 auto; }  /* keep original sizing from your file */
+
+
+/* === Covers v10: Oscar-like grab-to-drag with smooth slow drift, NO jitter === */
+#covers .arrow{display:none !important;}
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  border-radius:0 !important;
+  padding: 0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  cursor: grab;
+  user-select:none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+}
+#covers .coverSlider::-webkit-scrollbar{display:none;}
+
+#covers .slides{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:center;
+  gap: 14px !important;
+  padding: 18px 0 !important;   /* no side padding -> covers can touch corners */
+  width:max-content;
+  animation:none !important;
+}
+
+
+/* === FINAL FIX (edge-to-edge + drag + slow auto) === */
+#covers .arrow, #covers .arrow.left, #covers .arrow.right{ display:none !important; }
+
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  cursor: grab;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-y; /* allow vertical page scroll, we handle horizontal drag */
+}
+#covers .coverSlider::-webkit-scrollbar{ display:none; }
+#covers .coverSlider.is-grabbing{ cursor: grabbing; }
+
+#covers .slides{
+  display:flex !important;
+  align-items:center !important;
+  gap: 18px !important;
+  padding: 0 !important;          /* no inner gutters */
+  width: max-content !important;   /* content defines width */
+  animation: none !important;      /* JS controls movement */
+  transform: none !important;
+  will-change: auto !important;
+}
+#covers .slide{ flex: 0 0 auto !important; }
+
+
+/* === Covers edge fill fix: remove internal gutters completely === */
+#covers .coverSlider{padding-left:0 !important; padding-right:0 !important;}
+#covers .coverSlider:after{left:0 !important; right:0 !important; opacity:.25;}
+
+
+/* === FINAL covers edge fix: make slider FULL-BLEED + remove ALL inner gutters === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+  border-radius:0 !important;
+}
+#covers .slides{
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+
+/* === Covers FINAL edge fix (force flush to viewport edges) === */
+#covers .coverSlider{
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 18px 0 !important;   /* kills original 54px side padding */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+#covers .slides{
+  padding: 0 !important;
+  margin: 0 !important;
+  justify-content: flex-start !important;
+}
+
+
+/* === HERO upgrade: creative calm library background + premium glows (no HTML changes) === */
+.hero.section-dark{
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, rgba(5,18,44,.88), rgba(5,18,44,.92)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2200&auto=format&fit=crop") center/cover no-repeat !important;
+}
+/* soften any existing texture */
+.hero.section-dark .texture{opacity:.16 !important; filter: blur(.5px);}
+
+/* ambient light blobs */
+.hero.section-dark::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 14% 22%, rgba(110,231,255,.26), transparent 60%),
+    radial-gradient(900px 520px at 84% 18%, rgba(167,139,250,.22), transparent 62%),
+    radial-gradient(820px 520px at 55% 92%, rgba(250,204,21,.14), transparent 70%);
+  pointer-events:none;
+}
+/* subtle animated shimmer */
+.hero.section-dark::after{
+  content:"";
+  position:absolute; inset:-40%;
+  background: conic-gradient(from 180deg at 50% 50%,
+      rgba(110,231,255,.10),
+      rgba(167,139,250,.10),
+      rgba(250,204,21,.08),
+      rgba(110,231,255,.10));
+  opacity:.12;
+  filter: blur(28px);
+  animation: heroGlowSpin 18s linear infinite;
+  pointer-events:none;
+}
+@keyframes heroGlowSpin{
+  from{transform: translate3d(0,0,0) rotate(0deg);}
+  to{transform: translate3d(0,0,0) rotate(360deg);}
+}
+
+/* make the image panel feel more premium */
+.hero.section-dark .heroImage,
+.hero.section-dark .heroPhoto,
+.hero.section-dark .imgCard{
+  border:1px solid rgba(255,255,255,.14) !important;
+  box-shadow: 0 26px 80px rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+
+
+/* ===== Stats section: tech/datacenter style background ===== */
+#stats{
+  position:relative;
+  overflow:hidden;
+}
+#stats::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(700px 300px at 15% 15%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(700px 300px at 85% 85%, rgba(167,139,250,.18), transparent 60%),
+    linear-gradient(180deg, rgba(2,6,23,.35), rgba(2,6,23,.65)),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27800%27%20height%3D%27400%27%20viewBox%3D%270%200%20800%20400%27%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20x2%3D%271%27%20y1%3D%270%27%20y2%3D%271%27%3E%0A%3Cstop%20offset%3D%270%27%20stop-color%3D%27%236ee7ff%27%20stop-opacity%3D%27.35%27/%3E%0A%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23a78bfa%27%20stop-opacity%3D%27.25%27/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%27800%27%20height%3D%27400%27%20fill%3D%27none%27/%3E%0A%3Cg%20stroke%3D%27url%28%23g%29%27%20stroke-width%3D%271%27%20fill%3D%27none%27%20opacity%3D%27.9%27%3E%0A%3Cpath%20d%3D%27M40%2070%20H220%20V140%20H360%27%20/%3E%0A%3Cpath%20d%3D%27M120%20260%20H300%20V210%20H520%20V110%20H700%27%20/%3E%0A%3Cpath%20d%3D%27M60%20330%20H180%20V280%20H260%20V150%20H480%27%20/%3E%0A%3Cpath%20d%3D%27M420%20300%20V220%20H640%20V260%20H760%27%20/%3E%0A%3Cpath%20d%3D%27M520%2060%20V160%20H610%20V210%27%20/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%27%236ee7ff%27%20opacity%3D%27.55%27%3E%0A%3Ccircle%20cx%3D%2740%27%20cy%3D%2770%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27220%27%20cy%3D%27140%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27360%27%20cy%3D%27140%27%20r%3D%274%27/%3E%0A%3Ccircle%20cx%3D%27120%27%20cy%3D%27260%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27520%27%20cy%3D%27110%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27700%27%20cy%3D%27110%27%20r%3D%274%27/%3E%0A%3Ccircle%20cx%3D%2760%27%20cy%3D%27330%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27150%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27480%27%20cy%3D%27150%27%20r%3D%274%27/%3E%0A%3Ccircle%20cx%3D%27420%27%20cy%3D%27300%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27640%27%20cy%3D%27260%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27760%27%20cy%3D%27260%27%20r%3D%274%27/%3E%0A%3Ccircle%20cx%3D%27520%27%20cy%3D%2760%27%20r%3D%274%27/%3E%3Ccircle%20cx%3D%27610%27%20cy%3D%27210%27%20r%3D%274%27/%3E%0A%3C/g%3E%0A%3C/svg%3E");
+  background-size: auto, auto, auto, 1100px 550px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  opacity:.95;
+  filter:saturate(1.05) contrast(1.02);
+  animation: statsGridDrift 22s ease-in-out infinite;
+  pointer-events:none;
+}
+#stats::after{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 90px);
+  opacity:.08;
+  transform:skewX(-8deg);
+  pointer-events:none;
+}
+@keyframes statsGridDrift{
+  0%{background-position:0 0,0 0,0 0, 0 0;}
+  50%{background-position:0 0,0 0,0 0, -120px -40px;}
+  100%{background-position:0 0,0 0,0 0, 0 0;}
+}
+#stats .container{position:relative; z-index:1;}
+/* slightly more "technical" card styling */
+#stats .statCard{
+  background: linear-gradient(180deg, rgba(17,45,86,.55), rgba(10,24,48,.45)) !important;
+  border: 1px solid rgba(110,231,255,.14) !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35) !important;
+}
+#stats .statCard:hover{
+  border-color: rgba(110,231,255,.28) !important;
+  transform: translateY(-2px);
+}
+#stats .statIcon{
+  background: radial-gradient(circle at 30% 30%, rgba(110,231,255,.22), rgba(167,139,250,.10)) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+}
+
+
+
+/* === TECH BACKGROUND for Stats (id="stats") === */
+#stats.section-dark{
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(rgba(3,11,31,.88), rgba(3,11,31,.92)),
+    url("https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2400&auto=format&fit=crop") center/cover no-repeat !important;
+}
+#stats.section-dark::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity:.16;
+  pointer-events:none;
+}
+#stats.section-dark::after{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(900px 520px at 12% 20%, rgba(110,231,255,.22), transparent 60%),
+    radial-gradient(900px 520px at 88% 10%, rgba(167,139,250,.20), transparent 62%),
+    radial-gradient(800px 520px at 60% 92%, rgba(250,204,21,.12), transparent 70%);
+  pointer-events:none;
+}
+/* Make the cards pop */
+#stats .statCard{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: 0 20px 70px rgba(0,0,0,.35) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+#stats .statIcon{
+  background: linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.16)) !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+
+
+/* ===== GUIDED FIX (PROCESS) — DARK, READABLE, PREMIUM ===== */
+#process{
+  position: relative !important;
+  background: #06142e !important;
+  color: #eaf0ff !important;
+  overflow: hidden !important;
+}
+#process::before{
+  content:"";
+  position:absolute;
+  inset:-60px;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221600%22%20height%3D%22900%22%3E%0A%3Cdefs%3E%0A%3CradialGradient%20id%3D%22a%22%20cx%3D%2228%25%22%20cy%3D%2222%25%22%20r%3D%2270%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2338bdf8%22%20stop-opacity%3D%220.75%22/%3E%0A%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%2306142e%22%20stop-opacity%3D%220%22/%3E%0A%3C/radialGradient%3E%0A%3CradialGradient%20id%3D%22b%22%20cx%3D%2282%25%22%20cy%3D%2228%25%22%20r%3D%2270%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23a78bfa%22%20stop-opacity%3D%220.65%22/%3E%0A%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%2306142e%22%20stop-opacity%3D%220%22/%3E%0A%3C/radialGradient%3E%0A%3CradialGradient%20id%3D%22c%22%20cx%3D%2270%25%22%20cy%3D%2285%25%22%20r%3D%2275%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2322c55e%22%20stop-opacity%3D%220.35%22/%3E%0A%3Cstop%20offset%3D%2265%25%22%20stop-color%3D%22%2306142e%22%20stop-opacity%3D%220%22/%3E%0A%3C/radialGradient%3E%0A%3ClinearGradient%20id%3D%22d%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230b2a5a%22%20stop-opacity%3D%221%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2306142e%22%20stop-opacity%3D%221%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23d%29%22/%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23a%29%22/%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23b%29%22/%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23c%29%22/%3E%0A%3Cg%20opacity%3D%220.25%22%20stroke%3D%22%23ffffff%22%3E%0A%3Cpath%20d%3D%22M0%20580%20C%20320%20520%2C%20520%20720%2C%20820%20660%20S%201320%20520%2C%201600%20620%22%20fill%3D%22none%22%20stroke-width%3D%222%22/%3E%0A%3Cpath%20d%3D%22M0%20340%20C%20360%20260%2C%20600%20420%2C%20900%20360%20S%201300%20220%2C%201600%20340%22%20fill%3D%22none%22%20stroke-width%3D%222%22/%3E%0A%3C/g%3E%0A%3Cg%20opacity%3D%220.10%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%3E%0A%3Ccircle%20cx%3D%22260%22%20cy%3D%22170%22%20r%3D%22120%22%20stroke-width%3D%222%22/%3E%0A%3Ccircle%20cx%3D%221280%22%20cy%3D%22220%22%20r%3D%22160%22%20stroke-width%3D%222%22/%3E%0A%3Ccircle%20cx%3D%22980%22%20cy%3D%22720%22%20r%3D%22190%22%20stroke-width%3D%222%22/%3E%0A%3C/g%3E%0A%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  opacity: .95;
+  filter: saturate(1.1) contrast(1.05);
+  z-index: 0;
+}
+#process::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 520px at 20% 0%, rgba(56,189,248,.18), transparent 60%),
+    radial-gradient(900px 520px at 85% 10%, rgba(167,139,250,.16), transparent 60%),
+    linear-gradient(180deg, rgba(6,20,46,.86) 0%, rgba(6,20,46,.90) 45%, rgba(6,20,46,.94) 100%);
+  z-index: 1;
+}
+#process .container{ position: relative !important; z-index: 2 !important; }
+
+#process .eyebrow{
+  color: rgba(255,255,255,.88) !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+}
+#process .h2{
+  color: #ffffff !important;
+  text-shadow: 0 10px 40px rgba(0,0,0,.35) !important;
+}
+#process .lead{
+  color: rgba(255,255,255,.74) !important;
+  max-width: 760px !important;
+}
+
+/* Cards: glass but readable */
+#process .step{
+  background: rgba(255,255,255,.09) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+#process .step h4{ color:#ffffff !important; }
+#process .step p{ color: rgba(255,255,255,.80) !important; }
+#process .step .num{ color: rgba(255,255,255,.78) !important; }
+#process .step .mini{
+  background: rgba(255,255,255,.16) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+
+/* If any older injected styles used :has(), neutralize them for compatibility */
+@supports selector(:has(*)) {
+  section:has(.steps){ background: unset !important; }
+}
 
 </style>
 
@@ -2858,7 +5496,7 @@ html, body{
           <svg viewBox="0 0 24 24" fill="none"><path d="M20 8v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4z" stroke="currentColor" stroke-width="2"/><path d="M8 11h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
         <div class="statNum"><span class="count" data-target="45" data-suffix="mil">0</span></div>
-        <div class="statLabel">GhostWriting Books Sold</div>
+        <div class="statLabel">Books Sold</div>
       </div>
     </div>
   </div>
@@ -3286,7 +5924,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
       
       <!-- Row 1 -->
       <div class="review-card">
-        <img src="review1.jpg" class="r-avatar"/>
+        <img src="review7.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3300,7 +5938,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
       </div>
 
       <div class="review-card">
-        <img src="review2.jpg" class="r-avatar"/>
+        <img src="review8.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3314,7 +5952,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
       </div>
 
       <div class="review-card">
-        <img src="review3.jpg" class="r-avatar"/>
+        <img src="review9.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3329,7 +5967,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 
       <!-- Row 2 -->
       <div class="review-card">
-        <img src="review4.jpg" class="r-avatar"/>
+        <img src="review10.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3343,7 +5981,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
       </div>
 
       <div class="review-card">
-        <img src="review5.jpg" class="r-avatar"/>
+        <img src="review11.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3357,7 +5995,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
       </div>
 
       <div class="review-card">
-        <img src="review6.jpg" class="r-avatar"/>
+        <img src="review12.jpg" class="r-avatar"/>
         <div class="r-content">
           <div class="r-head">
             <div>
@@ -3706,9 +6344,9 @@ document.addEventListener('click',()=>{
   <div class="contact-line">
     <span class="label">Address</span>
     <div class="addr">
-      1401 Lavaca Street<br/>
-      Unit #7065<br/>
-      Austin, TX 78701
+      6001 Gateway Blvd<br/>
+      Suite 400 (Corporate Campus)<br/>
+      Austin, TX 78752
     </div>
   </div>
 <div class="social">
@@ -3787,96 +6425,132 @@ document.addEventListener('click',()=>{
 
 <script>
 (function(){
-  const slider = document.querySelector('.coverSlider');
+  const slider = document.querySelector('#covers .coverSlider') || document.querySelector('.coverSlider');
   if(!slider) return;
   const track = slider.querySelector('.slides');
-  const btnL = slider.querySelector('.arrow.left');
-  const btnR = slider.querySelector('.arrow.right');
   if(!track) return;
 
-  // Build seamless loop using enough clones to always cover the viewport (no blanks)
-  let baseSlides = Array.from(track.children).filter(el => el.classList.contains('slide'));
-  if(baseSlides.length < 2) return;
+  // Mark original slides (exclude prior clones)
+  const base = Array.from(track.children).filter(el => el.classList && el.classList.contains('slide') && !el.dataset.clone);
+  if(base.length < 2) return;
 
-  let slides = [];
-  let realCount = baseSlides.length;
-  let cloneCount = 0;
-  let index = 0;
-  let autoTimer = null;
-
-  function stepSize(){
-    const first = slider.querySelector('.slide');
+  function getStep(){
+    const first = track.querySelector('.slide');
     if(!first) return 0;
-    const cs = window.getComputedStyle(first);
-    const mr = parseFloat(cs.marginRight) || 0;
-    return first.getBoundingClientRect().width + mr;
+    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+    return first.getBoundingClientRect().width + gap;
   }
 
-  function rebuildClones(){
-    // Remove any existing clones
-    Array.from(track.querySelectorAll('.slide.is-clone')).forEach(n => n.remove());
+  let clonesEachSide = 0;
+  let step = 0;
 
-    // Determine how many slides are visible; clone a bit more to prevent blank gaps
-    const s = stepSize();
-    const viewport = slider.getBoundingClientRect().width;
-    const visible = s ? Math.ceil(viewport / s) : 3;
-    cloneCount = Math.min(realCount, Math.max(visible + 2, 3)); // at least 3, plus buffer
-
-    // Add clones
-    const headClones = baseSlides.slice(0, cloneCount).map(n => n.cloneNode(true));
-    const tailClones = baseSlides.slice(-cloneCount).map(n => n.cloneNode(true));
-
-    tailClones.forEach(n => { n.classList.add('is-clone'); track.insertBefore(n, track.firstChild); });
-    headClones.forEach(n => { n.classList.add('is-clone'); track.appendChild(n); });
-
-    slides = Array.from(track.children).filter(el => el.classList.contains('slide'));
-    index = cloneCount; // first real slide
-    setPos(false);
+  function removeClones(){
+    Array.from(track.querySelectorAll('.slide[data-clone="1"]')).forEach(n => n.remove());
   }
 
-  function setPos(animate=true){
-    const s = stepSize();
-    if(!s) return;
-    track.style.transition = animate ? 'transform .8s ease' : 'none';
-    track.style.transform = `translateX(${-index * s}px)`;
+  function buildClones(){
+    step = getStep();
+    if(!step) return;
+
+    removeClones();
+
+    const viewport = slider.clientWidth || window.innerWidth;
+    clonesEachSide = Math.max(6, Math.ceil(viewport / step) + 4);
+
+    // prepend tail clones
+    const tail = base.slice(-clonesEachSide).map(n => n.cloneNode(true));
+    tail.forEach(n => { n.dataset.clone = "1"; track.insertBefore(n, track.firstChild); });
+
+    // append head clones
+    const head = base.slice(0, clonesEachSide).map(n => n.cloneNode(true));
+    head.forEach(n => { n.dataset.clone = "1"; track.appendChild(n); });
+
+    // Start inside the cloned area so BOTH corners are always covered
+    slider.scrollLeft = clonesEachSide * step;
   }
 
-  function restartAuto(){
-    if(autoTimer) clearInterval(autoTimer);
-    autoTimer = setInterval(()=>{ goNext(); }, 6000);
-  }
+  function normalize(){
+    if(!step) return;
+    const realSpan = base.length * step;
+    const min = step; // avoid hitting the very start
+    const max = (clonesEachSide + base.length) * step;
 
-  function goNext(){
-    index += 1;
-    setPos(true);
-  }
-  function goPrev(){
-    index -= 1;
-    setPos(true);
-  }
-
-  track.addEventListener('transitionend', ()=>{
-    // Past the last real into head clones -> jump back to first real
-    if(index >= cloneCount + realCount){
-      index = cloneCount;
-      setPos(false);
+    if(slider.scrollLeft < min){
+      slider.scrollLeft += realSpan;
+    } else if(slider.scrollLeft > max){
+      slider.scrollLeft -= realSpan;
     }
-    // Before first real into tail clones -> jump to last real
-    if(index < cloneCount){
-      index = cloneCount + realCount - 1;
-      setPos(false);
+  }
+
+  // --- Drag to scroll (click + hold) ---
+  let isDown = false;
+  let startX = 0;
+  let startScroll = 0;
+  let lastUser = performance.now();
+
+  function onDown(e){
+    isDown = true;
+    lastUser = performance.now();
+    slider.classList.add('is-grabbing');
+    startX = e.clientX;
+    startScroll = slider.scrollLeft;
+    try{ slider.setPointerCapture(e.pointerId); }catch(_){}
+  }
+  function onMove(e){
+    if(!isDown) return;
+    lastUser = performance.now();
+    const dx = e.clientX - startX;
+    slider.scrollLeft = startScroll - dx;
+    e.preventDefault();
+  }
+  function endDrag(){
+    if(!isDown) return;
+    isDown = false;
+    slider.classList.remove('is-grabbing');
+    lastUser = performance.now();
+  }
+
+  slider.addEventListener('pointerdown', onDown, {passive:false});
+  slider.addEventListener('pointermove', onMove, {passive:false});
+  slider.addEventListener('pointerup', endDrag);
+  slider.addEventListener('pointercancel', endDrag);
+  slider.addEventListener('mouseleave', endDrag);
+
+  // Track user interaction so auto-scroll pauses while dragging
+  slider.addEventListener('wheel', () => { lastUser = performance.now(); }, {passive:true});
+  slider.addEventListener('touchstart', () => { lastUser = performance.now(); }, {passive:true});
+  slider.addEventListener('scroll', () => { if(!isDown) normalize(); }, {passive:true});
+
+  // --- Slow continuous movement when idle ---
+  const SPEED_PX_PER_MS = 0.018; // ~18px/sec (slow)
+  let lastT = performance.now();
+
+  function tick(t){
+    const dt = t - lastT;
+    lastT = t;
+
+    // Move only when user isn't dragging; keep it calm
+    if(!isDown && (t - lastUser) > 120){
+      slider.scrollLeft += dt * SPEED_PX_PER_MS;
+      normalize();
     }
-  });
+    requestAnimationFrame(tick);
+  }
 
-  btnR && btnR.addEventListener('click', (e)=>{ e.preventDefault(); goNext(); restartAuto(); });
-  btnL && btnL.addEventListener('click', (e)=>{ e.preventDefault(); goPrev(); restartAuto(); });
+  // Build clones now and on resize (debounced)
+  let resizeTimer = null;
+  function onResize(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{
+      buildClones();
+      normalize();
+    }, 120);
+  }
+  window.addEventListener('resize', onResize);
 
-  // Init
-  rebuildClones();
-  restartAuto();
-
-  // Responsive rebuild (recompute cloneCount based on new viewport)
-  window.addEventListener('resize', ()=>{ rebuildClones(); });
+  buildClones();
+  normalize();
+  requestAnimationFrame(tick);
 })();
 </script>
 
@@ -4244,6 +6918,341 @@ document.addEventListener('DOMContentLoaded', function () {
     if (submitBtn) submitBtn.disabled = false;
   });
 });
+</script>
+
+
+
+<script>
+/* Covers marquee: duplicate slides so the row always fills edge-to-edge (no empty corners) */
+(function(){
+  const slider = document.querySelector('#covers .coverSlider');
+  const track  = document.querySelector('#covers .slides');
+  if(!slider || !track) return;
+
+  // Ensure we have enough items to cover 2x viewport for seamless looping
+  const vp = () => Math.max(slider.clientWidth, window.innerWidth);
+  const ensure = () => {
+    // reset: remove previously cloned nodes
+    track.querySelectorAll('[data-clone="1"]').forEach(n => n.remove());
+
+    const originals = Array.from(track.children).filter(n => n.nodeType === 1);
+    if(originals.length === 0) return;
+
+    // clone until track width >= 2x viewport
+    let guard = 0;
+    while(track.scrollWidth < vp()*2 && guard < 30){
+      originals.forEach(node => {
+        const c = node.cloneNode(true);
+        c.setAttribute('data-clone','1');
+        track.appendChild(c);
+      });
+      guard++;
+    }
+
+    // set travel distance as half the track (originals + clones) for seamless loop
+    // We move left by the width of the original set.
+    const children = Array.from(track.children);
+    const half = Math.floor(children.length/2);
+    let dist = 0;
+    for(let i=0;i<half;i++){
+      dist += children[i].getBoundingClientRect().width;
+      // include gap via computed column-gap (flex gap)
+      const gap = parseFloat(getComputedStyle(track).gap || 0);
+      dist += gap;
+    }
+    // set CSS variables
+    track.style.setProperty('--coversDist', (-dist) + 'px');
+
+    // duration tuned by pixels-per-second (slower + premium)
+    const pps = 55; // lower = slower
+    const dur = Math.max(24, Math.round(dist / pps));
+    track.style.setProperty('--coversDur', dur + 's');
+  };
+
+  ensure();
+  window.addEventListener('resize', () => { clearTimeout(window.__coversT); window.__coversT=setTimeout(ensure, 160); });
+})();
+</script>
+
+
+<script>
+/* Oscar-style drag-to-scroll + very slow auto-drift + infinite loop */
+(function(){
+  const scroller = document.querySelector('#covers .coverSlider');
+  const track    = document.querySelector('#covers .slides');
+  if(!scroller || !track) return;
+
+  // Clone once so there are always items at edges; keep it lightweight
+  const originals = Array.from(track.children).filter(n => n.nodeType === 1 && !n.dataset.clone);
+  if(originals.length){
+    originals.forEach(n => {
+      const c = n.cloneNode(true);
+      c.dataset.clone = "1";
+      track.appendChild(c);
+    });
+  }
+
+  // Start not-centered: begin at left edge
+  scroller.scrollLeft = 0;
+
+  // Drag with mouse/touch
+  let isDown = false;
+  let startX = 0;
+  let startScroll = 0;
+  let lastX = 0;
+  let velocity = 0;
+  let raf = null;
+
+  const onDown = (e) => {
+    isDown = true;
+    scroller.classList.add('dragging');
+    scroller.style.cursor = 'grabbing';
+    startX = (e.touches ? e.touches[0].pageX : e.pageX);
+    lastX = startX;
+    startScroll = scroller.scrollLeft;
+    velocity = 0;
+  };
+  const onMove = (e) => {
+    if(!isDown) return;
+    const x = (e.touches ? e.touches[0].pageX : e.pageX);
+    const walk = (x - startX);
+    scroller.scrollLeft = startScroll - walk;
+    velocity = x - lastX;
+    lastX = x;
+    e.preventDefault();
+  };
+  const onUp = () => {
+    if(!isDown) return;
+    isDown = false;
+    scroller.classList.remove('dragging');
+    scroller.style.cursor = 'grab';
+
+    // Gentle inertia
+    let v = velocity;
+    const inertia = () => {
+      v *= 0.92;
+      if(Math.abs(v) < 0.2) return;
+      scroller.scrollLeft -= v;
+      requestAnimationFrame(inertia);
+    };
+    requestAnimationFrame(inertia);
+  };
+
+  scroller.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove, {passive:false});
+  window.addEventListener('mouseup', onUp);
+
+  scroller.addEventListener('touchstart', onDown, {passive:true});
+  scroller.addEventListener('touchmove', onMove, {passive:false});
+  scroller.addEventListener('touchend', onUp);
+
+  // Infinite loop: when you reach the end of the first set, jump back seamlessly
+  const loopCheck = () => {
+    const half = track.scrollWidth / 2;
+    if(scroller.scrollLeft >= half) scroller.scrollLeft -= half;
+    if(scroller.scrollLeft < 0) scroller.scrollLeft += half;
+  };
+  scroller.addEventListener('scroll', loopCheck, {passive:true});
+
+  // Very slow auto-drift (pause while hovering or dragging)
+  let hover = false;
+  scroller.addEventListener('mouseenter', () => hover = true);
+  scroller.addEventListener('mouseleave', () => hover = false);
+
+  const driftSpeed = 0.18; // px per frame (VERY slow)
+  const drift = () => {
+    if(!isDown && !hover){
+      scroller.scrollLeft += driftSpeed;
+      loopCheck();
+    }
+    raf = requestAnimationFrame(drift);
+  };
+  raf = requestAnimationFrame(drift);
+})();
+</script>
+
+
+<script>
+/* Covers v2: fill viewport (no empty corners) + click&hold drag + slow drift when idle */
+(function(){
+  const scroller = document.querySelector('#covers .coverSlider');
+  const track    = document.querySelector('#covers .slides');
+  if(!scroller || !track) return;
+
+  // Prevent double-init if multiple patches exist
+  if(scroller.dataset.coversV2 === "1") return;
+  scroller.dataset.coversV2 = "1";
+
+  // Helper: compute width of a list of nodes including flex gap
+  const gapPx = () => parseFloat(getComputedStyle(track).gap || 0) || 0;
+  const nodesWidth = (nodes) => {
+    const g = gapPx();
+    let w = 0;
+    nodes.forEach((n, i) => {
+      w += n.getBoundingClientRect().width;
+      if(i < nodes.length - 1) w += g;
+    });
+    return w;
+  };
+
+  // Build: ensure we have enough covers to ALWAYS fill the viewport while scrolling
+  const build = () => {
+    // Remove old clones (from any previous run)
+    track.querySelectorAll('[data-clone="1"]').forEach(n => n.remove());
+
+    const originals = Array.from(track.children).filter(n => n.nodeType === 1 && !n.dataset.clone);
+    if(!originals.length) return;
+
+    // Measure original set width
+    const originalWidth = nodesWidth(originals);
+
+    // Clone the original set until total content >= (originalWidth * 2 + viewportWidth)
+    // This guarantees both left/right edges are always filled.
+    const vp = Math.max(window.innerWidth, scroller.clientWidth);
+    let total = originalWidth;
+    let guard = 0;
+    while(total < originalWidth * 2 + vp && guard < 30){
+      originals.forEach(n => {
+        const c = n.cloneNode(true);
+        c.dataset.clone = "1";
+        track.appendChild(c);
+      });
+      total += originalWidth;
+      guard++;
+    }
+
+    // Store widths for seamless looping (we keep 2+ copies)
+    scroller.dataset.originalWidth = String(originalWidth);
+
+    // Start in the middle copy so no empty edge at load
+    scroller.scrollLeft = originalWidth;
+  };
+
+  build();
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__coversV2T);
+    window.__coversV2T = setTimeout(build, 150);
+  });
+
+  // Click & hold drag (hand cursor)
+  let isDown = false;
+  let startX = 0;
+  let startScroll = 0;
+  let lastX = 0;
+  let velocity = 0;
+
+  const onDown = (e) => {
+    isDown = true;
+    scroller.style.cursor = 'grabbing';
+    startX = (e.touches ? e.touches[0].pageX : e.pageX);
+    lastX = startX;
+    startScroll = scroller.scrollLeft;
+    velocity = 0;
+  };
+  const onMove = (e) => {
+    if(!isDown) return;
+    const x = (e.touches ? e.touches[0].pageX : e.pageX);
+    const walk = (x - startX);
+    scroller.scrollLeft = startScroll - walk;
+    velocity = x - lastX;
+    lastX = x;
+    e.preventDefault();
+  };
+  const onUp = () => {
+    if(!isDown) return;
+    isDown = false;
+    scroller.style.cursor = 'grab';
+
+    // Gentle inertia (small)
+    let v = velocity;
+    const inertia = () => {
+      v *= 0.90;
+      if(Math.abs(v) < 0.15) return;
+      scroller.scrollLeft -= v;
+      loopCheck();
+      requestAnimationFrame(inertia);
+    };
+    requestAnimationFrame(inertia);
+  };
+
+  scroller.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove, {passive:false});
+  window.addEventListener('mouseup', onUp);
+
+  scroller.addEventListener('touchstart', onDown, {passive:true});
+  scroller.addEventListener('touchmove', onMove, {passive:false});
+  scroller.addEventListener('touchend', onUp);
+
+  // Seamless infinite loop using originalWidth
+  const loopCheck = () => {
+    const ow = parseFloat(scroller.dataset.originalWidth || "0") || 0;
+    if(!ow) return;
+
+    // Keep scrollLeft in [ow, 2*ow)
+    if(scroller.scrollLeft >= ow * 2) scroller.scrollLeft -= ow;
+    if(scroller.scrollLeft < ow) scroller.scrollLeft += ow;
+  };
+  scroller.addEventListener('scroll', loopCheck, {passive:true});
+
+  // Slow idle drift ONLY when not holding mouse/touch
+  const driftSpeed = 0.08; // px per frame (VERY slow)
+  const drift = () => {
+    if(!isDown){
+      scroller.scrollLeft += driftSpeed;
+      loopCheck();
+    }
+    requestAnimationFrame(drift);
+  };
+  requestAnimationFrame(drift);
+
+  // Ensure grab cursor when idle
+  scroller.style.cursor = 'grab';
+})();
+</script>
+
+
+<script>
+/* Covers v3: after build, auto-align so a book starts at the LEFT edge (no empty corner). */
+(function(){
+  const scroller = document.querySelector('#covers .coverSlider');
+  const track    = document.querySelector('#covers .slides');
+  if(!scroller || !track) return;
+
+  if(scroller.dataset.coversV3 === "1") return;
+  scroller.dataset.coversV3 = "1";
+
+  const gapPx = () => parseFloat(getComputedStyle(track).gap || 0) || 0;
+
+  const firstVisible = () => {
+    const sr = scroller.getBoundingClientRect();
+    const kids = Array.from(track.children).filter(n => n.nodeType === 1);
+    for(const k of kids){
+      const r = k.getBoundingClientRect();
+      if(r.right > sr.left + 2) return {el:k, rect:r, sr};
+    }
+    return null;
+  };
+
+  const alignLeftEdge = () => {
+    // Align the first visible card's left edge to scroller left edge
+    const fv = firstVisible();
+    if(!fv) return;
+    const delta = fv.rect.left - fv.sr.left;  // positive means empty space on the left
+    if(delta > 2){
+      scroller.scrollLeft += delta; // remove left empty
+    }
+  };
+
+  // Hook into v2 build if present by aligning after a short delay
+  const later = () => setTimeout(alignLeftEdge, 80);
+  later();
+  window.addEventListener('resize', () => setTimeout(alignLeftEdge, 120));
+
+  // Also align whenever the user stops dragging (so corners stay filled)
+  let dragTimer = null;
+  scroller.addEventListener('mouseup', () => { clearTimeout(dragTimer); dragTimer=setTimeout(alignLeftEdge, 120); });
+  scroller.addEventListener('touchend', () => { clearTimeout(dragTimer); dragTimer=setTimeout(alignLeftEdge, 120); });
+})();
 </script>
 
 
