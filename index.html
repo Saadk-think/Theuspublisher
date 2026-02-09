@@ -23,7 +23,7 @@
   "url": "https://theuspublisher.com/",
   "email": "support@theuspublisher.com",
   "telephone": "+1 737-282-5860",
-  "logo": "https://theuspublisher.com/img/mkt-side-bg.webp",
+  "logo": "https://theuspublisher.com/img/logo.jpg",
   "makesOffer": [
     {
       "@type": "Offer",
@@ -259,24 +259,7 @@
     .header .inner{position:relative; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 0}
 
     .brand{display:flex; align-items:center; gap:14px}
-    .logo{
-      /* Premium big logo (no box) */
-      position:relative;
-      height: clamp(108px, 8.2vw, 148px);
-      width: auto;
-      max-width: min(520px, 70vw);
-      padding: 0;
-      border-radius: 0;
-      overflow: visible;
-      border: 0;
-      background: transparent;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      box-shadow: none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:flex-start;
-    }
+    
 
     
 .logo img{
@@ -318,7 +301,7 @@
     .logo:hover img{ transform: translateY(-1px) scale(1.025); }
 
     @media (max-width: 640px){
-      .logo{ height: 82px; }
+      
     }
     .brand .name{font-weight:1000; letter-spacing:.2px}
     .brand .tag{display:block; font-size:12px; color:var(--muted2); font-weight:800; margin-top:2px}
@@ -729,17 +712,7 @@
 
 /* --- Premium logo overrides (requested) --- */
 /* Keep ONLY the logo (no box/outline). Make the real logo bigger & clearer. */
-.logo{
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  height: 82px !important;           /* BIG premium size */
-  max-width: min(560px, 70vw) !important;
-}
+
 .logo:before, .logo:after{ content: none !important; }
 .logo img{
   height: 82px !important;           /* actual image size (not outline) */
@@ -757,15 +730,15 @@
 /* Hover micro-animation (very subtle) */
 .logo:hover img{ transform: translateY(-1px) scale(1.02); }
 @media (max-width: 1024px){
-  .logo{ height: 78px !important; }
+  
   .logo img{ height: 78px !important; }
 }
 @media (max-width: 640px){
-  .logo{ height: 92px !important; }
+  
   .logo img{ height: 92px !important; }
 }
 /* Slightly smaller on scroll (still big) */
-.header.scrolled .logo{ height: 80px !important; }
+.header.scrolled 
 .header.scrolled .logo img{ height: 80px !important; }
 
 
@@ -826,13 +799,7 @@ body{
 
 /* Brand/logo area: add a richer, premium frame */
 .brand{gap:14px !important;}
-.logo{
-  border-radius: 18px !important;
-  background: linear-gradient(135deg, rgba(103,232,255,.14), rgba(124,108,255,.14)) !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
-  box-shadow: 0 18px 60px rgba(0,0,0,.32) !important;
-  padding: 10px !important;
-}
+
 
 /* Trustbar tiles: keep readable */
 .trustbar .t b, .trustbar .t{color: rgba(255,255,255,.92) !important;}
@@ -864,9 +831,9 @@ body{
 
   /* === FINAL OVERRIDES: Alternating sections + contrast + original logo === */
   .logo, .logo *{ background: transparent !important; border: none !important; box-shadow: none !important; }
-  .logoImg{ height: 96px !important; width: auto !important; display:block; filter: drop-shadow(0 14px 30px rgba(0,0,0,.28)); }
-  .header.scrolled .logoImg{ height: 88px !important; }
-  @media (max-width: 980px){ .logoImg{ height: 78px !important; } }
+  
+  .header.scrolled 
+  @media (max-width: 980px){  }
 
   /* Strong alternation: dark section, then light section */
   .section-dark{
@@ -938,9 +905,9 @@ body{
 .topLink:hover{opacity:1; text-decoration:underline;}
 
 .navRow{display:flex; align-items:center; gap:18px; padding:14px 0;}
-.logo{display:block; flex:0 0 auto; height:auto;}
-.logoImg{height:86px; width:auto; display:block; border:none !important; outline:none !important; box-shadow:none !important; filter:none !important; background:transparent !important;}
-@media (max-width: 980px){ .logoImg{height:74px;} }
+
+
+@media (max-width: 980px){  }
 
 .nav{display:flex; align-items:center; gap:10px; margin-left:auto; flex-wrap:wrap; justify-content:flex-end;}
 .nav a, .ddBtn{padding:10px 12px; border-radius:14px; color: rgba(255,255,255,.92); font-weight:900; font-size:15px; border:1px solid transparent; background:transparent; cursor:pointer;}
@@ -997,9 +964,9 @@ body{
 .header--oscar .nav-row{display:flex; align-items:center; gap:20px; padding:14px 0;}
 
 /* BIG logo, no outline, no bg, no shadow */
-.header--oscar .logo{display:flex; align-items:center; padding:0; margin:0; background:transparent; border:0; box-shadow:none;}
-.header--oscar .logoImg{height:72px; width:auto; display:block; background:transparent; border:0; box-shadow:none; filter:none !important;}
-@media (max-width: 980px){ .header--oscar .logoImg{height:72px;} }
+.header--oscar 
+.header--oscar 
+@media (max-width: 980px){ .header--oscar  }
 
 /* Nav links */
 .header--oscar .nav{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
@@ -1065,7 +1032,7 @@ body{
 
 /* Remove any old logo outlines/shadows from previous overrides */
 .logo, .logo *{background:transparent !important; border:none !important; box-shadow:none !important;}
-.logoImg{filter:none !important;}
+
 
 .header--oscar{position:sticky; top:0; z-index:999;}
 .top-contact{background: rgba(3,11,31,.55); border-bottom:1px solid rgba(255,255,255,.12); backdrop-filter: blur(10px);}
@@ -1163,7 +1130,7 @@ body{
 .topLine, .topline, .top-strip{border-bottom:none !important; box-shadow:none !important}
 
 /* Logo: ensure no outline/shadow/background */
-.logoImg{background:transparent !important; border:none !important; outline:none !important; box-shadow:none !important; filter:none !important;}
+
 .logoImg:focus{outline:none !important;}
 
 /* Header: remove thin divider line */
@@ -1228,7 +1195,7 @@ header, .header, .topbar, .navBar{border-bottom:none !important; box-shadow:none
 
 /* Ensure logo has ZERO outline/glow/background */
 .logo, .logo *{ background:transparent !important; border:none !important; box-shadow:none !important; outline:none !important; }
-.logoImg{ background:transparent !important; border:none !important; box-shadow:none !important; filter:none !important; }
+
 
 
 /* === v9 fixes: no white-on-white, nav single line, logo no outline === */
@@ -1237,7 +1204,7 @@ header, .header, .topbar, .navBar{border-bottom:none !important; box-shadow:none
 
 /* Logo: remove any outline/background/shadow and keep big */
 .logo,.logo *{background:transparent !important; border:none !important; outline:none !important; box-shadow:none !important; filter:none !important}
-.logoImg{background:transparent !important; border:none !important; outline:none !important; box-shadow:none !important; filter:none !important; border-radius:0 !important; }
+
 
 /* FAQ: force readable text on light bg */
 #faq, #faq *{color:#0b1021 !important;}
@@ -2129,15 +2096,7 @@ html, body{
 
   /* Brand: more premium look */
   .brand{ gap:14px !important; }
-  .logo{
-    border-radius: 18px !important;
-    padding: 10px 12px !important;
-    background: linear-gradient(135deg, rgba(103,232,255,.16), rgba(167,139,250,.14)) !important;
-    border: 1px solid rgba(255,255,255,.18) !important;
-    box-shadow: 0 18px 55px rgba(0,0,0,.30) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
+  
 
   /* Glass cards + hover animation */
   .svc, .plan, .quote, .carousel, .whyCard, .processCard, .heroTile, .t{
@@ -2276,8 +2235,8 @@ html, body{
   }
 
 /* === FIX v6: no outline/shadow around logo + eliminate white-on-white in light sections === */
-.logoImg{filter:none !important; box-shadow:none !important;}
-.logo{outline:none !important; box-shadow:none !important; border:none !important; background:transparent !important;}
+
+
 
 /* Force readable text in light sections (stop white-on-white) */
 .section.light, .section.light *{ text-shadow:none !important; }
@@ -3332,13 +3291,8 @@ section:has(.steps) > *{
   padding:14px 0;
 }
 /* Bigger, crisp logo (but header stays compact) */
-.header--agency .logo{display:flex; align-items:center; padding:0; margin:0; background:transparent !important; border:0 !important; box-shadow:none !important;}
-.header--agency .logoImg{
-  height:96px !important; width:auto !important; display:block;
-  background:transparent !important; border:0 !important; outline:none !important;
-  box-shadow:none !important;
-  filter: drop-shadow(0 14px 28px rgba(0,0,0,.26)) drop-shadow(0 0 16px rgba(110,231,255,.10));
-}
+.header--agency 
+.header--agency 
 .header--agency .nav{display:flex !important; align-items:center; gap:6px; margin-left:auto; flex-wrap:wrap;}
 .header--agency .nav a, .header--agency .ddbtn{
   padding:10px 12px; border-radius:14px;
@@ -3416,12 +3370,29 @@ section:has(.steps) > *{
 @media (max-width: 980px){
   .header--agency .nav{display:none !important;}
   .header--agency .burger{display:inline-grid;}
-  .header--agency .logoImg{height:86px !important;}
+  .header--agency 
   .header--agency.open .mobile{display:block;}
 }
 @media (max-width: 640px){
-  .header--agency .logoImg{height:92px !important;}
+  .header--agency 
   :target{scroll-margin-top:126px;}
+}
+
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
 }
 
 </style>
@@ -4109,6 +4080,23 @@ section:has(.steps) > *{
   display:block;
 }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 <style>
 /* Covers: ensure captions never white-on-white */
@@ -4744,6 +4732,23 @@ section:has(.steps) > *{
   object-fit:cover;
   border-radius:24px;
   display:block;
+}
+
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
 }
 
 </style>
@@ -5423,6 +5428,23 @@ section:has(.steps) > *{
   .tusp-reviews__card{padding:20px;}
   .tusp-reviews__header h2{font-size:24px;}
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 <link href="assets/img/inline_1_b0f06e6780.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="assets/img/inline_1_b0f06e6780.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -6313,6 +6335,23 @@ section:has(.steps) > *{
   display:block;
 }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -6468,6 +6507,23 @@ section:has(.steps) > *{
   display:block;
 }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 <style id="about-ss-readability-final-fix">
 /* === TARGETED READABILITY FIX: About / What You Get section ONLY === */
@@ -6614,6 +6670,23 @@ section:has(.steps) > *{
   object-fit:cover;
   border-radius:24px;
   display:block;
+}
+
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
 }
 
 </style>
@@ -6765,6 +6838,23 @@ section:has(.steps) > *{
   object-fit:cover;
   border-radius:24px;
   display:block;
+}
+
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
 }
 
 </style>
@@ -7001,6 +7091,23 @@ section:has(.steps) > *{
   display:block;
 }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 </link><script async_="True" defer="True" src="https://www.google.com/recaptcha/api.js"></script>
 <style>
@@ -7028,6 +7135,23 @@ nav {
 .hero-section{
     padding-top: 140px;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7059,6 +7183,23 @@ nav{
 .hero-section{
     margin-top: 160px;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7083,6 +7224,23 @@ header,
 nav{
     background: transparent !important;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7106,6 +7264,23 @@ header, nav, .top-contact, .nav-wrap{
     box-shadow: none !important;
     background: transparent !important;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7146,6 +7321,23 @@ header, nav, .top-contact, .nav-wrap, .top-bar{
 /* keep page content below fixed header */
 body{ padding-top: 0 !important; }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7165,6 +7357,23 @@ body{ padding-top: 0 !important; }
     margin: 0 !important;
     padding: 0 !important;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
@@ -7183,12 +7392,46 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 .hero, .hero-section, .banner, .home-hero{
     transform: none !important;
 }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 
 <style>
 /* Extra gap under glass header */
 body{ padding-top: var(--tuspHeaderH) !important; }
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
 </style>
 
 </head>
@@ -7219,7 +7462,7 @@ body{ padding-top: var(--tuspHeaderH) !important; }
     <div class="container">
       <div class="nav-row">
         <a class="logo" href="#home" aria-label="TheUSpublisher Home">
-          <img class="logoImg" src="img/logo.jpg" alt="TheUSpublisher Logo" decoding="async" fetchpriority="high"/>
+          <img class="logoImg" src="tUSPA.png" alt="TheUSpublisher Logo" loading="eager" decoding="async">
         </a>
 
         <nav class="nav" aria-label="Primary navigation">
@@ -8174,7 +8417,7 @@ document.addEventListener('click',()=>{
 <div class="cols">
 <div>
 <div class="brand" style="margin-bottom:10px">
-<span aria-hidden="true" class="logo"><img alt="" src="assets/img/inline_5_e1ace629e5.png" loading="lazy" decoding="async"/></span>
+<span aria-hidden="true" class="logo"><img alt="TheUSpublisher Logo" src="tUSPA.png" loading="lazy" decoding="async"/></span>
 <span>
 <span class="name">TheUSpublisher</span>
 <span class="tag">Enterprise Ghostwriting • Editing • Publishing</span>
@@ -9514,6 +9757,58 @@ document.addEventListener('DOMContentLoaded', function () {
   display:block;
 }
 
+
+/* CLEAN ORIGINAL LOGO */
+.logo{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.logoImg{
+  height: 110px !important;
+  width: auto !important;
+  display: block !important;
+}
+@media (max-width: 980px){
+  .logoImg{ height: 82px !important; }
+}
+
+
+
+/* ===== FINAL: Logo visibility + bigger size (requested) ===== */
+/* Header logo */
+.header .logoImg{
+  height: 132px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+@media (max-width: 980px){
+  .header .logoImg{ height: 108px !important; }
+}
+@media (max-width: 640px){
+  .header .logoImg{ height: 96px !important; }
+}
+
+/* Footer logo (so it actually shows) */
+.footer .brand .logo img{
+  height: 70px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
 </style>
 <!-- ===== Marketing Popup (small) ===== -->
 <div aria-hidden="true" class="mktModal" id="mktModal">
@@ -10009,5 +10304,3 @@ document.addEventListener('keydown', function(e){
 
 </body>
 </html>
-
-
