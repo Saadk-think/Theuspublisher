@@ -3293,6 +3293,137 @@ section:has(.steps) > *{
   display:block;
 }
 
+
+
+/* ===============================
+   $30k Agency Header (clean + animated dropdown)
+   =============================== */
+.header--agency{position:sticky; top:0; z-index:999;}
+
+.header--agency .top-contact{
+  background: rgba(3,11,31,.55);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.header--agency .top-contact-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 0; gap:12px;
+}
+.header--agency .top-contact-right{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:flex-end;
+  font-weight:800; font-size:14px; color: rgba(255,255,255,.92);
+}
+.header--agency .top-link{
+  display:inline-flex; align-items:center; gap:10px;
+  color:inherit; opacity:.95;
+}
+.header--agency .top-link:hover{opacity:1; text-decoration:underline;}
+.header--agency .top-link .ico{color: rgba(250,204,21,.95);}
+
+.header--agency .nav-wrap{
+  background: rgba(3,11,31,.45);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+.header--agency .nav-row{
+  display:flex; align-items:center; gap:18px;
+  padding:14px 0;
+}
+/* Bigger, crisp logo (but header stays compact) */
+.header--agency .logo{display:flex; align-items:center; padding:0; margin:0; background:transparent !important; border:0 !important; box-shadow:none !important;}
+.header--agency .logoImg{
+  height:96px !important; width:auto !important; display:block;
+  background:transparent !important; border:0 !important; outline:none !important;
+  box-shadow:none !important;
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.26)) drop-shadow(0 0 16px rgba(110,231,255,.10));
+}
+.header--agency .nav{display:flex !important; align-items:center; gap:6px; margin-left:auto; flex-wrap:wrap;}
+.header--agency .nav a, .header--agency .ddbtn{
+  padding:10px 12px; border-radius:14px;
+  color: rgba(255,255,255,.92) !important;
+  font-weight:900; font-size:15px;
+  border:1px solid transparent;
+  background: transparent;
+  cursor:pointer;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.header--agency .nav a:hover, .header--agency .ddbtn:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+.header--agency .actions{display:flex; align-items:center; gap:10px; margin-left:6px;}
+.header--agency .burger{display:none; width:44px; height:44px; border-radius:16px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:#fff; cursor:pointer;}
+
+/* Dropdown: animated + glass */
+.header--agency .dd{position:relative; display:inline-flex; align-items:center;}
+.header--agency .ddmenu{
+  position:absolute; top:calc(100% + 12px); left:0;
+  min-width:260px;
+  padding:10px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(7,16,32,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.45);
+  z-index:9999;
+
+  opacity:0;
+  transform: translateY(10px) scale(.98);
+  pointer-events:none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.header--agency .dd.open .ddmenu{
+  opacity:1;
+  transform: translateY(0) scale(1);
+  pointer-events:auto;
+}
+.header--agency .ddmenu a{
+  display:block; padding:10px 12px; border-radius:14px;
+  color: rgba(255,255,255,.92) !important;
+  font-weight:850;
+}
+.header--agency .ddmenu a:hover{background: rgba(255,255,255,.08); color:#fff !important;}
+.header--agency .ddsep{border:0; border-top:1px solid rgba(255,255,255,.10); margin:8px 6px;}
+
+.header--agency .nav a.navHighlight{
+  background: linear-gradient(135deg, rgba(250,204,21,.18), rgba(110,231,255,.12));
+  border: 1px solid rgba(250,204,21,.28);
+  box-shadow: 0 10px 30px rgba(0,0,0,.22);
+}
+.header--agency .nav a.navHighlight:hover{
+  background: linear-gradient(135deg, rgba(250,204,21,.22), rgba(167,139,250,.14));
+}
+
+/* Mobile */
+.header--agency .mobile{
+  display:none;
+  margin:10px 0 16px;
+  padding:10px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(3,11,31,.78);
+}
+.header--agency .mobile a{
+  display:block; padding:12px 12px; border-radius:14px;
+  color: rgba(255,255,255,.92) !important; font-weight:900;
+}
+.header--agency .mobile a:hover{background: rgba(255,255,255,.08);}
+
+@media (max-width: 980px){
+  .header--agency .nav{display:none !important;}
+  .header--agency .burger{display:inline-grid;}
+  .header--agency .logoImg{height:86px !important;}
+  .header--agency.open .mobile{display:block;}
+}
+@media (max-width: 640px){
+  .header--agency .logoImg{height:92px !important;}
+  :target{scroll-margin-top:126px;}
+}
+
 </style>
 <style>
 /* Professional CTA buttons */
@@ -7065,72 +7196,86 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 <a class="skip" href="#main">Skip to content</a>
 <div class="glass-header">
 <div class="glass-wrapper">
-<header class="header header--oscar" id="top">
-<div class="top-contact">
-<div class="container top-contact-row">
-<div class="top-spacer"></div>
-<div class="top-contact-right">
-<a aria-label="Email" class="top-link" href="mailto:support@theuspublisher.com">
-<span aria-hidden="true" class="ico"><svg fill="none" height="16" viewbox="0 0 24 24" width="16"><path d="M4 6h16v12H4V6z" stroke="currentColor" stroke-width="2"></path><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
-<span>support@theuspublisher.com</span>
-</a>
-<a aria-label="Phone" class="top-link" href="tel:+17372825860">
-<span aria-hidden="true" class="ico"><svg fill="none" height="16" viewbox="0 0 24 24" width="16"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1A19.5 19.5 0 0 1 3.2 10.8 19.8 19.8 0 0 1 .1 2.2 2 2 0 0 1 2 0h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L6.1 7.9a16 16 0 0 0 10 10l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span>
-<span>+1 737-282-5860</span>
-</a>
-</div>
-</div>
-</div>
-<div class="nav-wrap">
-<div class="container nav-row">
-<a aria-label="TheUSpublisher home" class="logo" href="#home">
-<img alt="TheUSpublisher" class="logoImg" src="assets/img/inline_3_dbf4023218.png" loading="lazy" decoding="async"/>
-</a>
-<nav aria-label="Primary" class="nav" id="nav">
-<a href="#" onclick="location.reload(); return false;">Home</a>
-<a href="#about">About</a>
-<a href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
-<a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
-<div class="dd">
-<button aria-expanded="false" aria-haspopup="true" class="ddbtn" type="button">Ghostwriter <span class="ddarrow">▾</span></button>
-<div class="ddmenu" role="menu">
-<div class="ddtitle">Ghostwriting</div>
-<a class="ddoverview" href="javascript:void(0)" onclick="openGhostwritingPopup(event)" role="menuitem">Overview</a>
-<hr class="ddsep"/>
-<a href="#services" role="menuitem">Non-Fiction</a>
-<a href="#services" role="menuitem">Biography</a>
-<a href="#services" role="menuitem">Autobiography</a>
-<a href="#services" role="menuitem">Memoir Writing</a>
-<a href="#services" role="menuitem">Novel Writing</a>
-<a href="#services" role="menuitem">Comic Writing</a>
-<a href="#services" role="menuitem">Speech Writing</a>
-<a href="#services" role="menuitem">Children Book Writing</a>
-<a href="#services" role="menuitem">Fitness Writing</a>
-<a href="#services" role="menuitem">Cookbooks</a>
-<hr class="ddsep"/>
-<a href="#process" role="menuitem">Process</a>
-<a href="#pricing" role="menuitem">Packages</a>
-</div>
-</div>
-<a href="#covers">Book Cover</a>
-<a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
-<a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
-<a href="#pricing">Packages</a>
-</nav>
-<button aria-expanded="false" aria-label="Open menu" class="burger" id="burger">☰</button>
-</div>
-<div aria-label="Mobile menu" class="mobile" id="mobile">
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
-<a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
-<a href="javascript:void(0)" onclick="openGhostwritingPopup(event)">Ghostwriting</a>
-<a href="#covers">Book Cover</a>
-<a href="#proofreading">Proofreading</a>
-<a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
-<a href="#pricing">Packages</a>
-</div>
-</div>
+<header class="header header--agency header--oscar" id="siteHeader">
+  <!-- Top contact strip -->
+  <div class="top-contact">
+    <div class="container">
+      <div class="top-contact-row">
+        <div class="top-contact-spacer"></div>
+        <div class="top-contact-right">
+          <a class="top-link" href="mailto:support@theuspublisher.com">
+            <span class="ico">✉</span> support@theuspublisher.com
+          </a>
+          <a class="top-link" href="tel:+17372825860">
+            <span class="ico">☎</span> +1 737-282-5860
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main nav row -->
+  <div class="nav-wrap">
+    <div class="container">
+      <div class="nav-row">
+        <a class="logo" href="#home" aria-label="TheUSpublisher Home">
+          <img class="logoImg" src="img/logo.jpg" alt="TheUSpublisher Logo" decoding="async" fetchpriority="high"/>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+
+          <a href="javascript:void(0)" onclick="openEditingPopup(event)" aria-label="Editing">Editing</a>
+          <a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)" aria-label="Publishing">Publishing</a>
+
+          <!-- Ghostwriter dropdown -->
+          <div class="dd" id="gwDd">
+            <button class="ddbtn" type="button" aria-haspopup="true" aria-expanded="false">
+              Ghostwriter <span class="ddarrow">▾</span>
+            </button>
+            <div class="ddmenu" role="menu" aria-label="Ghostwriter menu">
+              <a href="javascript:void(0)" role="menuitem" onclick="openGhostwritingPopup(event)">Overview</a>
+              <hr class="ddsep"/>
+              <a href="#services" role="menuitem">Business Book Writing</a>
+              <a href="#services" role="menuitem">Memoir Writing</a>
+              <a href="#services" role="menuitem">Speech Writing</a>
+              <a href="#services" role="menuitem">Children Book Writing</a>
+              <a href="#services" role="menuitem">Fitness Writing</a>
+              <a href="#services" role="menuitem">Cookbooks</a>
+              <hr class="ddsep"/>
+              <a href="#process" role="menuitem">Process</a>
+              <a href="#pricing" role="menuitem">Packages</a>
+            </div>
+          </div>
+
+          <a href="#covers">Book Cover</a>
+          <a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
+          <a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
+          <a href="#pricing">Packages</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn secondary" href="#contact">Get a Quote</a>
+          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" type="button">☰</button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobile" id="mobile" aria-label="Mobile menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
+        <a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
+        <a href="javascript:void(0)" onclick="openGhostwritingPopup(event)">Ghostwriting</a>
+        <a href="#covers">Book Cover</a>
+        <a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
+        <a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
+        <a href="#pricing">Packages</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
 </header>
 </div>
 </div>
@@ -9788,6 +9933,79 @@ document.addEventListener('keydown', function(e){
 })();
 </script>
 
+
+
+<script>
+(function(){
+  // Mobile menu (keep compatible with existing burger behavior)
+  const header = document.getElementById('siteHeader') || document.querySelector('.header');
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile') || document.getElementById('mobileNav');
+
+  function closeMobile(){
+    if(!header) return;
+    header.classList.remove('open');
+    if(burger) burger.setAttribute('aria-expanded','false');
+  }
+  if(burger && header){
+    burger.addEventListener('click', () => {
+      const open = header.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+  }
+  if(mobileNav){
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+  }
+
+  // Ghostwriter dropdown (animated)
+  const dd = document.getElementById('gwDd');
+  const btn = dd ? dd.querySelector('.ddbtn') : null;
+
+  let hoverTimer = null;
+  function openDd(){
+    if(!dd || !btn) return;
+    dd.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+  function closeDd(){
+    if(!dd || !btn) return;
+    dd.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  }
+  function toggleDd(e){
+    e.preventDefault();
+    e.stopPropagation();
+    dd.classList.contains('open') ? closeDd() : openDd();
+  }
+
+  if(dd && btn){
+    btn.addEventListener('click', toggleDd);
+
+    // Hover intent (desktop only)
+    dd.addEventListener('mouseenter', () => {
+      if(window.matchMedia('(max-width: 980px)').matches) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(openDd, 80);
+    });
+    dd.addEventListener('mouseleave', () => {
+      if(window.matchMedia('(max-width: 980px)').matches) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(closeDd, 120);
+    });
+  }
+
+  // Close dropdown on outside click / ESC
+  document.addEventListener('click', (e) => {
+    if(dd && dd.classList.contains('open')){
+      const within = dd.contains(e.target);
+      if(!within) closeDd();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){ closeDd(); closeMobile(); }
+  });
+})();
+</script>
 
 </body>
 </html>
