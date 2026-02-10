@@ -9842,7 +9842,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ===== LCP GUARANTEE: never hide hero content ===== */
 .hero .reveal{opacity:1 !important; transform:none !important; filter:none !important; transition:none !important;}
-
+/* LCP container fix */
+.hero{
+  contain: layout paint;
+}
 </style>
 <!-- ===== Marketing Popup (small) ===== -->
 <div aria-hidden="true" class="mktModal" id="mktModal">
@@ -10338,3 +10341,4 @@ document.addEventListener('keydown', function(e){
 
 </body>
 </html>
+
