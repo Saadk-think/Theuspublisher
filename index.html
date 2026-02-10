@@ -7528,7 +7528,7 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 <div aria-hidden="true" class="texture"></div>
 <div class="container">
 <div class="heroGrid">
-<div class="reveal">
+<div class="">
 <div class="kicker"><span class="dot"></span> Your enterprise publishing partner</div>
 <h1 class="h1">Your voice. <span style="background:linear-gradient(150deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent"> Your story. </span> — Professionally <span style="background:linear-gradient(150deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent"> Published.</span></h1>
 <p class="lead">We help executives, founders, and authors write, edit, design, publish, and launch books with a clear process, strong quality control, and full rights ownership.</p>
@@ -7543,7 +7543,7 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 <div class="heroTile"><b>Get a Quote</b><span>Clear pricing. No obligation. No pressure.</span></div>
 </div>
 </div>
-<aside aria-label="Author model" class="heroMedia reveal" style="transition-delay:.08s">
+<aside aria-label="Author model" class="heroMedia" style="transition-delay:.08s">
 <img alt="Professional author holding books" class="heroModel"
       src="assets/img/hero-1200.webp"
       srcset="assets/img/hero-480.webp 480w, assets/img/hero-768.webp 768w, assets/img/hero-1200.webp 1200w"
@@ -9837,6 +9837,11 @@ document.addEventListener('DOMContentLoaded', function () {
   filter:none !important;
   transition:none !important;
 }
+
+
+
+/* ===== LCP GUARANTEE: never hide hero content ===== */
+.hero .reveal{opacity:1 !important; transform:none !important; filter:none !important; transition:none !important;}
 
 </style>
 <!-- ===== Marketing Popup (small) ===== -->
