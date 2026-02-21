@@ -2,7 +2,6 @@
 
 <html lang="en">
 <head>
-<link rel="preload" as="image" href="assets/img/hero-1200.webp" imagesrcset="assets/img/hero-480.webp 480w, assets/img/hero-768.webp 768w, assets/img/hero-1200.webp 1200w" imagesizes="(max-width: 560px) 480px, (max-width: 980px) 768px, 1200px">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>The US Publisher | Ghostwriting, Editing &amp; Publishing</title>
@@ -328,9 +327,7 @@
       position:relative;
       overflow:hidden;
       border-bottom:1px solid var(--line);
-    
-  contain: layout paint;
-}
+    }
     .hero:before{
       content:"";
       position:absolute; inset:0;
@@ -1220,14 +1217,78 @@ header, .header, .topbar, .navBar{border-bottom:none !important; box-shadow:none
 .section-light .label, .section-light .one, .section-light .bul span{color:rgba(11,16,33,.72) !important;}
 
 
-.coverSlider{position:relative;overflow:hidden;margin-top:40px;padding:18px 54px 64px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10)}
-.coverSlider:after{content:"";position:absolute;left:24px;right:24px;bottom:26px;height:14px;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.0));border-radius:999px;filter:blur(.2px)}
-.slides{display:flex;align-items:flex-end;gap:28px;transition:transform 1.2s ease;will-change:transform}
-.slide{flex:0 0 auto;min-width:210px;height:320px;background-size:contain;background-repeat:no-repeat;background-position:center;border-radius:10px;margin-right:0;filter:drop-shadow(0 18px 20px rgba(0,0,0,.45))}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;display:grid;place-items:center;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:26px;cursor:pointer;border-radius:999px;backdrop-filter:blur(6px)}
-.arrow.left{left:14px}
-.arrow.right{right:14px}
-.arrow:hover{background:rgba(0,0,0,.70)}
+.coverSlider{
+  position:relative;
+  margin-top:28px;
+  border-radius:26px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.12);
+  overflow:hidden;              /* keeps everything inside the frame */
+  padding:22px 0;               /* frame padding (top/bottom) */
+}
+.coverSlider:before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(900px 260px at 20% 20%, rgba(110,231,255,.10), transparent 60%),
+              radial-gradient(900px 260px at 80% 20%, rgba(167,139,250,.10), transparent 60%);
+  pointer-events:none;
+}
+.coverSlider .slidesViewport{
+  position:relative;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:0 64px;               /* makes covers start/end near the frame corners (arrows sit above) */
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+}
+.coverSlider .slidesViewport::-webkit-scrollbar{display:none;}
+.slides{
+  display:flex;
+  align-items:stretch;
+  gap:18px;
+  will-change:transform;
+}
+.slide{
+  flex:0 0 auto;
+  width:220px;
+  aspect-ratio: 2 / 3;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow: 0 18px 30px rgba(0,0,0,.45);
+  background: rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:contain;           /* no cropping (faces won’t be cut) */
+  display:block;
+  background: rgba(0,0,0,.10);
+}
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+  border-radius:999px;
+  backdrop-filter:blur(8px);
+  z-index:20;
+}
+.arrow.left{left:18px}
+.arrow.right{right:18px}
+.arrow:hover{background:rgba(0,0,0,.72)}
+.coverSlider.is-grabbing{cursor:grabbing}
 
 
 .ddtitle{
@@ -2722,6 +2783,7 @@ html, body{
 #covers .arrow, #covers .arrow.left, #covers .arrow.right{display:none !important;}
 
 #covers .coverSlider{
+  mask-image: none !important;
   width:100vw !important;
   margin-left:calc(50% - 50vw) !important;
   margin-right:calc(50% - 50vw) !important;
@@ -3396,6 +3458,94 @@ section:has(.steps) > *{
 }
 @media (max-width: 980px){
   .logoImg{ height: 82px !important; }
+}
+
+
+/* === COVER SLIDER FIX (fit + full-width + RTL start + autoplay + arrows) === */
+.coverSlider{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.coverSlider .slides{
+  direction: rtl;                 /* start from right edge */
+  justify-content: flex-start;
+  align-items: stretch !important;
+  gap: 18px !important;
+  padding: 0 56px 0 56px;         /* keep room under arrows, but still reach edges */
+  transition: transform .55s ease;
+  will-change: transform;
+}
+.coverSlider .slide{
+  width: 220px !important;
+  min-width: 220px !important;
+  height: 320px !important;
+  border-radius: 16px !important;
+  background-size: cover !important;     /* fill frame */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 18px 30px rgba(0,0,0,.40);
+  border: 1px solid rgba(255,255,255,.10);
+  overflow: hidden;
+}
+.coverSlider .arrow{
+  z-index: 5;
+}
+@media (max-width: 680px){
+  .coverSlider .slides{ padding: 0 48px; }
+  .coverSlider .slide{ width: 170px !important; min-width: 170px !important; height: 250px !important; }
+}
+
+
+/* === FIX: Covers slider (slow + arrows + edge-to-edge) === */
+#covers .coverSlider{
+  width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  position: relative !important;
+}
+#covers .slidesViewport{
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+#covers .slidesViewport::-webkit-scrollbar{display:none;}
+#covers .slides{
+  display:flex !important;
+  align-items:center !important;
+  gap: 18px !important;
+  padding: 18px 0 !important; /* no side gutters => fills corners */
+  width: max-content !important;
+}
+#covers .slide{flex:0 0 auto;}
+#covers .arrow{
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(3,11,31,.55);
+  color: rgba(255,255,255,.95);
+  cursor:pointer;
+  z-index: 5;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+#covers .arrow.left{ left: 14px; }
+#covers .arrow.right{ right: 14px; }
+#covers .arrow:hover{ background: rgba(3,11,31,.72); }
+@media (max-width: 640px){
+  #covers .arrow{ width:42px; height:42px; border-radius:14px; }
+  #covers .arrow.left{ left: 10px; }
+  #covers .arrow.right{ right: 10px; }
 }
 
 </style>
@@ -6372,7 +6522,7 @@ section:has(.steps) > *{
   "url": "https://theuspublisher.com"
 }
 </script>
-<link href="https://theuspublisher.com/" rel="canonical">
+<link href="https://theuspublisher.com/" rel="canonical"/>
 <style id="ss-whatyouget-readability-fix">
 /* === Readability fix ONLY for the SS "What you get" section === */
 .section .eyebrow {
@@ -7112,7 +7262,7 @@ section:has(.steps) > *{
 }
 
 </style>
-</link><script async_="True" defer="True" src="https://www.google.com/recaptcha/api.js"></script>
+<script async_="True" defer="True" src="https://www.google.com/recaptcha/api.js"></script>
 <style>
 .glass-header{
     position: fixed;
@@ -7156,8 +7306,6 @@ nav {
 }
 
 </style>
-
-
 <style>
 .glass-wrapper{
     position: fixed;
@@ -7204,8 +7352,6 @@ nav{
 }
 
 </style>
-
-
 <style>
 .glass-wrapper{
     position: fixed;
@@ -7245,8 +7391,6 @@ nav{
 }
 
 </style>
-
-
 <style>
 .glass-wrapper header{
     backdrop-filter: blur(20px);
@@ -7285,8 +7429,6 @@ header, nav, .top-contact, .nav-wrap{
 }
 
 </style>
-
-
 <style>
 /* Glass bar like reference screenshot */
 .glass-wrapper{
@@ -7342,8 +7484,6 @@ body{ padding-top: 0 !important; }
 }
 
 </style>
-
-
 <style>
 /* Keep glass bar compact so it doesn't cover the hero */
 .glass-wrapper header{
@@ -7378,8 +7518,6 @@ body{ padding-top: 0 !important; }
 }
 
 </style>
-
-
 <style>
 /* Force hero/content to start AFTER the fixed header */
 :root{ --tuspHeaderH: 210px; }
@@ -7413,8 +7551,6 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 }
 
 </style>
-
-
 <style>
 /* Extra gap under glass header */
 body{ padding-top: var(--tuspHeaderH) !important; }
@@ -7436,6 +7572,275 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 }
 
 </style>
+<style id="v6-hero-covers-fix">
+/* ===== HERO: cleaner, not oversized, better spacing ===== */
+.heroGrid{padding:52px 0 !important; gap:26px !important; align-items:center !important;}
+.hero .h1{max-width:18ch;}
+.hero .lead{max-width:70ch;}
+.heroMedia{min-height:460px !important;}
+@media (max-width: 1020px){
+  .heroGrid{padding:40px 0 !important;}
+  .heroMedia{min-height:360px !important;}
+}
+
+/* ===== COVERS: match reference frame + no cropping + arrows visible ===== */
+#covers .coverSlider{
+  position:relative;
+  margin-top:22px !important;
+  border-radius:28px !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  background: rgba(3,11,31,.22) !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.42) !important;
+  overflow:hidden !important;
+  padding: 22px 0 !important;
+}
+#covers .slidesViewport{
+  overflow:hidden !important;         /* hide scrollbars; we control scrollLeft */
+  padding: 0 78px !important;         /* space for arrows + nice frame inset */
+}
+#covers .slides{
+  display:flex !important;
+  gap:18px !important;
+  align-items:stretch !important;
+}
+#covers .slide{
+  width:240px !important;
+  aspect-ratio: 2 / 3 !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  background: rgba(0,0,0,.22) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 18px 34px rgba(0,0,0,.45) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+#covers .slide img{
+  width:100% !important;
+  height:100% !important;
+  object-fit: contain !important;     /* NEVER crop faces/text */
+  object-position:center !important;
+  background: rgba(0,0,0,.10) !important;
+}
+#covers .arrow{
+  z-index:50 !important;
+  width:54px !important;
+  height:54px !important;
+  font-size:30px !important;
+  background: rgba(0,0,0,.55) !important;
+}
+#covers .arrow.left{left:18px !important;}
+#covers .arrow.right{right:18px !important;}
+#covers .arrow:hover{background: rgba(0,0,0,.72) !important;}
+
+@media (max-width: 640px){
+  #covers .slidesViewport{padding: 0 62px !important;}
+  #covers .slide{width:190px !important;}
+}
+</style>
+<style id="saad-fixes-v2">
+/* ===== Header cleanup (single shade, compact, no stacked overlays) ===== */
+#siteHeader.header{
+  background: rgba(6, 14, 40, .88) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(10px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.15) !important;
+}
+#siteHeader.header:before,
+#siteHeader.header:after,
+#siteHeader .nav-wrap:before,
+#siteHeader .nav-wrap:after{
+  content:none !important;
+  display:none !important;
+}
+
+/* Make top strip smaller */
+#siteHeader .top-contact{
+  padding: 6px 0 !important;
+}
+#siteHeader .top-link{
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+}
+#siteHeader .top-contact-row{
+  min-height: 0 !important;
+}
+
+/* Compact nav row */
+#siteHeader .nav-wrap{
+  padding: 10px 0 !important;
+  background: transparent !important;
+}
+#siteHeader .nav-row{
+  min-height: 64px !important;
+  gap: 14px !important;
+}
+#siteHeader .logoImg{
+  height: 44px !important;
+  width: auto !important;
+}
+
+/* Ensure nav looks like your screenshot (not huge) */
+#siteHeader .nav a,
+#siteHeader .nav button,
+#siteHeader .nav .dropdown > a{
+  padding: 10px 12px !important;
+  font-size: 15px !important;
+}
+#siteHeader .navHighlight{
+  padding: 10px 14px !important;
+  border-radius: 14px !important;
+}
+
+/* Prevent header from covering half the page on small screens */
+@media (max-width: 991px){
+  #siteHeader .nav-row{min-height: 58px !important;}
+  #siteHeader .logoImg{height: 40px !important;}
+}
+
+/* ===== Covers slider UX ===== */
+#covers .coverSlider .arrow{
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+#covers .coverSlider .slidesViewport{
+  scroll-behavior: smooth !important;
+}
+</style>
+
+
+<style id="covers-heading-style">
+#covers .container{max-width:1100px;margin:0 auto;padding:40px 16px 18px;}
+#covers .head .eyebrow{display:flex;gap:10px;align-items:center;justify-content:center;font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:12px;opacity:.9}
+#covers .head .eyebrow span{display:inline-block;width:28px;height:2px;background:linear-gradient(90deg, rgba(110,231,255,.9), rgba(167,139,250,.9));border-radius:2px}
+#covers .head .h2{margin:10px 0 10px;font-size:44px;line-height:1.1}
+#covers .head p{margin:6px auto;max-width:820px}
+</style>
+
+
+<style id="hero-header-size-fix">
+/* Make header more compact (desktop + mobile) */
+#siteHeader .navRow{padding:10px 0 !important; gap:14px !important;}
+#siteHeader .topbar{padding:6px 0 !important;}
+#siteHeader .topbar .contact, #siteHeader .topbar a{font-size:13px !important; line-height:1.2 !important;}
+#siteHeader .brand{gap:10px !important;}
+#siteHeader img.logo{max-height:34px !important; width:auto !important;}
+
+/* Make hero smaller so it doesn't dominate the page */
+#home.section{padding:56px 0 !important;}
+#home .heroGrid{padding:42px 0 !important;}
+#home .kicker{margin-bottom:10px !important;}
+#home .h1{letter-spacing:-.4px !important;}
+#home .lead{margin-top:12px !important;}
+
+@media (max-width: 820px){
+  #home.section{padding:44px 0 !important;}
+  #home .heroGrid{padding:28px 0 !important;}
+}
+@media (max-width: 560px){
+  /* Keep email/phone but make them compact */
+  #siteHeader .topbar .contact{gap:10px !important;}
+  #siteHeader .topbar .contact span{display:inline-flex !important;}
+  #siteHeader .navRow{padding:8px 0 !important;}
+  #siteHeader img.logo{max-height:28px !important;}
+
+  /* Reduce hero headline so it won't cover half the screen */
+  #home.section{padding:34px 0 !important;}
+  #home .heroGrid{padding:18px 0 !important;}
+  #home .h1{font-size:clamp(28px, 8.2vw, 40px) !important; line-height:1.05 !important;}
+  #home .lead{font-size:14px !important; line-height:1.6 !important;}
+}
+</style>
+
+
+<style id="hero-style-upgrade">
+.hero h1{
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  line-height:1.05;
+  font-size:clamp(34px,4.5vw,68px);
+}
+.hero h1 strong,
+.hero h1 span{
+  background:linear-gradient(90deg,#ffd86b,#fff3c4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p{
+  font-size:clamp(15px,1.4vw,20px);
+  opacity:.92;
+}
+@media(max-width:768px){
+  .hero{padding-top:90px !important;padding-bottom:60px !important;}
+  .hero h1{font-size:clamp(28px,7vw,40px);line-height:1.1}
+}
+</style>
+
+
+<style id="hero-style-force">
+/* try multiple possible hero headings */
+.hero h1,
+.banner h1,
+#hero h1,
+section:first-of-type h1{
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-weight:800 !important;
+  letter-spacing:-0.02em !important;
+  line-height:1.05 !important;
+  font-size:clamp(34px,4.5vw,68px) !important;
+}
+.hero h1 span, .hero h1 strong,
+.banner h1 span, .banner h1 strong,
+#hero h1 span, #hero h1 strong,
+section:first-of-type h1 span, section:first-of-type h1 strong{
+  background:linear-gradient(90deg,#ffd86b,#fff3c4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+@media(max-width:768px){
+  .hero, #hero, .banner, section:first-of-type{padding-top:90px !important;padding-bottom:60px !important;}
+  .hero h1, .banner h1, #hero h1, section:first-of-type h1{font-size:clamp(28px,7vw,40px) !important;line-height:1.1 !important}
+}
+</style>
+
+
+<style id="hero-h1-fix">
+/* Actual hero heading uses class .h1 */
+.h1{
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.05 !important;
+  font-size: clamp(34px, 4.2vw, 64px) !important;
+  margin: 14px 0 14px !important;
+}
+/* Make hero section shorter on desktop + mobile */
+.heroGrid{ padding-top: 42px !important; padding-bottom: 48px !important; }
+@media (max-width: 768px){
+  .h1{ font-size: clamp(26px, 7.2vw, 40px) !important; line-height: 1.1 !important; }
+  .heroGrid{ padding-top: 26px !important; padding-bottom: 34px !important; }
+}
+</style>
+
+
+<style id="hero-h1-style-v16">
+/* VERY visible hero heading style */
+.h1{
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.02 !important;
+  font-size: clamp(40px, 4.6vw, 76px) !important;
+  text-shadow: 0 10px 30px rgba(0,0,0,.35) !important;
+}
+@media (max-width: 768px){
+  .h1{
+    font-size: clamp(30px, 8.2vw, 44px) !important;
+    line-height: 1.08 !important;
+  }
+}
+</style>
 
 </head>
 <body>
@@ -7443,96 +7848,89 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 <div class="glass-header">
 <div class="glass-wrapper">
 <header class="header header--agency header--oscar" id="siteHeader">
-  <!-- Top contact strip -->
-  <div class="top-contact">
-    <div class="container">
-      <div class="top-contact-row">
-        <div class="top-contact-spacer"></div>
-        <div class="top-contact-right">
-          <a class="top-link" href="mailto:support@theuspublisher.com">
-            <span class="ico">✉</span> support@theuspublisher.com
+<!-- Top contact strip -->
+<div class="top-contact">
+<div class="container">
+<div class="top-contact-row">
+<div class="top-contact-spacer"></div>
+<div class="top-contact-right">
+<a class="top-link" href="mailto:support@theuspublisher.com">
+<span class="ico">✉</span> support@theuspublisher.com
           </a>
-          <a class="top-link" href="tel:+17372825860">
-            <span class="ico">☎</span> +1 737-282-5860
+<a class="top-link" href="tel:+17372825860">
+<span class="ico">☎</span> +1 737-282-5860
           </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main nav row -->
-  <div class="nav-wrap">
-    <div class="container">
-      <div class="nav-row">
-        <a class="logo" href="#home" aria-label="TheUSpublisher Home">
-          <img class="logoImg" src="tUSPA.png" alt="TheUSpublisher Logo" loading="eager" decoding="async">
-        </a>
-
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-
-          <a href="javascript:void(0)" onclick="openEditingPopup(event)" aria-label="Editing">Editing</a>
-          <a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)" aria-label="Publishing">Publishing</a>
-
-          <!-- Ghostwriter dropdown -->
-          <div class="dd" id="gwDd">
-            <button class="ddbtn" type="button" aria-haspopup="true" aria-expanded="false">
+</div>
+</div>
+</div>
+</div>
+<!-- Main nav row -->
+<div class="nav-wrap">
+<div class="container">
+<div class="nav-row">
+<a aria-label="TheUSpublisher Home" class="logo" href="#home">
+<img alt="TheUSpublisher Logo" class="logoImg" decoding="async" loading="eager" src="tUSPA.png"/>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a aria-label="Editing" href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
+<a aria-label="Publishing" class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
+<!-- Ghostwriter dropdown -->
+<div class="dd" id="gwDd">
+<button aria-expanded="false" aria-haspopup="true" class="ddbtn" type="button">
               Ghostwriter <span class="ddarrow">▾</span>
-            </button>
-            <div class="ddmenu" role="menu" aria-label="Ghostwriter menu">
-              <a href="javascript:void(0)" role="menuitem" onclick="openGhostwritingPopup(event)">Overview</a>
-              <hr class="ddsep"/>
-              <a href="#services" role="menuitem">Business Book Writing</a>
-              <a href="#services" role="menuitem">Memoir Writing</a>
-              <a href="#services" role="menuitem">Speech Writing</a>
-              <a href="#services" role="menuitem">Children Book Writing</a>
-              <a href="#services" role="menuitem">Fitness Writing</a>
-              <a href="#services" role="menuitem">Cookbooks</a>
-              <hr class="ddsep"/>
-              <a href="#process" role="menuitem">Process</a>
-              <a href="#pricing" role="menuitem">Packages</a>
-            </div>
-          </div>
-
-          <a href="#covers">Book Cover</a>
-          <a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
-          <a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
-          <a href="#pricing">Packages</a>
-        </nav>
-
-        <div class="actions">
-          <a class="btn secondary" href="#contact">Get a Quote</a>
-          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" type="button">☰</button>
-        </div>
-      </div>
-
-      <!-- Mobile menu -->
-      <div class="mobile" id="mobile" aria-label="Mobile menu">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
-        <a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
-        <a href="javascript:void(0)" onclick="openGhostwritingPopup(event)">Ghostwriting</a>
-        <a href="#covers">Book Cover</a>
-        <a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
-        <a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
-        <a href="#pricing">Packages</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </div>
+</button>
+<div aria-label="Ghostwriter menu" class="ddmenu" role="menu">
+<a href="javascript:void(0)" onclick="openGhostwritingPopup(event)" role="menuitem">Overview</a>
+<hr class="ddsep"/>
+<a href="#services" role="menuitem">Business Book Writing</a>
+<a href="#services" role="menuitem">Memoir Writing</a>
+<a href="#services" role="menuitem">Speech Writing</a>
+<a href="#services" role="menuitem">Children Book Writing</a>
+<a href="#services" role="menuitem">Fitness Writing</a>
+<a href="#services" role="menuitem">Cookbooks</a>
+<hr class="ddsep"/>
+<a href="#process" role="menuitem">Process</a>
+<a href="#pricing" role="menuitem">Packages</a>
+</div>
+</div>
+<a href="#covers">Book Cover</a>
+<a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
+<a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
+<a href="#pricing">Packages</a>
+</nav>
+<div class="actions">
+<a class="btn secondary" href="#contact">Get a Quote</a>
+<button aria-expanded="false" aria-label="Open menu" class="burger" id="burger" type="button">☰</button>
+</div>
+</div>
+<!-- Mobile menu -->
+<div aria-label="Mobile menu" class="mobile" id="mobile">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="javascript:void(0)" onclick="openEditingPopup(event)">Editing</a>
+<a class="navHighlight" href="javascript:void(0)" onclick="openPublishingPopup(event)">Publishing</a>
+<a href="javascript:void(0)" onclick="openGhostwritingPopup(event)">Ghostwriting</a>
+<a href="#covers">Book Cover</a>
+<a href="javascript:void(0)" onclick="openSvc('proofreadingModal'); return false;">Proofreading</a>
+<a class="navHighlight" href="javascript:void(0)" onclick="openMarketingPopup(event)">Marketing</a>
+<a href="#pricing">Packages</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</div>
 </header>
 </div>
 </div>
 <main id="main">
-<section id="home" class="hero section-dark">
+<section class="hero section-dark" id="home">
 <div aria-hidden="true" class="texture"></div>
 <div class="container">
 <div class="heroGrid">
-<div class="">
+<div class="reveal">
 <div class="kicker"><span class="dot"></span> Your enterprise publishing partner</div>
-<h1 class="h1">Your voice. <span style="background:linear-gradient(150deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent"> Your story. </span> — Professionally <span style="background:linear-gradient(150deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent"> Published.</span></h1>
+<h1 class="h1">Your voice. <span style="background:linear-gradient(90deg,#ffd86b,#fff3c4); -webkit-background-clip:text; background-clip:text; color:transparent"> Your story. </span> — Professionally <span style="background:linear-gradient(90deg,#ffd86b,#fff3c4); -webkit-background-clip:text; background-clip:text; color:transparent"> Published.</span></h1>
 <p class="lead">We help executives, founders, and authors write, edit, design, publish, and launch books with a clear process, strong quality control, and full rights ownership.</p>
 <div class="cta">
 <a class="btn primary" href="/contact/">Start Your Project</a>
@@ -7545,13 +7943,8 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 <div class="heroTile"><b>Get a Quote</b><span>Clear pricing. No obligation. No pressure.</span></div>
 </div>
 </div>
-<aside aria-label="Author model" class="heroMedia" style="transition-delay:.08s">
-<img alt="Professional author holding books" class="heroModel"
-      src="assets/img/hero-1200.webp"
-      srcset="assets/img/hero-480.webp 480w, assets/img/hero-768.webp 768w, assets/img/hero-1200.webp 1200w"
-      sizes="(max-width: 560px) 480px, (max-width: 980px) 768px, 1200px"
-      width="1200" height="1800"
-      loading="eager" fetchpriority="high" decoding="async">
+<aside aria-label="Author model" class="heroMedia reveal" style="transition-delay:.08s">
+<img alt="Professional author holding books" class="heroModel" decoding="async" fetchpriority="high" loading="eager" src="assets/img/inline_4_05b221a3d4.png"/>
 </aside>
 </div>
 </div>
@@ -7833,34 +8226,44 @@ body{ padding-top: var(--tuspHeaderH) !important; }
 </div>
 </div>
 </section>
-<section class="section tight section-light" id="covers">
+
+<section class="coversShowcase" id="covers">
+
 <div class="container">
-<div class="head reveal">
-<div class="eyebrow">book Portfolio</div>
-<h2 class="h2">Achieve the dream you crave</h2>
-<p style="max-width:800px;margin-top:12px;color:var(--muted)">
-Envision your work coming into reality<br/>
-Don't just go by our words; look at the top best-sellers we've worked on. Our portfolio showcases the diverse range of creative book cover design projects we've brought to life, demonstrating our commitment to quality and innovation for every author.
-</p>
-<div class="coverSlider">
-<button class="arrow left">❮</button>
-<div class="slides">
-<div class="slide" style="background-image:url('Book1.jpg')"></div>
-<div class="slide" style="background-image:url('Book2.jpg')"></div>
-<div class="slide" style="background-image:url('Book3.jpg')"></div>
-<div class="slide" style="background-image:url('Book4.jpg')"></div>
-<div class="slide" style="background-image:url('Book5.jpg')"></div>
-<div class="slide" style="background-image:url('Book6.jpg')"></div>
-<div class="slide" style="background-image:url('Book7.jpg')"></div>
-<div class="slide" style="background-image:url('Book8.jpg')"></div>
-<div class="slide" style="background-image:url('Book9.jpg')"></div>
-<div class="slide" style="background-image:url('Book10.jpg')"></div>
-<div class="slide" style="background-image:url('Book11.jpg')"></div>
+  <div class="head">
+    <div class="eyebrow"><span></span>BOOK PORTFOLIO</div>
+    <h2 class="h2">Achieve the dream you crave</h2>
+    <p>Envision your work coming into reality</p>
+    <p>Don't just go by our words; look at the top best-sellers we've worked on. Our portfolio showcases the diverse range of creative book cover design projects we've brought to life, demonstrating our commitment to quality and innovation for every author.</p>
+  </div>
 </div>
-<button class="arrow right">❯</button>
+
+<div class="coversShell">
+<button aria-label="Previous covers" class="coversNav coversPrev" title="Previous" type="button">
+<span aria-hidden="true">‹</span>
+</button>
+<div aria-label="Book covers carousel" class="coversViewport">
+<div class="coversTrack">
+<div class="coverCard"><img alt="Book cover 1" loading="lazy" src="Book1.png"/></div>
+<div class="coverCard"><img alt="Book cover 2" loading="lazy" src="Book2.png"/></div>
+<div class="coverCard"><img alt="Book cover 3" loading="lazy" src="Book3.png"/></div>
+<div class="coverCard"><img alt="Book cover 4" loading="lazy" src="Book4.png"/></div>
+<div class="coverCard"><img alt="Book cover 5" loading="lazy" src="Book5.png"/></div>
+<div class="coverCard"><img alt="Book cover 6" loading="lazy" src="Book6.png"/></div>
+<div class="coverCard"><img alt="Book cover 7" loading="lazy" src="Book7.png"/></div>
+<div class="coverCard"><img alt="Book cover 8" loading="lazy" src="Book8.png"/></div>
+<div class="coverCard"><img alt="Book cover 9" loading="lazy" src="Book9.png"/></div>
+<div class="coverCard"><img alt="Book cover 10" loading="lazy" src="Book10.png"/></div>
+<div class="coverCard"><img alt="Book cover 11" loading="lazy" src="Book11.png"/></div>
+<div class="coverCard"><img alt="Book cover 12" loading="lazy" src="Book12.png"/></div>
 </div>
 </div>
-</div></section>
+<button aria-label="Next covers" class="coversNav coversNext" title="Next" type="button">
+<span aria-hidden="true">›</span>
+</button>
+</div>
+</section>
+
 <section class="section section-dark" id="process">
 <div class="container">
 <div class="reveal">
@@ -7990,7 +8393,7 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 <div class="review-grid">
 <!-- Row 1 -->
 <div class="review-card">
-<img class="r-avatar" src="review7.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review7.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8001,9 +8404,9 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“They turned my rough notes into a book that reads like I wrote it on my best day.”</p>
 </div>
-</div>
+</img></div>
 <div class="review-card">
-<img class="r-avatar" src="review8.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review8.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8014,9 +8417,9 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“Weekly updates, clear milestones, and a polished manuscript ahead of schedule.”</p>
 </div>
-</div>
+</img></div>
 <div class="review-card">
-<img class="r-avatar" src="review9.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review9.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8027,10 +8430,10 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“The research and structure were on point. The editor’s pass made it publication‑ready.”</p>
 </div>
-</div>
+</img></div>
 <!-- Row 2 -->
 <div class="review-card">
-<img class="r-avatar" src="review10.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review10.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8041,9 +8444,9 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“Cover to copy, everything felt premium. Great communication and zero stress.”</p>
 </div>
-</div>
+</img></div>
 <div class="review-card">
-<img class="r-avatar" src="review11.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review11.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8054,9 +8457,9 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“My brand voice stayed intact. The final draft was sharp and engaging.”</p>
 </div>
-</div>
+</img></div>
 <div class="review-card">
-<img class="r-avatar" src="review12.jpg" loading="lazy" decoding="async"/>
+<img class="r-avatar" decoding="async" loading="lazy" src="review12.jpg">
 <div class="r-content">
 <div class="r-head">
 <div>
@@ -8067,66 +8470,9 @@ Don't just go by our words; look at the top best-sellers we've worked on. Our po
 </div>
 <p>“Professional, fast, and the writing quality is genuinely high.”</p>
 </div>
-</div>
+</img></div>
 </div>
 </div></section>
-
-<section class="tusp-reviews" id="reviews">
-<div class="container">
-<div class="tusp-reviews__card">
-<div class="tusp-reviews__header">
-<span class="tusp-reviews__kicker">REVIEWS</span>
-<h2>Share your experience</h2>
-<p>
-          Your review will be <strong>verified within 24 hours</strong> before it appears on the website.
-          We do <strong>not</strong> allow instant public posting.
-        </p>
-</div>
-<form class="tusp-reviews__form" data-endpoint="/api/reviews" id="reviewForm" novalidate="">
-<div class="tusp-reviews__grid">
-<div class="tusp-field">
-<label for="reviewName">Full name</label>
-<input autocomplete="name" id="reviewName" maxlength="80" name="name" placeholder="Your full name" required="" type="text"/>
-</div>
-<div class="tusp-field">
-<label for="reviewEmail">Email address</label>
-<input autocomplete="email" id="reviewEmail" maxlength="120" name="email" placeholder="you@email.com" required="" type="email"/>
-</div>
-</div>
-<div class="tusp-field">
-<label for="reviewText">Your review</label>
-<textarea id="reviewText" maxlength="1500" name="review" placeholder="Write your honest review here..." required="" rows="5"></textarea>
-<div class="tusp-reviews__meta">
-<span id="reviewCharCount">0</span>/1500
-          </div>
-</div>
-<div class="tusp-field tusp-field--check">
-<label>
-<input id="reviewConsent" required="" type="checkbox"/>
-            I confirm this is my genuine experience and I agree my review may be displayed publicly after verification.
-          </label>
-</div>
-<div class="tusp-reviews__captcha">
-<div class="g-recaptcha" data-sitekey="6Lc3-mMsAAAAAMYYjywtceZf04JtjQIsS1JKXiq9"></div>
-<small class="tusp-reviews__help">
-                      </small>
-</div>
-<div class="tusp-reviews__actions">
-<button class="btn-primary" type="submit">Submit for verification</button>
-<div aria-live="polite" class="tusp-reviews__status" id="reviewStatus" role="status"></div>
-</div>
-<!--
-          IMPORTANT (No instant public posting):
-          This form intentionally DOES NOT publish reviews on the page immediately.
-          You must connect data-endpoint="/api/reviews" to your server so submissions are stored as "PENDING",
-          verified manually, and only then shown on the website.
-
-          The server should verify the reCAPTCHA token and then send an approval email/workflow.
-        -->
-</form>
-</div>
-</div>
-</section>
 <section class="section section-dark" id="faq">
 <div class="container">
 <div class="faq">
@@ -8425,7 +8771,7 @@ document.addEventListener('click',()=>{
 <div class="cols">
 <div>
 <div class="brand" style="margin-bottom:10px">
-<span aria-hidden="true" class="logo"><img alt="TheUSpublisher Logo" src="tUSPA.png" loading="lazy" decoding="async"/></span>
+<span aria-hidden="true" class="logo"><img alt="TheUSpublisher Logo" decoding="async" loading="lazy" src="tUSPA.png"/></span>
 <span>
 <span class="name">TheUSpublisher</span>
 <span class="tag">Enterprise Ghostwriting • Editing • Publishing</span>
@@ -8455,8 +8801,8 @@ document.addEventListener('click',()=>{
 <div class="contact-line">
 <span class="label">Address</span>
 <div class="addr">
-      6001 Gateway Blvd<br>
-      Suite 400 (Corporate Campus)<br/>
+      6001 Gateway Blvd<br/>
+      Suite 400 (Corporate Campus)<br>
       Austin, TX 78752
     </br></div>
 </div>
@@ -8529,136 +8875,6 @@ document.addEventListener('click',()=>{
   }
 </script>
 <!--End of Tawk.to Script-->
-<script>
-(function(){
-  const slider = document.querySelector('#covers .coverSlider') || document.querySelector('.coverSlider');
-  if(!slider) return;
-  const track = slider.querySelector('.slides');
-  if(!track) return;
-
-  // Mark original slides (exclude prior clones)
-  const base = Array.from(track.children).filter(el => el.classList && el.classList.contains('slide') && !el.dataset.clone);
-  if(base.length < 2) return;
-
-  function getStep(){
-    const first = track.querySelector('.slide');
-    if(!first) return 0;
-    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
-    return first.getBoundingClientRect().width + gap;
-  }
-
-  let clonesEachSide = 0;
-  let step = 0;
-
-  function removeClones(){
-    Array.from(track.querySelectorAll('.slide[data-clone="1"]')).forEach(n => n.remove());
-  }
-
-  function buildClones(){
-    step = getStep();
-    if(!step) return;
-
-    removeClones();
-
-    const viewport = slider.clientWidth || window.innerWidth;
-    clonesEachSide = Math.max(6, Math.ceil(viewport / step) + 4);
-
-    // prepend tail clones
-    const tail = base.slice(-clonesEachSide).map(n => n.cloneNode(true));
-    tail.forEach(n => { n.dataset.clone = "1"; track.insertBefore(n, track.firstChild); });
-
-    // append head clones
-    const head = base.slice(0, clonesEachSide).map(n => n.cloneNode(true));
-    head.forEach(n => { n.dataset.clone = "1"; track.appendChild(n); });
-
-    // Start inside the cloned area so BOTH corners are always covered
-    slider.scrollLeft = clonesEachSide * step;
-  }
-
-  function normalize(){
-    if(!step) return;
-    const realSpan = base.length * step;
-    const min = step; // avoid hitting the very start
-    const max = (clonesEachSide + base.length) * step;
-
-    if(slider.scrollLeft < min){
-      slider.scrollLeft += realSpan;
-    } else if(slider.scrollLeft > max){
-      slider.scrollLeft -= realSpan;
-    }
-  }
-
-  // --- Drag to scroll (click + hold) ---
-  let isDown = false;
-  let startX = 0;
-  let startScroll = 0;
-  let lastUser = performance.now();
-
-  function onDown(e){
-    isDown = true;
-    lastUser = performance.now();
-    slider.classList.add('is-grabbing');
-    startX = e.clientX;
-    startScroll = slider.scrollLeft;
-    try{ slider.setPointerCapture(e.pointerId); }catch(_){}
-  }
-  function onMove(e){
-    if(!isDown) return;
-    lastUser = performance.now();
-    const dx = e.clientX - startX;
-    slider.scrollLeft = startScroll - dx;
-    e.preventDefault();
-  }
-  function endDrag(){
-    if(!isDown) return;
-    isDown = false;
-    slider.classList.remove('is-grabbing');
-    lastUser = performance.now();
-  }
-
-  slider.addEventListener('pointerdown', onDown, {passive:false});
-  slider.addEventListener('pointermove', onMove, {passive:false});
-  slider.addEventListener('pointerup', endDrag);
-  slider.addEventListener('pointercancel', endDrag);
-  slider.addEventListener('mouseleave', endDrag);
-
-  // Track user interaction so auto-scroll pauses while dragging
-  slider.addEventListener('wheel', () => { lastUser = performance.now(); }, {passive:true});
-  slider.addEventListener('touchstart', () => { lastUser = performance.now(); }, {passive:true});
-  slider.addEventListener('scroll', () => { if(!isDown) normalize(); }, {passive:true});
-
-  // --- Slow continuous movement when idle ---
-  const SPEED_PX_PER_MS = 0.018; // ~18px/sec (slow)
-  let lastT = performance.now();
-
-  function tick(t){
-    const dt = t - lastT;
-    lastT = t;
-
-    // Move only when user isn't dragging; keep it calm
-    if(!isDown && (t - lastUser) > 120){
-      slider.scrollLeft += dt * SPEED_PX_PER_MS;
-      normalize();
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // Build clones now and on resize (debounced)
-  let resizeTimer = null;
-  function onResize(){
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(()=>{
-      buildClones();
-      normalize();
-    }, 120);
-  }
-  window.addEventListener('resize', onResize);
-
-  buildClones();
-  normalize();
-  requestAnimationFrame(tick);
-})();
-</script>
 <script>
 (function(){
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9007,332 +9223,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (submitBtn) submitBtn.disabled = false;
   });
 });
-</script>
-<script>
-/* Covers marquee: duplicate slides so the row always fills edge-to-edge (no empty corners) */
-(function(){
-  const slider = document.querySelector('#covers .coverSlider');
-  const track  = document.querySelector('#covers .slides');
-  if(!slider || !track) return;
-
-  // Ensure we have enough items to cover 2x viewport for seamless looping
-  const vp = () => Math.max(slider.clientWidth, window.innerWidth);
-  const ensure = () => {
-    // reset: remove previously cloned nodes
-    track.querySelectorAll('[data-clone="1"]').forEach(n => n.remove());
-
-    const originals = Array.from(track.children).filter(n => n.nodeType === 1);
-    if(originals.length === 0) return;
-
-    // clone until track width >= 2x viewport
-    let guard = 0;
-    while(track.scrollWidth < vp()*2 && guard < 30){
-      originals.forEach(node => {
-        const c = node.cloneNode(true);
-        c.setAttribute('data-clone','1');
-        track.appendChild(c);
-      });
-      guard++;
-    }
-
-    // set travel distance as half the track (originals + clones) for seamless loop
-    // We move left by the width of the original set.
-    const children = Array.from(track.children);
-    const half = Math.floor(children.length/2);
-    let dist = 0;
-    for(let i=0;i<half;i++){
-      dist += children[i].getBoundingClientRect().width;
-      // include gap via computed column-gap (flex gap)
-      const gap = parseFloat(getComputedStyle(track).gap || 0);
-      dist += gap;
-    }
-    // set CSS variables
-    track.style.setProperty('--coversDist', (-dist) + 'px');
-
-    // duration tuned by pixels-per-second (slower + premium)
-    const pps = 55; // lower = slower
-    const dur = Math.max(24, Math.round(dist / pps));
-    track.style.setProperty('--coversDur', dur + 's');
-  };
-
-  ensure();
-  window.addEventListener('resize', () => { clearTimeout(window.__coversT); window.__coversT=setTimeout(ensure, 160); });
-})();
-</script>
-<script>
-/* Oscar-style drag-to-scroll + very slow auto-drift + infinite loop */
-(function(){
-  const scroller = document.querySelector('#covers .coverSlider');
-  const track    = document.querySelector('#covers .slides');
-  if(!scroller || !track) return;
-
-  // Clone once so there are always items at edges; keep it lightweight
-  const originals = Array.from(track.children).filter(n => n.nodeType === 1 && !n.dataset.clone);
-  if(originals.length){
-    originals.forEach(n => {
-      const c = n.cloneNode(true);
-      c.dataset.clone = "1";
-      track.appendChild(c);
-    });
-  }
-
-  // Start not-centered: begin at left edge
-  scroller.scrollLeft = 0;
-
-  // Drag with mouse/touch
-  let isDown = false;
-  let startX = 0;
-  let startScroll = 0;
-  let lastX = 0;
-  let velocity = 0;
-  let raf = null;
-
-  const onDown = (e) => {
-    isDown = true;
-    scroller.classList.add('dragging');
-    scroller.style.cursor = 'grabbing';
-    startX = (e.touches ? e.touches[0].pageX : e.pageX);
-    lastX = startX;
-    startScroll = scroller.scrollLeft;
-    velocity = 0;
-  };
-  const onMove = (e) => {
-    if(!isDown) return;
-    const x = (e.touches ? e.touches[0].pageX : e.pageX);
-    const walk = (x - startX);
-    scroller.scrollLeft = startScroll - walk;
-    velocity = x - lastX;
-    lastX = x;
-    e.preventDefault();
-  };
-  const onUp = () => {
-    if(!isDown) return;
-    isDown = false;
-    scroller.classList.remove('dragging');
-    scroller.style.cursor = 'grab';
-
-    // Gentle inertia
-    let v = velocity;
-    const inertia = () => {
-      v *= 0.92;
-      if(Math.abs(v) < 0.2) return;
-      scroller.scrollLeft -= v;
-      requestAnimationFrame(inertia);
-    };
-    requestAnimationFrame(inertia);
-  };
-
-  scroller.addEventListener('mousedown', onDown);
-  window.addEventListener('mousemove', onMove, {passive:false});
-  window.addEventListener('mouseup', onUp);
-
-  scroller.addEventListener('touchstart', onDown, {passive:true});
-  scroller.addEventListener('touchmove', onMove, {passive:false});
-  scroller.addEventListener('touchend', onUp);
-
-  // Infinite loop: when you reach the end of the first set, jump back seamlessly
-  const loopCheck = () => {
-    const half = track.scrollWidth / 2;
-    if(scroller.scrollLeft >= half) scroller.scrollLeft -= half;
-    if(scroller.scrollLeft < 0) scroller.scrollLeft += half;
-  };
-  scroller.addEventListener('scroll', loopCheck, {passive:true});
-
-  // Very slow auto-drift (pause while hovering or dragging)
-  let hover = false;
-  scroller.addEventListener('mouseenter', () => hover = true);
-  scroller.addEventListener('mouseleave', () => hover = false);
-
-  const driftSpeed = 0.18; // px per frame (VERY slow)
-  const drift = () => {
-    if(!isDown && !hover){
-      scroller.scrollLeft += driftSpeed;
-      loopCheck();
-    }
-    raf = requestAnimationFrame(drift);
-  };
-  raf = requestAnimationFrame(drift);
-})();
-</script>
-<script>
-/* Covers v2: fill viewport (no empty corners) + click&hold drag + slow drift when idle */
-(function(){
-  const scroller = document.querySelector('#covers .coverSlider');
-  const track    = document.querySelector('#covers .slides');
-  if(!scroller || !track) return;
-
-  // Prevent double-init if multiple patches exist
-  if(scroller.dataset.coversV2 === "1") return;
-  scroller.dataset.coversV2 = "1";
-
-  // Helper: compute width of a list of nodes including flex gap
-  const gapPx = () => parseFloat(getComputedStyle(track).gap || 0) || 0;
-  const nodesWidth = (nodes) => {
-    const g = gapPx();
-    let w = 0;
-    nodes.forEach((n, i) => {
-      w += n.getBoundingClientRect().width;
-      if(i < nodes.length - 1) w += g;
-    });
-    return w;
-  };
-
-  // Build: ensure we have enough covers to ALWAYS fill the viewport while scrolling
-  const build = () => {
-    // Remove old clones (from any previous run)
-    track.querySelectorAll('[data-clone="1"]').forEach(n => n.remove());
-
-    const originals = Array.from(track.children).filter(n => n.nodeType === 1 && !n.dataset.clone);
-    if(!originals.length) return;
-
-    // Measure original set width
-    const originalWidth = nodesWidth(originals);
-
-    // Clone the original set until total content >= (originalWidth * 2 + viewportWidth)
-    // This guarantees both left/right edges are always filled.
-    const vp = Math.max(window.innerWidth, scroller.clientWidth);
-    let total = originalWidth;
-    let guard = 0;
-    while(total < originalWidth * 2 + vp && guard < 30){
-      originals.forEach(n => {
-        const c = n.cloneNode(true);
-        c.dataset.clone = "1";
-        track.appendChild(c);
-      });
-      total += originalWidth;
-      guard++;
-    }
-
-    // Store widths for seamless looping (we keep 2+ copies)
-    scroller.dataset.originalWidth = String(originalWidth);
-
-    // Start in the middle copy so no empty edge at load
-    scroller.scrollLeft = originalWidth;
-  };
-
-  build();
-  window.addEventListener('resize', () => {
-    clearTimeout(window.__coversV2T);
-    window.__coversV2T = setTimeout(build, 150);
-  });
-
-  // Click & hold drag (hand cursor)
-  let isDown = false;
-  let startX = 0;
-  let startScroll = 0;
-  let lastX = 0;
-  let velocity = 0;
-
-  const onDown = (e) => {
-    isDown = true;
-    scroller.style.cursor = 'grabbing';
-    startX = (e.touches ? e.touches[0].pageX : e.pageX);
-    lastX = startX;
-    startScroll = scroller.scrollLeft;
-    velocity = 0;
-  };
-  const onMove = (e) => {
-    if(!isDown) return;
-    const x = (e.touches ? e.touches[0].pageX : e.pageX);
-    const walk = (x - startX);
-    scroller.scrollLeft = startScroll - walk;
-    velocity = x - lastX;
-    lastX = x;
-    e.preventDefault();
-  };
-  const onUp = () => {
-    if(!isDown) return;
-    isDown = false;
-    scroller.style.cursor = 'grab';
-
-    // Gentle inertia (small)
-    let v = velocity;
-    const inertia = () => {
-      v *= 0.90;
-      if(Math.abs(v) < 0.15) return;
-      scroller.scrollLeft -= v;
-      loopCheck();
-      requestAnimationFrame(inertia);
-    };
-    requestAnimationFrame(inertia);
-  };
-
-  scroller.addEventListener('mousedown', onDown);
-  window.addEventListener('mousemove', onMove, {passive:false});
-  window.addEventListener('mouseup', onUp);
-
-  scroller.addEventListener('touchstart', onDown, {passive:true});
-  scroller.addEventListener('touchmove', onMove, {passive:false});
-  scroller.addEventListener('touchend', onUp);
-
-  // Seamless infinite loop using originalWidth
-  const loopCheck = () => {
-    const ow = parseFloat(scroller.dataset.originalWidth || "0") || 0;
-    if(!ow) return;
-
-    // Keep scrollLeft in [ow, 2*ow)
-    if(scroller.scrollLeft >= ow * 2) scroller.scrollLeft -= ow;
-    if(scroller.scrollLeft < ow) scroller.scrollLeft += ow;
-  };
-  scroller.addEventListener('scroll', loopCheck, {passive:true});
-
-  // Slow idle drift ONLY when not holding mouse/touch
-  const driftSpeed = 0.08; // px per frame (VERY slow)
-  const drift = () => {
-    if(!isDown){
-      scroller.scrollLeft += driftSpeed;
-      loopCheck();
-    }
-    requestAnimationFrame(drift);
-  };
-  requestAnimationFrame(drift);
-
-  // Ensure grab cursor when idle
-  scroller.style.cursor = 'grab';
-})();
-</script>
-<script>
-/* Covers v3: after build, auto-align so a book starts at the LEFT edge (no empty corner). */
-(function(){
-  const scroller = document.querySelector('#covers .coverSlider');
-  const track    = document.querySelector('#covers .slides');
-  if(!scroller || !track) return;
-
-  if(scroller.dataset.coversV3 === "1") return;
-  scroller.dataset.coversV3 = "1";
-
-  const gapPx = () => parseFloat(getComputedStyle(track).gap || 0) || 0;
-
-  const firstVisible = () => {
-    const sr = scroller.getBoundingClientRect();
-    const kids = Array.from(track.children).filter(n => n.nodeType === 1);
-    for(const k of kids){
-      const r = k.getBoundingClientRect();
-      if(r.right > sr.left + 2) return {el:k, rect:r, sr};
-    }
-    return null;
-  };
-
-  const alignLeftEdge = () => {
-    // Align the first visible card's left edge to scroller left edge
-    const fv = firstVisible();
-    if(!fv) return;
-    const delta = fv.rect.left - fv.sr.left;  // positive means empty space on the left
-    if(delta > 2){
-      scroller.scrollLeft += delta; // remove left empty
-    }
-  };
-
-  // Hook into v2 build if present by aligning after a short delay
-  const later = () => setTimeout(alignLeftEdge, 80);
-  later();
-  window.addEventListener('resize', () => setTimeout(alignLeftEdge, 120));
-
-  // Also align whenever the user stops dragging (so corners stay filled)
-  let dragTimer = null;
-  scroller.addEventListener('mouseup', () => { clearTimeout(dragTimer); dragTimer=setTimeout(alignLeftEdge, 120); });
-  scroller.addEventListener('touchend', () => { clearTimeout(dragTimer); dragTimer=setTimeout(alignLeftEdge, 120); });
-})();
 </script>
 <style>
   /* ===== FIX: WHAT YOU GET CARDS TEXT VISIBILITY ONLY ===== */
@@ -9818,32 +9708,30 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 
-
-/* ===== PERF: Don't hide above-the-fold content (improves LCP + reduces layout shifts) ===== */
-.hero .reveal{opacity:1 !important; transform:none !important;}
-@media (prefers-reduced-motion: reduce){
-  .reveal{transition:none !important; animation:none !important;}
+/* === FORCE SHOW COVERS ARROWS (override legacy rules) === */
+#covers .arrow{
+  display:grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 50 !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 18px !important;
+  background: rgba(0,0,0,.55) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,.45) !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
 }
-
-
-
-/* Reserve space so hero image doesn't push content around */
-.heroMedia{aspect-ratio: 2 / 3;}
-.heroModel{width:100%; height:100%; object-fit:cover; display:block;}
-
-
-/* ===== LCP FIX: do NOT animate above-the-fold text ===== */
-.hero .reveal{
-  opacity:1 !important;
-  transform:none !important;
-  filter:none !important;
-  transition:none !important;
+#covers .arrow.left{left: 14px !important;}
+#covers .arrow.right{right: 14px !important;}
+#covers .arrow:hover{background: rgba(0,0,0,.70) !important;}
+#covers .arrow:active{transform: translateY(-50%) scale(.96) !important;}
+/* keep arrows on mobile too */
+@media (max-width: 900px){
+  #covers .arrow{display:grid !important;}
 }
-
-
-
-/* ===== LCP GUARANTEE: never hide hero content ===== */
-.hero .reveal{opacity:1 !important; transform:none !important; filter:none !important; transition:none !important;}
 
 </style>
 <!-- ===== Marketing Popup (small) ===== -->
@@ -9941,8 +9829,8 @@ document.addEventListener('DOMContentLoaded', function () {
           while sharpening every page for readers.
         </p>
 <div class="svcArt">
-<img alt="" src="Editing.png" loading="lazy" decoding="async"/>
-</div>
+<img alt="" decoding="async" loading="lazy" src="Editing.png">
+</img></div>
 <ul class="svcList">
 <li><span class="svcCheck"></span>Developmental notes (structure, pacing, and reader experience)</li>
 <li><span class="svcCheck"></span>Line &amp; copy edit (clarity, style, consistency, and polish)</li>
@@ -9971,8 +9859,8 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 <div>
 <div class="svcArt">
-<img alt="" src="Editing Image.png" loading="lazy" decoding="async"/>
-</div>
+<img alt="" decoding="async" loading="lazy" src="Editing Image.png">
+</img></div>
 <div class="svcCards">
 <div class="svcCard"><h4>Best for</h4><p>Authors who want clarity, flow, and professional polish without losing voice.</p></div>
 <div class="svcCard"><h4>Deliverables</h4><p>Track-changes edit + clean file (optional) + editor notes.</p></div>
@@ -10148,8 +10036,8 @@ document.addEventListener('keydown', function(e){
 <div class="svcTitle">Final proof that protects your reputation.</div>
 <p class="svcLead">A clean final pass for typos, punctuation, formatting consistency, and small errors—so your book looks polished and professional.</p>
 <div class="svcArt">
-<img alt="" src="Proofreading.png" loading="lazy" decoding="async"/>
-</div>
+<img alt="" decoding="async" loading="lazy" src="Proofreading.png">
+</img></div>
 </div>
 <div class="svcGrid">
 <div>
@@ -10167,8 +10055,8 @@ document.addEventListener('keydown', function(e){
 </div>
 <div>
 <div class="svcArt">
-<img alt="" src="Proofreading 2.png" loading="lazy" decoding="async"/>
-</div>
+<img alt="" decoding="async" loading="lazy" src="Proofreading 2.png">
+</img></div>
 <div class="svcCards" style="margin-top:14px">
 <div class="svcCard"><h4>Best time to proof</h4><p>After editing + formatting, right before publishing.</p></div>
 <div class="svcCard"><h4>Deliverables</h4><p>Track-changes file + clean file (optional) + notes.</p></div>
@@ -10263,30 +10151,37 @@ document.addEventListener('keydown', function(e){
   });
 })();
 </script>
-
-
-
 <script>
 (function(){
-  // Mobile menu (keep compatible with existing burger behavior)
-  const header = document.getElementById('siteHeader') || document.querySelector('.header');
-  const burger = document.getElementById('burger');
-  const mobileNav = document.getElementById('mobile') || document.getElementById('mobileNav');
+  // Mobile menu (robust / fixed)
+  const header2 = document.getElementById('siteHeader') || document.querySelector('.header');
+  const burger2 = document.getElementById('burger');
+  const mobileNav2 = document.getElementById('mobile') || document.getElementById('mobileNav');
 
-  function closeMobile(){
-    if(!header) return;
-    header.classList.remove('open');
-    if(burger) burger.setAttribute('aria-expanded','false');
+  function setOpen2(isOpen){
+    if(header2) header2.classList.toggle('open', !!isOpen);
+    if(mobileNav2) mobileNav2.classList.toggle('open', !!isOpen); // fallback for any CSS variant
+    if(burger2) burger2.setAttribute('aria-expanded', String(!!isOpen));
   }
-  if(burger && header){
-    burger.addEventListener('click', () => {
-      const open = header.classList.toggle('open');
-      burger.setAttribute('aria-expanded', String(open));
-    });
+
+  function closeMobile2(){ setOpen2(false); }
+
+  if(burger2){
+    burger2.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentlyOpen = (header2 && header2.classList.contains('open')) || (mobileNav2 && mobileNav2.classList.contains('open'));
+      setOpen2(!currentlyOpen);
+    }, {passive:false});
   }
-  if(mobileNav){
-    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+
+  if(mobileNav2){
+    mobileNav2.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile2));
   }
+
+  // Close on escape
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape') closeMobile2();
+  });
 
   // Ghostwriter dropdown (animated)
   const dd = document.getElementById('gwDd');
@@ -10338,5 +10233,373 @@ document.addEventListener('keydown', function(e){
 })();
 </script>
 
+
+
+
+<style id="covers-slider-v8-css">
+/* Clean rebuilt covers slider (v8) */
+#covers.coversShowcase{
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#covers.coversShowcase .coversShell{
+  position:relative !important;
+  width:100% !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#covers.coversShowcase .coversViewport{
+  width:100% !important;
+  overflow:hidden !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#covers.coversShowcase .coversTrack{
+  display:flex !important;
+  align-items:center !important;
+  gap:24px !important;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  padding:10px 0 !important;
+}
+#covers.coversShowcase .coverCard{
+  flex:0 0 auto !important;
+  width:clamp(180px, 18vw, 280px) !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.45) !important;
+}
+#covers.coversShowcase .coverCard img{
+  width:100% !important;
+  height:auto !important;
+  display:block !important;
+}
+#covers.coversShowcase .coversNav{
+  position:absolute !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:54px !important;
+  height:54px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  background:rgba(0,0,0,.65) !important;
+  color:#fff !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  z-index:999999 !important;
+  cursor:pointer !important;
+  user-select:none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+#covers.coversShowcase .coversNav span{
+  font-size:34px !important;
+  line-height:1 !important;
+  margin-top:-2px !important;
+}
+#covers.coversShowcase .coversPrev{ left:10px !important; }
+#covers.coversShowcase .coversNext{ right:10px !important; }
+
+/* remove grab/hand */
+#covers.coversShowcase, 
+#covers.coversShowcase *{
+  cursor:default !important;
+}
+#covers.coversShowcase .coversNav{ cursor:pointer !important; }
+
+@media (max-width: 768px){
+  #covers.coversShowcase .coversTrack{ gap:16px !important; }
+  #covers.coversShowcase .coversNav{
+    width:46px !important; height:46px !important;
+  }
+  #covers.coversShowcase .coversNav span{ font-size:30px !important; }
+}
+
+/* =========================================================
+   v19: SCALE + HEADER + MOBILE FIX
+   Goal: match ~75% browser zoom feel at 100% zoom (desktop),
+         keep header in ONE line on desktop, and clean mobile layout.
+========================================================= */
+
+/* Global scale: shrink desktop/laptop canvas without breaking mobile */
+html{ font-size: 12.5px; }                    /* desktop baseline (smaller) */
+@media (max-width: 1800px){ html{ font-size: 12.25px; } } /* large screens */
+@media (max-width: 1600px){ html{ font-size: 12px; } }    /* big laptops */
+@media (max-width: 1440px){ html{ font-size: 11.5px; } }  /* normal laptops */
+@media (max-width: 1366px){ html{ font-size: 11.25px; } } /* common laptops */
+@media (max-width: 1280px){ html{ font-size: 11px; } }    /* small laptops */
+@media (max-width: 980px){  html{ font-size: 13.5px; } }  /* reset for tablets/phones */
+
+/* Slightly tighter canvas */
+:root{
+  --max: 1040px;
+  --h1: clamp(28px, 3.0vw, 46px);
+  --h2: clamp(21px, 2.2vw, 33px);
+}
+
+/* Container breathing room */
+.container{width:min(var(--max), calc(100% - 32px));}
+
+/* ===== Header: keep everything on one line on desktop ===== */
+.top-contact-row{flex-wrap:nowrap !important;}
+.top-contact-right{flex-wrap:nowrap !important; gap:18px !important;}
+
+.nav-row{
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  gap:16px !important;
+}
+.nav{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:4px !important;
+  white-space:nowrap;
+}
+.nav a, .ddbtn{
+  padding:8px 10px !important;
+  font-size:14px !important;
+}
+.actions{flex:0 0 auto;}
+.actions .btn{padding:10px 14px !important;}
+
+/* If screen gets tight, reduce nav density (still one line) */
+@media (max-width: 1440px){
+  .nav a, .ddbtn{padding:7px 9px !important; font-size:13.5px !important;}
+  .actions .btn{padding:9px 12px !important; font-size:13.5px !important;}
+  .top-contact-right{gap:14px !important;}
+}
+
+/* Reduce big vertical gaps */
+.section{ padding: 60px 0; }
+.section.tight{ padding: 42px 0; }
+@media (max-width: 1440px){
+  .section{ padding: 54px 0; }
+}
+
+/* Hero size */
+.heroGrid{ padding: 50px 0 !important; }
+.heroMedia{ min-height: 400px !important; }
+@media (max-width: 1440px){
+  .heroMedia{ min-height: 360px !important; }
+}
+@media (max-width: 1020px){
+  .heroGrid{ padding: 44px 0 !important; }
+  .heroMedia{ min-height: 330px !important; border-radius: 26px; }
+}
+
+/* Logo size (keep premium but not oversized) */
+.logo img{ height: 60px !important; width:auto !important; }
+@media (max-width: 1440px){ .logo img{ height: 54px !important; } }
+@media (max-width: 640px){ .logo img{ height: 52px !important; } }
+
+/* ===== Mobile view fixes ===== */
+@media (max-width: 820px){
+  .container{ width:min(var(--max), calc(100% - 26px)); }
+  .actions{ gap:10px; }
+}
+@media (max-width: 560px){
+  html, body{ overflow-x: hidden; }
+  .header .inner{ padding: 12px 0; }
+  .actions{ width:100%; flex-direction: column; align-items: stretch; }
+  .actions a.btn{ width:100% !important; }
+  .actions a.btn.ghost{ display:none !important; }
+  .mobile{ padding: 8px 0 12px; }
+  .mobile a{ padding: 12px 12px; }
+
+  /* Make hero buttons stack cleanly */
+  .cta{flex-direction:column; align-items:stretch;}
+  .cta .btn{width:100%;}
+}
+
+/* Covers grid safety */
+@media (max-width: 640px){
+  .coversGrid{grid-template-columns: repeat(2, 1fr) !important;}
+  .cover{height: 190px !important;}
+}
+
+
+
+/* ===== Mobile header fixes (v20) ===== */
+html, body{max-width:100%; overflow-x:hidden;}
+
+@media (max-width: 640px){
+  /* Top contact: keep email/phone readable, no digit stacking */
+  .top-contact-row,
+  .topContactRow,
+  .topbar .row{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .top-contact-right,
+  .topContactRight,
+  .topbar .links{
+    width: 100% !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  .top-link,
+  .topLink,
+  .topbar a{
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  /* Nav row: prevent huge empty header block */
+  .nav-row,
+  .navRow,
+  .header .inner{
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 12px 0 !important;
+  }
+
+  /* Logo smaller on mobile to save vertical space */
+  .logo img{height: 52px !important;}
+
+  /* CTA button: full-width but not oversized height */
+  .actions{width:100% !important; justify-content:flex-start !important;}
+  .actions .btn.primary{
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Keep burger aligned to the right */
+  .burger{margin-left:auto !important;}
+
+  /* Hero spacing */
+  .heroGrid{padding: 44px 0 !important;}
+}
+
+/* Smaller phones */
+@media (max-width: 420px){
+  .top-link, .topLink{font-size: 11px !important;}
+  .logo img{height: 48px !important;}
+}
+</style>
+<script id="covers-slider-v8-js">
+(() => {
+  function initCoversSlider(){
+    const section = document.querySelector('#covers.coversShowcase');
+    if(!section) return;
+    const track = section.querySelector('.coversTrack');
+    const viewport = section.querySelector('.coversViewport');
+    const btnPrev = section.querySelector('.coversPrev');
+    const btnNext = section.querySelector('.coversNext');
+    if(!track || !viewport || !btnPrev || !btnNext) return;
+
+    // Build infinite loop with clones
+    const originalCards = Array.from(track.children);
+    const cloneCount = Math.min(3, originalCards.length);
+    // Clean any existing clones (safety)
+    Array.from(track.querySelectorAll('[data-clone="1"]')).forEach(n => n.remove());
+
+    const headClones = originalCards.slice(0, cloneCount).map(n => n.cloneNode(true));
+    const tailClones = originalCards.slice(-cloneCount).map(n => n.cloneNode(true));
+
+    tailClones.forEach(n => { n.setAttribute('data-clone','1'); track.insertBefore(n, track.firstChild); });
+    headClones.forEach(n => { n.setAttribute('data-clone','1'); track.appendChild(n); });
+
+    let index = cloneCount; // start at first real slide
+    let slideW = 0;
+    let gap = 0;
+    let isAnimating = false;
+
+    function compute(){
+      const first = track.children[index];
+      if(!first) return;
+      const cs = getComputedStyle(track);
+      gap = parseFloat(cs.gap || '0') || 0;
+      slideW = first.getBoundingClientRect().width + gap;
+      track.style.transition = 'none';
+      track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
+      // force reflow
+      track.getBoundingClientRect();
+      track.style.transition = 'transform 650ms ease';
+    }
+
+    function goTo(i){
+      if(isAnimating) return;
+      isAnimating = true;
+      index = i;
+      track.style.transition = 'transform 650ms ease';
+      track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
+    }
+
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    track.addEventListener('transitionend', () => {
+      const totalReal = originalCards.length;
+      // If we moved past the last real slide into head clones
+      if(index >= totalReal + cloneCount){
+        index = cloneCount;
+        track.style.transition = 'none';
+        track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
+        track.getBoundingClientRect();
+        track.style.transition = 'transform 650ms ease';
+      }
+      // If we moved past the first real slide into tail clones
+      if(index < cloneCount){
+        index = totalReal + cloneCount - 1;
+        track.style.transition = 'none';
+        track.style.transform = `translate3d(${-index * slideW}px,0,0)`;
+        track.getBoundingClientRect();
+        track.style.transition = 'transform 650ms ease';
+      }
+      isAnimating = false;
+    });
+
+    btnNext.addEventListener('click', next);
+    btnPrev.addEventListener('click', prev);
+
+    // Slow autoplay
+    let timer = null;
+    function start(){
+      stop();
+      timer = setInterval(() => { if(!document.hidden) next(); }, 3200);
+    }
+    function stop(){
+      if(timer){ clearInterval(timer); timer = null; }
+    }
+
+    // Pause on hover/focus
+    section.addEventListener('mouseenter', stop);
+    section.addEventListener('mouseleave', start);
+    section.addEventListener('focusin', stop);
+    section.addEventListener('focusout', start);
+
+    // Keyboard arrows when section is in view
+    window.addEventListener('keydown', (e) => {
+      const rect = section.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if(!inView) return;
+      if(e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      if(e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    }, {passive:false});
+
+    window.addEventListener('resize', compute);
+
+    compute();
+    start();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initCoversSlider);
+  } else {
+    initCoversSlider();
+  }
+})();
+</script>
 </body>
 </html>
