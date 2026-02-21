@@ -10153,35 +10153,25 @@ document.addEventListener('keydown', function(e){
 </script>
 <script>
 (function(){
-  // Mobile menu (robust / fixed)
-  const header2 = document.getElementById('siteHeader') || document.querySelector('.header');
-  const burger2 = document.getElementById('burger');
-  const mobileNav2 = document.getElementById('mobile') || document.getElementById('mobileNav');
+  // Mobile menu (keep compatible with existing burger behavior)
+  const header = document.getElementById('siteHeader') || document.querySelector('.header');
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile') || document.getElementById('mobileNav');
 
-  function setOpen2(isOpen){
-    if(header2) header2.classList.toggle('open', !!isOpen);
-    if(mobileNav2) mobileNav2.classList.toggle('open', !!isOpen); // fallback for any CSS variant
-    if(burger2) burger2.setAttribute('aria-expanded', String(!!isOpen));
+  function closeMobile(){
+    if(!header) return;
+    header.classList.remove('open');
+    if(burger) burger.setAttribute('aria-expanded','false');
   }
-
-  function closeMobile2(){ setOpen2(false); }
-
-  if(burger2){
-    burger2.addEventListener('click', (e) => {
-      e.preventDefault();
-      const currentlyOpen = (header2 && header2.classList.contains('open')) || (mobileNav2 && mobileNav2.classList.contains('open'));
-      setOpen2(!currentlyOpen);
-    }, {passive:false});
+  if(burger && header){
+    burger.addEventListener('click', () => {
+      const open = header.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
   }
-
-  if(mobileNav2){
-    mobileNav2.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile2));
+  if(mobileNav){
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
   }
-
-  // Close on escape
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape') closeMobile2();
-  });
 
   // Ghostwriter dropdown (animated)
   const dd = document.getElementById('gwDd');
@@ -10314,177 +10304,6 @@ document.addEventListener('keydown', function(e){
     width:46px !important; height:46px !important;
   }
   #covers.coversShowcase .coversNav span{ font-size:30px !important; }
-}
-
-/* =========================================================
-   v19: SCALE + HEADER + MOBILE FIX
-   Goal: match ~75% browser zoom feel at 100% zoom (desktop),
-         keep header in ONE line on desktop, and clean mobile layout.
-========================================================= */
-
-/* Global scale: shrink desktop/laptop canvas without breaking mobile */
-html{ font-size: 12.5px; }                    /* desktop baseline (smaller) */
-@media (max-width: 1800px){ html{ font-size: 12.25px; } } /* large screens */
-@media (max-width: 1600px){ html{ font-size: 12px; } }    /* big laptops */
-@media (max-width: 1440px){ html{ font-size: 11.5px; } }  /* normal laptops */
-@media (max-width: 1366px){ html{ font-size: 11.25px; } } /* common laptops */
-@media (max-width: 1280px){ html{ font-size: 11px; } }    /* small laptops */
-@media (max-width: 980px){  html{ font-size: 13.5px; } }  /* reset for tablets/phones */
-
-/* Slightly tighter canvas */
-:root{
-  --max: 1040px;
-  --h1: clamp(28px, 3.0vw, 46px);
-  --h2: clamp(21px, 2.2vw, 33px);
-}
-
-/* Container breathing room */
-.container{width:min(var(--max), calc(100% - 32px));}
-
-/* ===== Header: keep everything on one line on desktop ===== */
-.top-contact-row{flex-wrap:nowrap !important;}
-.top-contact-right{flex-wrap:nowrap !important; gap:18px !important;}
-
-.nav-row{
-  flex-wrap:nowrap !important;
-  align-items:center !important;
-  gap:16px !important;
-}
-.nav{
-  display:flex !important;
-  flex-wrap:nowrap !important;
-  gap:4px !important;
-  white-space:nowrap;
-}
-.nav a, .ddbtn{
-  padding:8px 10px !important;
-  font-size:14px !important;
-}
-.actions{flex:0 0 auto;}
-.actions .btn{padding:10px 14px !important;}
-
-/* If screen gets tight, reduce nav density (still one line) */
-@media (max-width: 1440px){
-  .nav a, .ddbtn{padding:7px 9px !important; font-size:13.5px !important;}
-  .actions .btn{padding:9px 12px !important; font-size:13.5px !important;}
-  .top-contact-right{gap:14px !important;}
-}
-
-/* Reduce big vertical gaps */
-.section{ padding: 60px 0; }
-.section.tight{ padding: 42px 0; }
-@media (max-width: 1440px){
-  .section{ padding: 54px 0; }
-}
-
-/* Hero size */
-.heroGrid{ padding: 50px 0 !important; }
-.heroMedia{ min-height: 400px !important; }
-@media (max-width: 1440px){
-  .heroMedia{ min-height: 360px !important; }
-}
-@media (max-width: 1020px){
-  .heroGrid{ padding: 44px 0 !important; }
-  .heroMedia{ min-height: 330px !important; border-radius: 26px; }
-}
-
-/* Logo size (keep premium but not oversized) */
-.logo img{ height: 60px !important; width:auto !important; }
-@media (max-width: 1440px){ .logo img{ height: 54px !important; } }
-@media (max-width: 640px){ .logo img{ height: 52px !important; } }
-
-/* ===== Mobile view fixes ===== */
-@media (max-width: 820px){
-  .container{ width:min(var(--max), calc(100% - 26px)); }
-  .actions{ gap:10px; }
-}
-@media (max-width: 560px){
-  html, body{ overflow-x: hidden; }
-  .header .inner{ padding: 12px 0; }
-  .actions{ width:100%; flex-direction: column; align-items: stretch; }
-  .actions a.btn{ width:100% !important; }
-  .actions a.btn.ghost{ display:none !important; }
-  .mobile{ padding: 8px 0 12px; }
-  .mobile a{ padding: 12px 12px; }
-
-  /* Make hero buttons stack cleanly */
-  .cta{flex-direction:column; align-items:stretch;}
-  .cta .btn{width:100%;}
-}
-
-/* Covers grid safety */
-@media (max-width: 640px){
-  .coversGrid{grid-template-columns: repeat(2, 1fr) !important;}
-  .cover{height: 190px !important;}
-}
-
-
-
-/* ===== Mobile header fixes (v20) ===== */
-html, body{max-width:100%; overflow-x:hidden;}
-
-@media (max-width: 640px){
-  /* Top contact: keep email/phone readable, no digit stacking */
-  .top-contact-row,
-  .topContactRow,
-  .topbar .row{
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-  }
-
-  .top-contact-right,
-  .topContactRight,
-  .topbar .links{
-    width: 100% !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-  }
-
-  .top-link,
-  .topLink,
-  .topbar a{
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-    white-space: nowrap !important;
-    word-break: keep-all !important;
-    overflow-wrap: normal !important;
-  }
-
-  /* Nav row: prevent huge empty header block */
-  .nav-row,
-  .navRow,
-  .header .inner{
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-    padding: 12px 0 !important;
-  }
-
-  /* Logo smaller on mobile to save vertical space */
-  .logo img{height: 52px !important;}
-
-  /* CTA button: full-width but not oversized height */
-  .actions{width:100% !important; justify-content:flex-start !important;}
-  .actions .btn.primary{
-    width: 100% !important;
-    padding: 12px 14px !important;
-    border-radius: 16px !important;
-  }
-
-  /* Keep burger aligned to the right */
-  .burger{margin-left:auto !important;}
-
-  /* Hero spacing */
-  .heroGrid{padding: 44px 0 !important;}
-}
-
-/* Smaller phones */
-@media (max-width: 420px){
-  .top-link, .topLink{font-size: 11px !important;}
-  .logo img{height: 48px !important;}
 }
 </style>
 <script id="covers-slider-v8-js">
