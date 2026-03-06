@@ -8317,6 +8317,70 @@ a.logo{
 
 </style>
 
+
+<style id="mobile-menu-fix">
+/* Mobile menu hard fix */
+@media (max-width: 980px){
+  #siteHeader .actions{display:flex !important; align-items:center !important; gap:10px !important;}
+  #siteHeader .burger{display:inline-grid !important; place-items:center !important; width:56px !important; height:56px !important; border-radius:18px !important; z-index:10001 !important;}
+  #siteHeader #mobile{
+    display:none !important;
+    width:100% !important;
+    margin-top:12px !important;
+    padding:12px !important;
+    border-radius:18px !important;
+    background:rgba(6,18,40,.96) !important;
+    border:1px solid rgba(255,255,255,.14) !important;
+    box-shadow:0 18px 40px rgba(0,0,0,.35) !important;
+    position:relative !important;
+    z-index:10000 !important;
+  }
+  #siteHeader.open #mobile,
+  #siteHeader #mobile.open{display:block !important;}
+  #siteHeader #mobile a{display:block !important; padding:14px 12px !important; border-radius:14px !important; color:#fff !important; font-weight:800 !important;}
+  #siteHeader #mobile a:hover,
+  #siteHeader #mobile a:focus{background:rgba(255,255,255,.08) !important;}
+}
+</style>
+
+<style id="legal-popup-styles">
+.legal-link{position:relative}
+.legal-popup-overlay{
+  position:fixed; inset:0; z-index:10000; display:none; align-items:center; justify-content:center;
+  background:rgba(2,8,23,.72); padding:20px;
+}
+.legal-popup-overlay.open{display:flex}
+.legal-popup{
+  width:min(760px, 100%); max-height:min(84vh, 820px); overflow:auto;
+  border-radius:24px; border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, rgba(6,20,46,.98), rgba(2,9,26,.98));
+  box-shadow:0 28px 80px rgba(0,0,0,.45);
+  color:#f4f7ff;
+}
+.legal-popup-head{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.10);
+  position:sticky; top:0; background:linear-gradient(180deg, rgba(10,24,54,.98), rgba(6,20,46,.96));
+}
+.legal-popup-head h3{margin:0; font-size:22px; font-weight:900; color:#fff}
+.legal-close{
+  width:42px; height:42px; border-radius:14px; border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06); color:#fff; font-size:24px; cursor:pointer;
+}
+.legal-popup-body{padding:20px}
+.legal-popup-body p{margin:0 0 14px; color:rgba(244,247,255,.82); line-height:1.75}
+.legal-popup-body h4{margin:18px 0 10px; font-size:15px; color:#fff}
+.legal-popup-body ul{margin:0 0 14px 18px; padding:0}
+.legal-popup-body li{margin:0 0 8px; color:rgba(244,247,255,.82); line-height:1.7}
+@media (max-width:560px){
+  .legal-popup-overlay{padding:12px}
+  .legal-popup{max-height:88vh; border-radius:18px}
+  .legal-popup-head{padding:14px 16px}
+  .legal-popup-head h3{font-size:18px}
+  .legal-popup-body{padding:16px}
+}
+</style>
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -9295,9 +9359,12 @@ document.addEventListener('click',()=>{
 </div>
 <div>
 <h4>Legal</h4>
-<a href="#">Privacy Policy</a>
-<a href="#">Terms</a>
-<a href="#">NDA</a>
+<a href="#" class="legal-link" data-legal="privacy">Privacy Policy</a>
+<a href="#" class="legal-link" data-legal="terms">Terms &amp; Conditions</a>
+<a href="#" class="legal-link" data-legal="service">Service Agreement</a>
+<a href="#" class="legal-link" data-legal="refund">Refund Policy</a>
+<a href="#" class="legal-link" data-legal="disclaimer">Disclaimer</a>
+<a href="#" class="legal-link" data-legal="cookie">Cookie Policy</a>
 </div>
 </div>
 <div class="bottom">
@@ -9309,6 +9376,17 @@ document.addEventListener('click',()=>{
 <!-- Social links injected -->
 <a href="https://www.linkedin.com/company/theuspublisher/about/" style="display:none"></a>
 </footer>
+
+<div aria-hidden="true" class="legal-popup-overlay" id="legalPopupOverlay">
+  <div aria-label="Legal details" aria-modal="true" class="legal-popup" role="dialog">
+    <div class="legal-popup-head">
+      <h3 id="legalPopupTitle">Legal</h3>
+      <button aria-label="Close legal popup" class="legal-close" id="legalPopupClose" type="button">×</button>
+    </div>
+    <div class="legal-popup-body" id="legalPopupBody"></div>
+  </div>
+</div>
+
 <!-- Fallback Live Chat Modal (used for local file:// testing or if chat script is blocked) -->
 <div aria-hidden="true" class="modal" id="modal">
 <div aria-label="Live Chat" aria-modal="true" class="chat" role="dialog">
@@ -10984,5 +11062,383 @@ a.logo{
   }
 })();
 </script>
+
+<style id="mobile-friendly-final-fixes">
+/* Final mobile-friendly fixes */
+html,body{overflow-x:hidden !important;}
+img,video,iframe{max-width:100%;}
+
+@media (max-width: 768px){
+  :root{
+    --h1: clamp(30px, 8.5vw, 42px);
+    --h2: clamp(24px, 6.8vw, 34px);
+    --h3: clamp(18px, 5vw, 22px);
+  }
+
+  .container{width:min(100% - 24px, var(--max)) !important;}
+  .section{padding:48px 0 !important;}
+  .section.tight{padding:36px 0 !important;}
+
+  /* Header */
+  #siteHeader,
+  .header,
+  .nav-wrap,
+  .top-contact{overflow:visible !important;}
+
+  .top-contact-row{
+    justify-content:center !important;
+    padding:8px 0 !important;
+  }
+  .top-contact-spacer{display:none !important;}
+  .top-contact-right{
+    width:100%;
+    gap:6px !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center;
+  }
+  .top-link{
+    font-size:12px !important;
+    line-height:1.35 !important;
+    word-break:break-word;
+  }
+
+  .nav-row{
+    gap:10px !important;
+    padding:10px 0 !important;
+    align-items:center !important;
+  }
+  a.logo{
+    width:auto !important;
+    min-width:0 !important;
+    flex:1 1 auto;
+    margin-right:8px;
+  }
+  a.logo img.logoImg,
+  a.logo img,
+  .logo img{
+    height:48px !important;
+    max-height:48px !important;
+    width:auto !important;
+    transform:none !important;
+    transform-origin:left center !important;
+  }
+  .actions{
+    flex:0 0 auto;
+    gap:8px !important;
+    margin-left:auto;
+  }
+  .actions .btn.secondary{
+    display:none !important;
+  }
+  .burger{
+    width:42px !important;
+    height:42px !important;
+    display:inline-grid !important;
+    place-items:center;
+  }
+  .mobile{
+    margin-top:8px !important;
+    border-radius:16px !important;
+    padding:8px !important;
+  }
+  .mobile a{
+    font-size:15px !important;
+    padding:12px !important;
+  }
+
+  /* Hero */
+  #home.section,
+  .hero.section-dark{
+    padding:28px 0 40px !important;
+  }
+  .heroGrid{
+    grid-template-columns:1fr !important;
+    gap:20px !important;
+    padding:16px 0 0 !important;
+  }
+  .hero .reveal:first-child{order:1;}
+  .heroMedia{
+    order:2;
+    min-height:280px !important;
+    max-height:380px !important;
+    border-radius:22px !important;
+  }
+  .heroModel{
+    object-position:center top !important;
+  }
+  .kicker,
+  .pill{
+    font-size:11px !important;
+    padding:9px 12px !important;
+  }
+  .h1{
+    font-size:clamp(30px, 8.5vw, 42px) !important;
+    line-height:1.08 !important;
+    margin:12px 0 !important;
+  }
+  .lead{
+    font-size:15px !important;
+    line-height:1.65 !important;
+  }
+  .cta{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  .cta .btn{
+    width:100% !important;
+    min-height:48px;
+  }
+  .heroTiles,
+  .trustbar,
+  .kpis,
+  .statsGrid,
+  .steps,
+  .pricing,
+  .tGrid,
+  .cards,
+  .coversGrid,
+  .formInner,
+  .grid2,
+  .row2,
+  .cols{
+    grid-template-columns:1fr !important;
+  }
+  .heroTiles{gap:10px !important;}
+  .heroTile{
+    padding:14px !important;
+    border-radius:16px !important;
+  }
+
+  /* General card spacing */
+  .card.p,
+  .svc,
+  .plan,
+  .quote,
+  .step,
+  .statCard,
+  .form,
+  .faq .qa,
+  .carousel,
+  .coverCard{
+    border-radius:18px !important;
+  }
+
+  /* Footer */
+  .footer{padding:36px 0 24px !important;}
+  .bottom{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+
+  /* Floating chat / widgets */
+  .fab{
+    right:14px !important;
+    bottom:14px !important;
+    width:54px !important;
+    height:54px !important;
+    border-radius:16px !important;
+  }
+  .modal{padding:12px !important;}
+  .chat{
+    width:min(100vw - 24px, 420px) !important;
+    border-radius:20px !important;
+  }
+
+  /* Prevent third-party chat widget overlap on small screens */
+  iframe[src*="tawk.to"],
+  iframe[title*="chat" i],
+  iframe[title*="Chat" i],
+  #tawkchat-container,
+  #tawk-bubble-container,
+  .tawk-min-container,
+  .tawk-button-circle,
+  .tawk-button-large{
+    display:none !important;
+    visibility:hidden !important;
+  }
+}
+
+@media (max-width: 420px){
+  .container{width:calc(100% - 20px) !important;}
+  a.logo img.logoImg,
+  a.logo img,
+  .logo img{height:42px !important; max-height:42px !important;}
+  .top-link{font-size:11px !important;}
+  .h1{font-size:clamp(28px, 9vw, 36px) !important;}
+  .lead{font-size:14px !important;}
+  .heroMedia{min-height:240px !important;}
+}
+</style>
+
+
+<script id="mobile-menu-fix-script">
+(function(){
+  function initMobileMenu(){
+    const header = document.getElementById('siteHeader') || document.querySelector('.header');
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobile') || document.getElementById('mobileNav');
+    if(!header || !burger || !mobileNav) return;
+
+    function setOpen(state){
+      header.classList.toggle('open', state);
+      mobileNav.classList.toggle('open', state);
+      burger.setAttribute('aria-expanded', String(state));
+      burger.setAttribute('aria-label', state ? 'Close menu' : 'Open menu');
+    }
+
+    burger.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!header.classList.contains('open'));
+    };
+
+    mobileNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+
+    document.addEventListener('click', function(e){
+      if(header.classList.contains('open') && !header.contains(e.target)){
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') setOpen(false);
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+})();
+</script>
+
+<script id="legal-popup-script">
+(function(){
+  const legalContent = {
+    privacy: {
+      title: 'Privacy Policy',
+      body: `
+        <p>We respect your privacy and only collect information needed to respond to your inquiry, deliver our services, and improve your experience on our website.</p>
+        <h4>What we collect</h4>
+        <ul>
+          <li>Name, email address, phone number, and project details you submit through our forms.</li>
+          <li>Basic website usage data such as browser type, pages visited, and time spent on the site.</li>
+          <li>Any files, drafts, or materials you share with us during a project discussion.</li>
+        </ul>
+        <h4>How we use your information</h4>
+        <ul>
+          <li>To contact you about your request or project.</li>
+          <li>To provide writing, editing, publishing, design, and marketing services.</li>
+          <li>To improve our website, support, and internal operations.</li>
+        </ul>
+        <p>We do not sell your personal information. We may use trusted third-party tools for forms, analytics, communication, payments, and support when needed to operate our business.</p>
+      `
+    },
+    terms: {
+      title: 'Terms & Conditions',
+      body: `
+        <p>By using this website, you agree to use it lawfully and in a way that does not harm our business, services, or other users.</p>
+        <ul>
+          <li>All website content is provided for general information and service presentation purposes.</li>
+          <li>Project scopes, timelines, pricing, and deliverables are confirmed separately in writing.</li>
+          <li>You are responsible for ensuring the information you provide to us is accurate and lawful to use.</li>
+          <li>Unauthorized copying, misuse, or interference with the website is prohibited.</li>
+        </ul>
+        <p>We may update these terms from time to time. Continued use of the website after updates means you accept the revised terms.</p>
+      `
+    },
+    service: {
+      title: 'Service Agreement',
+      body: `
+        <p>Our services are delivered according to the agreed proposal, package, or written confirmation shared with the client before project commencement.</p>
+        <ul>
+          <li>Work begins after project confirmation and any required initial payment.</li>
+          <li>Revision rounds, turnaround times, and deliverables depend on the selected package or custom agreement.</li>
+          <li>Client delays in approvals, content submission, or communication may affect timelines.</li>
+          <li>Final files, rights, and handover terms are subject to completed payment and agreed scope.</li>
+        </ul>
+        <p>Custom requests, extra revisions, or scope changes may require additional fees and revised delivery timelines.</p>
+      `
+    },
+    refund: {
+      title: 'Refund Policy',
+      body: `
+        <p>Refund decisions are reviewed based on the project stage, work already completed, and the agreed service terms.</p>
+        <ul>
+          <li>Refunds are generally not available for work that has already been delivered, approved, or substantially completed.</li>
+          <li>If a project is canceled before substantial work begins, a partial refund may be considered after deducting administrative or consultation costs.</li>
+          <li>Custom creative services, consultations, strategy work, and completed milestones are usually non-refundable.</li>
+        </ul>
+        <p>To request a refund review, please contact our support team with your order details and the reason for the request.</p>
+      `
+    },
+    disclaimer: {
+      title: 'Disclaimer',
+      body: `
+        <p>The information on this website is provided in good faith for general business and service information only. It should not be treated as legal, financial, or professional advice.</p>
+        <ul>
+          <li>Results from writing, publishing, design, or marketing services can vary by project, market, audience, and client decisions.</li>
+          <li>We do not guarantee publishing approval, sales volume, rankings, media placement, or commercial success unless clearly stated in writing.</li>
+          <li>Third-party platforms, marketplaces, advertising systems, and publishing channels operate under their own rules and policies.</li>
+        </ul>
+      `
+    },
+    cookie: {
+      title: 'Cookie Policy',
+      body: `
+        <p>Our website may use cookies and similar technologies to improve performance, remember preferences, measure traffic, and support analytics or chat functions.</p>
+        <ul>
+          <li>Essential cookies help core website functions work properly.</li>
+          <li>Analytics cookies help us understand how visitors interact with our website.</li>
+          <li>Functional cookies may remember user preferences for a smoother browsing experience.</li>
+        </ul>
+        <p>You can control or disable cookies through your browser settings. Some website features may not function properly if cookies are disabled.</p>
+      `
+    }
+  };
+
+  const overlay = document.getElementById('legalPopupOverlay');
+  const title = document.getElementById('legalPopupTitle');
+  const body = document.getElementById('legalPopupBody');
+  const closeBtn = document.getElementById('legalPopupClose');
+  if(!overlay || !title || !body || !closeBtn) return;
+
+  function openLegal(key){
+    const item = legalContent[key];
+    if(!item) return;
+    title.textContent = item.title;
+    body.innerHTML = item.body;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLegal(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.legal-link').forEach(link => {
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      openLegal(this.getAttribute('data-legal'));
+    });
+  });
+  closeBtn.addEventListener('click', closeLegal);
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeLegal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeLegal();
+  });
+})();
+</script>
+
 </body>
 </html>
