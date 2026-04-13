@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publishing Services | The US Publisher</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+
+
+<style>
+:root{
+  --bg1:#06142e;
+  --bg2:#0a3b9a;
+  --bg3:#081a4b;
+  --card:rgba(255,255,255,.08);
+  --card-strong:rgba(255,255,255,.12);
+  --line:rgba(255,255,255,.12);
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.76);
+  --accent:#6ee7ff;
+  --accent2:#a78bfa;
+  --gold:#facc15;
+  --shadow:0 20px 60px rgba(0,0,0,.38);
+  --shadow-hover:0 28px 80px rgba(0,0,0,.46);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(110,231,255,.14), transparent 60%),
+    radial-gradient(900px 500px at 85% 10%, rgba(167,139,250,.16), transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  padding-top:95px;
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:56px 20px 80px;
+  position:relative;
+}
+
+.hero-shell{
+  margin:0 auto 48px;
+  padding:42px 34px;
+  border-radius:28px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(10px);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-shell::before{
+  content:"";
+  position:absolute;
+  inset:-20% auto auto -10%;
+  width:320px;
+  height:320px;
+  background:radial-gradient(circle, rgba(110,231,255,.18), transparent 70%);
+  pointer-events:none;
+}
+
+.hero-shell::after{
+  content:"";
+  position:absolute;
+  inset:auto -8% -22% auto;
+  width:360px;
+  height:360px;
+  background:radial-gradient(circle, rgba(167,139,250,.20), transparent 70%);
+  pointer-events:none;
+}
+
+.hero-eyebrow{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.hero-title{
+  margin:18px 0 12px;
+  font-size:clamp(38px,6vw,68px);
+  line-height:1.02;
+  letter-spacing:-1.2px;
+  text-align:center;
+}
+
+.hero-title .accent{
+  background:linear-gradient(135deg,var(--accent),var(--gold),var(--accent2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-copy{
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
+}
+
+.hero-cta{
+  margin-top:24px;
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.hero-cta .hero-btn,
+.process-cta,
+.plan button{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  border:none;
+  cursor:pointer;
+  border-radius:14px;
+  padding:14px 22px;
+  font-weight:800;
+  text-decoration:none;
+  transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.hero-btn.primary,
+.plan button,
+.process-cta{
+  background:linear-gradient(135deg,var(--accent),var(--gold),var(--accent2));
+  color:#071022;
+  box-shadow:0 18px 40px rgba(0,0,0,.28);
+}
+
+.hero-btn.secondary{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.hero-btn:hover,
+.process-cta:hover,
+.plan button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 24px 48px rgba(0,0,0,.34);
+}
+
+.trust-row{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.trust-box{
+  padding:16px 14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  text-align:center;
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+
+.trust-box span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+.section-head{
+  text-align:center;
+  margin:0 0 26px;
+}
+
+.section-head .mini{
+  display:inline-block;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.section-head h2{
+  margin:0 0 10px;
+  font-size:clamp(30px,4vw,46px);
+  line-height:1.08;
+}
+
+.section-head p{
+  max-width:760px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.8;
+}
+
+.process-wrap,
+.pricing-wrap{
+  margin-top:24px;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.step{
+  position:relative;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  padding:24px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+.step::before{
+  content:"";
+  position:absolute;
+  top:-40px;
+  right:-40px;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle, rgba(110,231,255,.12), transparent 70%);
+  pointer-events:none;
+}
+
+.step:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(167,139,250,.38);
+}
+
+.step-num{
+  display:inline-flex;
+  width:44px;
+  height:44px;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(110,231,255,.18), rgba(167,139,250,.18));
+  border:1px solid rgba(255,255,255,.12);
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.step h3{
+  margin:0 0 12px;
+  font-size:22px;
+}
+
+.step ul{
+  padding-left:18px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.step li{margin:4px 0}
+
+.process-bar{
+  margin-top:28px;
+  text-align:center;
+}
+
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:20px;
+}
+
+.plan{
+  position:relative;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  padding:30px 26px 26px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+.plan::after{
+  content:"";
+  position:absolute;
+  inset:auto -40px -40px auto;
+  width:160px;
+  height:160px;
+  background:radial-gradient(circle, rgba(167,139,250,.14), transparent 72%);
+  pointer-events:none;
+}
+
+.plan:hover{
+  transform:translateY(-10px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(110,231,255,.34);
+}
+
+.plan.featured{
+  border-color:rgba(250,204,21,.42);
+  transform:translateY(-6px);
+  box-shadow:0 28px 80px rgba(245,158,11,.18);
+}
+
+.plan.featured .popular{
+  display:inline-block;
+}
+
+.popular{
+  display:none;
+  margin-bottom:12px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--gold),#ffd86b);
+  color:#111827;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.plan h3{
+  margin:0;
+  font-size:34px;
+  line-height:1;
+}
+
+.plan .plan-name{
+  margin:8px 0 12px;
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+}
+
+.plan .plan-copy{
+  color:var(--muted);
+  line-height:1.75;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+.plan ul{
+  padding-left:18px;
+  color:var(--muted);
+  line-height:1.8;
+  margin:0;
+  min-height:260px;
+}
+
+.plan li{margin:4px 0}
+
+.bottom-cta{
+  margin-top:54px;
+  padding:34px 28px;
+  border-radius:26px;
+  text-align:center;
+  background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(167,139,250,.16), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:var(--shadow);
+}
+
+.bottom-cta h2{
+  margin:0 0 10px;
+  font-size:clamp(28px,4vw,44px);
+}
+
+.bottom-cta p{
+  margin:0 auto 18px;
+  max-width:720px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+#popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  justify-content:center;
+  align-items:center;
+  z-index:5000;
+  padding:16px;
+}
+
+.popup-box{
+  background:linear-gradient(180deg,#0b2a6f,#091e4d);
+  padding:28px;
+  border-radius:20px;
+  width:90%;
+  max-width:440px;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.popup-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.popup-head h3{
+  margin:0;
+  font-size:28px;
+}
+
+.popup-close{
+  cursor:pointer;
+  font-size:24px;
+  line-height:1;
+}
+
+.popup-copy{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:12px;
+}
+
+.popup-box input,.popup-box textarea{
+  width:100%;
+  margin:10px 0;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  outline:none;
+}
+
+.popup-box textarea{min-height:120px; resize:vertical;}
+.popup-box input::placeholder,.popup-box textarea::placeholder{color:rgba(255,255,255,.6)}
+
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.in{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width: 1080px){
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .pricing{grid-template-columns:1fr}
+  .plan ul{min-height:unset}
+  .trust-row{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width: 760px){
+  .container{padding:40px 16px 90px}
+  .hero-shell{padding:28px 18px}
+  .steps{grid-template-columns:1fr}
+  .trust-row{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column}
+}
+</style>
+
+</head>
+
+<body>
+
+<header style="
+  padding:10px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(90deg,#0f2a5a,#1e3a8a);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  position:sticky; top:0; z-index:999;
+">
+  
+<img src="tUSPA.png" style="height:72px">
+
+  <div style="display:flex; gap:16px; align-items:center; font-size:13px; white-space:nowrap; flex-wrap:nowrap;">
+    <a href="index.html" style="color:white; text-decoration:none;">Home</a>
+    <a href="Children-book-illustration.html" style="color:white; text-decoration:none;">Children's Book (Illustrations)</a>   
+    <a href="author-website.html" style="color:white; text-decoration:none;">Author Website</a>
+    <a href="services.html" style="color:white; text-decoration:none;">Services</a>
+    <a href="book-marketing.html" style="color:white; text-decoration:none;">Marketing</a>
+    
+    <a href="contact.html" style="color:white; text-decoration:none;">Contact</a>
+
+    <button onclick="openPopup()" style="
+      padding:10px 18px;
+      background:linear-gradient(135deg,#6ee7ff,#a78bfa);
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;">
+      Get Started
+    </button>
+  </div>
+</header>
+</div>
+
+
+<div class="container">
+  <section class="hero-shell reveal">
+    <div style="text-align:center;">
+      <span class="hero-eyebrow">Enterprise Publishing Solutions</span>
+      <h1 class="hero-title">Publish with <span class="accent">Authority, Precision, and Reach</span></h1>
+      <p class="hero-copy">
+        We turn manuscripts into professionally published books with premium design, platform setup,
+        distribution readiness, and launch positioning built to strengthen your brand and sales potential.
+      </p>
+      <div class="hero-cta">
+        <button class="hero-btn primary" onclick="openPopup()">Start Your Publishing Project</button>
+        <a class="hero-btn secondary" href="#packages">See Publishing Packages</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-box">Premium Positioning<span>Built to look credible from day one</span></div>
+        <div class="trust-box">Multi-Format Setup<span>eBook, paperback, and hardcover readiness</span></div>
+        <div class="trust-box">Launch-Focused<span>Publishing structured for visibility and growth</span></div>
+        <div class="trust-box">Done-for-You Workflow<span>From manuscript prep to final release</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head reveal">
+    <span class="mini">Publishing Workflow</span>
+    <h2>High-Level Publishing Process</h2>
+    <p>
+      Every stage is designed to improve quality, presentation, discoverability, and conversion so your book
+      launches like a serious product, not just a file upload.
+    </p>
+  </div>
+
+
+
+<h1>Publishing Process</h1>
+
+<div class="steps">
+
+<div class="step reveal">
+<div class="step-num">1</div>
+<h3>Strategy</h3>
+<ul>
+<li>Understand your book vision</li>
+<li>Define target audience</li>
+<li>Create roadmap</li>
+<li>Set timeline</li>
+</ul>
+</div>
+
+<div class="step reveal">
+<div class="step-num">2</div>
+<h3>Editing</h3>
+<ul>
+<li>Grammar correction</li>
+<li>Content improvement</li>
+<li>Structure refinement</li>
+<li>Clarity enhancement</li>
+</ul>
+</div>
+
+<div class="step reveal">
+<div class="step-num">3</div>
+<h3>Design</h3>
+<ul>
+<li>Cover design concepts</li>
+<li>Typography setup</li>
+<li>Interior formatting</li>
+<li>Layout optimization</li>
+</ul>
+</div>
+
+<div class="step reveal">
+<div class="step-num">4</div>
+<h3>Setup</h3>
+<ul>
+<li>ISBN registration</li>
+<li>ASIN creation</li>
+<li>Platform setup</li>
+<li>Account configuration</li>
+</ul>
+</div>
+
+<div class="step reveal">
+<div class="step-num">5</div>
+<h3>Publishing</h3>
+<ul>
+<li>Amazon publishing</li>
+<li>Global distribution</li>
+<li>POD setup</li>
+<li>Multi-format release</li>
+</ul>
+</div>
+
+<div class="step reveal">
+<div class="step-num">6</div>
+<h3>Launch</h3>
+<ul>
+<li>SEO optimization</li>
+<li>Keyword research</li>
+<li>Listing optimization</li>
+<li>Launch strategy</li>
+</ul>
+</div>
+
+</div>
+
+
+<div class="section-head reveal" id="packages">
+  <span class="mini">Investment Options</span>
+  <h2>Publishing Packages Built for Different Growth Stages</h2>
+  <p>
+    Choose the level that fits your publishing goals — from essential setup to a complete premium release
+    designed for stronger brand presence and better market readiness.
+  </p>
+</div>
+
+
+<div class="pricing reveal">
+
+<div class="plan reveal">
+<h3>$299</h3>
+<div class="plan-name">Starter Publishing</div>
+<p class="plan-copy">A solid entry package for authors who want a clean, professional publishing setup.</p>
+<ul>
+<li>ISBN Included</li>
+<li>ASIN Setup</li>
+<li>Ebook Formatting</li>
+<li>Paperback Formatting</li>
+<li>Basic Editing</li>
+<li>Cover Design</li>
+<li>Amazon Publishing</li>
+<li>POD Setup</li>
+<li>Dashboard Setup</li>
+</ul>
+<button onclick="openPopup()">Get Started</button>
+</div>
+
+<div class="plan featured reveal">
+<span class="popular">Most Popular</span>
+<h3>$599</h3>
+<div class="plan-name">Professional Publishing</div>
+<p class="plan-copy">A stronger package for authors who want polished presentation and improved discoverability.</p>
+<ul>
+<li>ISBN + ASIN</li>
+<li>All Formats</li>
+<li>Advanced Editing</li>
+<li>Premium Cover</li>
+<li>Interior Layout</li>
+<li>Amazon + Google</li>
+<li>Global Distribution</li>
+<li>SEO Optimization</li>
+<li>Keyword Research</li>
+<li>Description Writing</li>
+</ul>
+<button onclick="openPopup()">Start Now</button>
+</div>
+
+<div class="plan reveal">
+<h3>$999</h3>
+<div class="plan-name">Elite Publishing</div>
+<p class="plan-copy">A premium publishing experience built for serious brand positioning, scale, and launch support.</p>
+<ul>
+<li>ISBN + ASIN</li>
+<li>All Formats Setup</li>
+<li>Full Editing</li>
+<li>Premium Cover</li>
+<li>Advanced Formatting</li>
+<li>Amazon + Google + B&N</li>
+<li>Global Distribution</li>
+<li>SEO Optimization</li>
+<li>Author Branding</li>
+<li>Marketing Strategy</li>
+<li>Launch Support</li>
+</ul>
+<button onclick="openPopup()">Get Published</button>
+</div>
+
+</div>
+
+
+  <section class="bottom-cta reveal">
+    <h2>Ready to Publish Like a Premium Brand?</h2>
+    <p>
+      Let’s position your book with the quality, structure, and market readiness it needs to stand out.
+      Start with a quick inquiry and we’ll guide the next steps.
+    </p>
+    <button class="process-cta" onclick="openPopup()">Talk to Publishing Team</button>
+  </section>
+</div>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+      }
+    });
+  }, {threshold:0.12});
+  items.forEach(item => io.observe(item));
+});
+</script>
+
+<!-- FIXED PREMIUM POPUP -->
+<div id="popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:linear-gradient(180deg,#0b2a6f,#091e4d);padding:30px;border-radius:20px;width:90%;max-width:420px;border:1px solid rgba(255,255,255,.2);box-shadow:0 30px 80px rgba(0,0,0,.6);">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+      <h3 style="margin:0;color:#fff;">Start Your Project</h3>
+      <span onclick="closePopup()" style="cursor:pointer;font-size:22px;color:#fff;">✕</span>
+    </div>
+
+    <input placeholder="Full Name" style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;background:#1e293b;color:#fff;">
+    <input placeholder="Email" style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;background:#1e293b;color:#fff;">
+    <input placeholder="Phone" style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;background:#1e293b;color:#fff;">
+
+    <select style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;background:#1e293b;color:#fff;">
+      <option>Service</option>
+      <option>Publishing</option>
+      <option>Marketing</option>
+      <option>Author Website</option>
+    </select>
+
+    <textarea placeholder="Message" style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;background:#1e293b;color:#fff;height:100px;"></textarea>
+
+    <button onclick="closePopup()" style="width:100%;margin-top:10px;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#6ee7ff,#a78bfa);font-weight:bold;cursor:pointer;">
+      Submit
+    </button>
+
+  </div>
+</div>
+
+<script>
+function openPopup(){
+  document.getElementById('popup').style.display='flex';
+}
+function closePopup(){
+  document.getElementById('popup').style.display='none';
+}
+</script>
+
+</body>
+</html>

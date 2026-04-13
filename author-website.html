@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The US Publisher - Author Websites</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:#0b0f19;
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+}
+.navbar img {
+    height:95px;
+}
+.navbar a {
+    color:#fff;
+    margin-left:25px;
+    text-decoration:none;
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:120px 20px 80px;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('Hero.png') center/cover no-repeat;
+}
+
+.hero h1 {
+    font-size:48px;
+    font-weight:700;
+}
+
+.hero span {
+    color:#f59e0b;
+}
+
+.hero p {
+    max-width:700px;
+    margin:20px auto;
+    color:#9ca3af;
+}
+
+.btn {
+    padding:14px 28px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    margin:10px;
+}
+
+.btn-primary {
+    background:#6366f1;
+    color:#fff;
+}
+
+.btn-secondary {
+    background:transparent;
+    border:1px solid #444;
+    color:#ccc;
+}
+
+/* MOCKUP */
+.mockup {
+    text-align:center;
+    margin-top:50px;
+}
+.mockup img {
+    width:70%;
+    border-radius:10px;
+}
+
+/* FEATURES */
+.features {
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:80px 20px;
+    flex-wrap:wrap;
+}
+.feature {
+    background:#111827;
+    padding:25px;
+    border-radius:10px;
+    width:220px;
+    text-align:center;
+}
+
+/* SECTION */
+.section {
+    text-align:center;
+    padding:80px 20px;
+}
+
+.section h2 {
+    font-size:32px;
+}
+
+/* SHOWCASE */
+.showcase img {
+    width:300px;
+    margin:10px;
+    border-radius:10px;
+}
+
+/* PACKAGES */
+.packages {
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.package {
+    position:relative;
+    background:linear-gradient(180deg,#0f172a,#020617);
+    padding:35px 30px;
+    border-radius:20px;
+    width:300px;
+    text-align:left;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    transition:all 0.4s ease;
+}
+
+.package:hover {
+    transform:translateY(-10px);
+    box-shadow:0 30px 80px rgba(99,102,241,0.4);
+    border-color:#6366f1;
+}
+
+.package.featured {
+    transform:scale(1.05);
+    border:1px solid #f59e0b;
+    box-shadow:0 30px 100px rgba(245,158,11,0.4);
+}
+
+.package.featured::before {
+    content:"MOST POPULAR";
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#f59e0b;
+    color:#000;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.package h3 {
+    color:#f59e0b;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.package p {
+    color:#cbd5e1;
+    margin:6px 0;
+}
+
+/* CTA */
+.cta {
+    background:#6366f1;
+    text-align:center;
+    padding:80px 20px;
+}
+
+/* FLOATING NAVBAR */
+.navbar {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(11,15,25,0.85);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    transition:all 0.3s ease;
+}
+
+/* SCROLL PROGRESS BAR */
+.progress-bar {
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    background:#6366f1;
+    width:0%;
+    z-index:2000;
+}
+
+/* LOADER */
+#loader {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#0b0f19;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+}
+.loader-circle {
+    width:60px;
+    height:95px;
+    border:4px solid rgba(255,255,255,0.1);
+    border-top:4px solid #6366f1;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin {
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+
+/* FIXED NAVBAR IMPROVEMENTS */
+.navbar {
+    box-sizing: border-box;
+    padding: 15px 40px;
+}
+
+/* Prevent content going under navbar */
+body {
+    padding-top: 110px;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="loader"><div class="loader-circle"></div></div>
+<div class="progress-bar" id="progressBar"></div>
+
+
+<!-- NAVBAR -->
+
+<header style="
+  padding:12px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(90deg,#0f2a5a,#1e3a8a);
+  position:sticky; top:0; z-index:999;
+">
+  <img src="tUSPA.png" style="height:100px">
+
+  <div style="display:flex; gap:30px; align-items:center; font-size:15px;">
+    <a href="index.html" style="color:white; text-decoration:none;">Home</a>
+    <a href="Children-book-illustration.html" style="color:white; text-decoration:none;">Children's Book (Illustrations)</a>
+    <a href="services.html" style="color:white; text-decoration:none;">Services</a>
+    <a href="book-publishing.html" style="color:white; text-decoration:none;">Publishing</a>
+    <a href="book-marketing.html" style="color:white; text-decoration:none;">Marketing</a>
+    <a href="contact.html" style="color:white; text-decoration:none;">Contact</a>
+
+    <button onclick="openLeadModal()" style="
+      padding:10px 22px;
+      background:linear-gradient(135deg,#6ee7ff,#a78bfa);
+      border:none;
+      border-radius:12px;
+      font-weight:600;
+      color:white;
+      cursor:pointer;">
+      Get Started
+    </button>
+  </div>
+</header>
+
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Scale Your Author Brand <span>Online</span></h1>
+    <p>
+        Build more than a website — build your authority as an author.  
+        We design premium author platforms that rank on Google and convert visitors into readers.
+    </p>
+
+    <button class="btn btn-primary">Start Your Author Website</button>
+    <button class="btn btn-secondary">Book a Free Consultation</button>
+
+    <div class="mockup">
+        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb">
+    </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+    <div class="feature">🚀 Build Your Brand</div>
+    <div class="feature">📚 Showcase Books</div>
+    <div class="feature">⚡ SEO Optimized</div>
+    <div class="feature">🎯 Lead Generation</div>
+</div>
+
+<!-- DESIGN SECTION -->
+<div class="section">
+    <h2>Craft Your Author Website Like a Pro</h2>
+    <p style="color:#9ca3af; max-width:700px; margin:auto;">
+        We design elite-level author websites that position you as a premium brand in your niche.
+    </p>
+
+    <div class="showcase">
+        <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6">
+    </div>
+</div>
+
+<!-- PACKAGES -->
+<div class="section">
+    <h2>Author Growth Packages</h2>
+
+    <div class="packages">
+
+        <div class="package">
+            <h3>$699</h3>
+            <p><strong>Starter Author Website</strong></p>
+            <p>Ideal for authors who want a professional online presence and a strong first impression.</p>
+
+            <p>✔ Custom homepage design</p>
+            <p>✔ Mobile responsive layout</p>
+            <p>✔ Author bio page</p>
+            <p>✔ Book showcase section</p>
+            <p>✔ Contact form integration</p>
+            <p>✔ Social media integration</p>
+            <p>✔ Basic SEO setup</p>
+            <p>✔ Newsletter signup form</p>
+            <p>✔ Branded call-to-action buttons</p>
+            <p>✔ Fast-loading page structure</p>
+
+            <button class="btn btn-primary">Get Started</button>
+        </div>
+
+        <div class="package featured">
+            <h3>$999</h3>
+            <p><strong>Growth Package</strong></p>
+            <p>Best for authors ready to build credibility, collect leads, and increase reader engagement.</p>
+
+            <p>✔ Everything in Starter package</p>
+            <p>✔ Advanced SEO optimization</p>
+            <p>✔ Lead capture system</p>
+            <p>✔ Blog or news section setup</p>
+            <p>✔ Analytics integration</p>
+            <p>✔ Speed optimization</p>
+            <p>✔ Conversion-focused page design</p>
+            <p>✔ Reader inquiry form setup</p>
+            <p>✔ Email marketing integration</p>
+            <p>✔ Brand styling enhancements</p>
+            <p>✔ Trust-building testimonial section</p>
+
+            <button class="btn btn-primary">Choose Growth</button>
+        </div>
+
+        <div class="package">
+            <h3>$1999</h3>
+            <p><strong>Enterprise Author Brand</strong></p>
+            <p>A premium solution for authors who want a complete brand experience and stronger sales conversion.</p>
+
+            <p>✔ Full premium branding experience</p>
+            <p>✔ Multi-section sales funnel design</p>
+            <p>✔ Premium UI/UX layout</p>
+            <p>✔ Advanced conversion optimization</p>
+            <p>✔ Custom landing pages</p>
+            <p>✔ Email automation integration</p>
+            <p>✔ Advanced SEO strategy</p>
+            <p>✔ Lead tracking system</p>
+            <p>✔ Featured reviews & media section</p>
+            <p>✔ Priority revisions & support</p>
+            <p>✔ Strategy-focused consultation flow</p>
+
+            <button class="btn btn-primary">Go Enterprise</button>
+        </div>
+
+    </div>
+</div>
+<!-- CTA -->
+<div class="cta">
+    <h2>Ready to Become a Recognized Author?</h2>
+    <p>Let’s build your authority and grow your book sales.</p>
+    <button class="btn btn-primary">Schedule a Call</button>
+</div>
+
+
+<script>
+// Loader
+window.addEventListener("load", ()=>{
+    document.getElementById("loader").style.display="none";
+});
+
+// Scroll Progress
+window.onscroll = function() {
+    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (winScroll / height) * 100;
+    document.getElementById("progressBar").style.width = scrolled + "%";
+};
+</script>
+
+
+<!-- POPUP MODAL -->
+<div id="quoteModalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;z-index:5000;">
+  <div style="background:#0f172a;padding:30px;border-radius:12px;width:90%;max-width:420px;position:relative;">
+    <span id="modalCloseBtn" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:22px;">×</span>
+    <h2 style="margin-bottom:15px;">Start Your Project</h2>
+    <form id="quoteForm">
+      <input name="name" placeholder="Your Name" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;">
+      <input name="email" type="email" placeholder="Your Email" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;">
+      <input name="phone" placeholder="Phone Number" style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;">
+      <select name="service" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;">
+        <option disabled selected>Select a Service *</option>
+        <option>Author Website</option>
+        <option>Publishing</option>
+        <option>Marketing</option>
+      </select>
+      <textarea name="message" placeholder="Enter a description" rows="4" style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none;"></textarea>
+      <button id="submitBtn" type="submit" style="width:100%;padding:12px;background:#6366f1;color:#fff;border:none;border-radius:6px;">SUBMIT</button>
+      <div id="formStatus" style="margin-top:10px;font-size:14px;"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbx48LXj5tnRaxPfV70W20W2DYBou3gK2YHRGASR0kqH0q9It5KBYI_CPkSfm_wmpvXSRw/exec";
+
+  const overlay = document.getElementById('quoteModalOverlay');
+  const closeBtn = document.getElementById('modalCloseBtn');
+  const form = document.getElementById('quoteForm');
+  const statusEl = document.getElementById('formStatus');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function openModal(){ overlay.style.display='flex'; }
+  function closeModal(){ overlay.style.display='none'; if(statusEl) statusEl.textContent=''; }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+
+  document.addEventListener('click', function(e){
+    const el = e.target.closest('button');
+    if(!el) return;
+    const t = (el.innerText||'').toLowerCase();
+    if(t.includes('start') || t.includes('consultation') || t.includes('get') || t.includes('choose') || t.includes('enterprise') || t.includes('schedule')){
+      e.preventDefault();
+      openModal();
+    }
+  }, true);
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    statusEl.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    const fd = new FormData(form);
+    const payload = {};
+    fd.forEach((v,k)=>payload[k]=v);
+    payload.page = window.location.href;
+    payload.timestamp = new Date().toISOString();
+
+    try{
+      await fetch(LEAD_ENDPOINT,{
+        method:'POST',
+        body:JSON.stringify(payload)
+      });
+      statusEl.textContent = 'Submitted successfully!';
+      form.reset();
+    }catch(err){
+      statusEl.textContent = 'Error submitting form';
+    }
+
+    submitBtn.disabled = false;
+  });
+
+});
+</script>
+
+</body>
+</html>
