@@ -12,7 +12,7 @@
 <meta content="website" property="og:type"/>
 <meta content="https://theuspublisher.com/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.aapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&amp;display=swap" rel="stylesheet"/>
 <script type="application/ld+json">
@@ -11567,6 +11567,59 @@ async function submitForm() {
 }
 </script>
   
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const form = document.querySelector("form");
+  if(!form) return;
+
+  form.setAttribute("id","quoteForm");
+
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const data = {
+      timestamp: new Date().toISOString(),
+      fullName: formData.get("fullName") || formData.get("name") || "",
+      email: formData.get("email") || "",
+      phone: formData.get("phone") || "",
+      service: formData.get("service") || "",
+      message: formData.get("message") || "",
+      websitePage: window.location.href,
+      pageTitle: document.title,
+      page: document.title,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      country: "",
+      city: "",
+      ip: ""
+    };
+
+    const endpoint = "https://script.google.com/macros/s/AKfycby1E3qq8tgS-8ttLzM09t0CmQ42tf98353Z43Mikekj1n1mJO1XQDTpqPydpWqcBfOMtQ/exec";
+
+    try{
+      const res = await fetch(endpoint,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const text = await res.text();
+      console.log("SERVER:", text);
+
+      alert("Lead submitted successfully ✅");
+
+      form.reset();
+
+    }catch(err){
+      console.error(err);
+      alert("Error sending lead ❌");
+    }
+  });
+});
+</script>
 
 </body>
 </html>
