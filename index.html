@@ -11469,5 +11469,57 @@ document.getElementById("quoteForm").addEventListener("submit", async function(e
     alert("Error submitting form");
   }
 });
-</script></body>
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+  if (!form) return;
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const data = {
+      timestamp: new Date().toISOString(),
+      fullName: formData.get("fullName") || formData.get("name") || "",
+      email: formData.get("email") || "",
+      phone: formData.get("phone") || "",
+      service: formData.get("service") || "",
+      message: formData.get("message") || "",
+      websitePage: window.location.href,
+      pageTitle: document.title,
+      page: document.title,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      country: "",
+      city: "",
+      ip: ""
+    };
+
+    const endpoint = "https://script.google.com/macros/s/AKfycby1E3qq8tgS-8ttLzM09t0CmQ42tf98353Z43Mikekj1n1mJO1XQDTpqPydpWqcBfOMtQ/exec";
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.text();
+      console.log("Response:", result);
+
+      alert("Submitted Successfully");
+      form.reset();
+
+    } catch (err) {
+      console.error(err);
+      alert("Submission failed");
+    }
+  });
+});
+</script>
+
+</body>
 </html>
