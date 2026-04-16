@@ -11386,19 +11386,46 @@ img,video,iframe{max-width:100%;}
 })();
 </script>
 <script>
-document.getElementById("leadForm").addEventListener("submit", async function(e){
+document.getElementById("quoteForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(this));
-  const endpoint = "https://script.google.com/macros/s/AKfycbx48LXj5tnRaxPfV70W20W2DYBou3gK2YHRGASR0kqH0q9It5KBYI_CPkSfm_wmpvXSRw/exec";
+
+  const formData = new FormData(this);
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    fullName: formData.get("fullName") || formData.get("name") || "",
+    email: formData.get("email") || "",
+    phone: formData.get("phone") || formData.get("phoneNumber") || "",
+    service: formData.get("service") || "",
+    message: formData.get("message") || "",
+    websitePage: window.location.href,
+    pageTitle: document.title,
+    page: document.title,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    country: "",
+    city: "",
+    ip: ""
+  };
+
+  const endpoint = "YOUR_SCRIPT_URL_HERE";
+
   try {
-    await fetch(endpoint, {
+    const res = await fetch(endpoint, {
       method: "POST",
-      headers: {"Content-Type":"application/json"},
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
     });
+
+    const text = await res.text();
+    console.log(text);
+
     alert("Submitted Successfully");
     this.reset();
-  } catch(err) {
+
+  } catch (err) {
+    console.error(err);
     alert("Error submitting form");
   }
 });
