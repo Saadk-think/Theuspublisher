@@ -9359,7 +9359,7 @@ document.addEventListener('click',()=>{
 <b>Phone:</b> +1 737-282-5860
       </div>
 </div>
-<form id="chatForm" onsubmit="return false;">
+<form id="quoteForm" onsubmit="return false;">
 <input placeholder="Type here (demo mode on file://)" type="text"/>
 <button class="send" onclick="this.closest('.chat').querySelector('input').value=''" type="button">Send</button>
 </form>
@@ -9513,7 +9513,7 @@ document.addEventListener('click',()=>{
 <option>Other</option>
 </select>
 <textarea name="message" placeholder="Enter a description" rows="4"></textarea>
-<button class="modal-submit" id="submitBtn" type="submit">SUBMIT</button>
+<button type="button" onclick="submitForm()">Submit</button>
 <div aria-live="polite" class="form-status" id="formStatus"></div>
 </form>
 </div>
@@ -11520,6 +11520,53 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+<script>
+async function submitForm() {
+
+  const form = document.getElementById("quoteForm");
+  const formData = new FormData(form);
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    fullName: formData.get("fullName") || "",
+    email: formData.get("email") || "",
+    phone: formData.get("phone") || "",
+    service: formData.get("service") || "",
+    message: formData.get("message") || "",
+    websitePage: window.location.href,
+    pageTitle: document.title,
+    page: document.title,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    country: "",
+    city: "",
+    ip: ""
+  };
+
+  const endpoint = "https://script.google.com/macros/s/AKfycby1E3qq8tgS-8ttLzM09t0CmQ42tf98353Z43Mikekj1n1mJO1XQDTpqPydpWqcBfOMtQ/exec";
+
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.text();
+    console.log(result);
+
+    alert("Submitted Successfully ✅");
+
+    form.reset();
+
+  } catch (err) {
+    console.error(err);
+    alert("Error ❌");
+  }
+}
+</script>
+  
 
 </body>
 </html>
